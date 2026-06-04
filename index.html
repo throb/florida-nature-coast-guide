@@ -3,22 +3,23 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="A fast practical relocation guide for Hernando, Lecanto, Ocala, Gainesville, Crystal River, and Florida's Nature Coast.">
-  <title>Nature Coast Move Guide</title>
+  <meta name="description" content="Nature Coast Pulse is a living local guide and weekly briefing for Crystal River, Homosassa, Ocala, Gainesville, and Florida's Nature Coast.">
+  <title>Nature Coast Pulse</title>
   <style>
     :root {
       color-scheme: light;
-      --ink: #17211f;
-      --muted: #5b6763;
-      --line: #dbe4dd;
+      --ink: #16201d;
+      --muted: #5f6b66;
+      --line: #dce4dd;
       --paper: #fbfcf8;
       --panel: #ffffff;
-      --water: #0b7c8f;
-      --river: #1c6f47;
-      --sun: #d9802f;
-      --hot: #b84a34;
       --soft: #eef6f1;
-      --shadow: 0 10px 28px rgba(23, 33, 31, .08);
+      --water: #0b7285;
+      --river: #236345;
+      --sun: #d98a2b;
+      --coral: #b94d3f;
+      --night: #253247;
+      --shadow: 0 12px 34px rgba(22, 32, 29, .09);
     }
 
     * { box-sizing: border-box; }
@@ -31,35 +32,41 @@
       line-height: 1.5;
       overflow-x: hidden;
     }
+
     a { color: var(--water); text-decoration-thickness: .08em; text-underline-offset: .18em; }
     a:hover { color: var(--river); }
-    .wrap { width: min(1120px, calc(100% - 32px)); margin: 0 auto; }
+    button, input { font: inherit; }
+    .wrap { width: min(1180px, calc(100% - 32px)); margin: 0 auto; }
+
     header {
       min-height: 78vh;
       display: grid;
       align-items: end;
-      padding: 28px 0 40px;
-      background:
-        linear-gradient(180deg, rgba(8, 35, 38, .55), rgba(8, 35, 38, .18) 46%, rgba(251, 252, 248, .96) 100%),
-        url("https://upload.wikimedia.org/wikipedia/commons/f/fa/Three_sisters_springs_near_crystal_river_national_wildlife_refuge.jpg") center/cover;
+      padding: 24px 0 42px;
       color: #fff;
+      background:
+        linear-gradient(180deg, rgba(8, 29, 34, .55), rgba(8, 29, 34, .22) 42%, rgba(251, 252, 248, .98) 100%),
+        url("https://upload.wikimedia.org/wikipedia/commons/f/fa/Three_sisters_springs_near_crystal_river_national_wildlife_refuge.jpg") center/cover;
     }
-    nav {
+
+    .topbar {
       position: sticky;
       top: 0;
-      z-index: 5;
+      z-index: 8;
       background: rgba(251, 252, 248, .94);
       border-bottom: 1px solid var(--line);
-      backdrop-filter: blur(10px);
+      backdrop-filter: blur(12px);
     }
-    nav .wrap {
+
+    .topbar .wrap {
       display: flex;
       gap: 10px;
       overflow-x: auto;
       padding: 10px 0;
       scrollbar-width: none;
     }
-    nav a {
+
+    .topbar a {
       flex: 0 0 auto;
       color: var(--ink);
       text-decoration: none;
@@ -68,100 +75,60 @@
       padding: 8px 12px;
       background: #fff;
       font-size: 14px;
+      font-weight: 700;
     }
-    .hero {
-      max-width: 820px;
-      text-shadow: 0 2px 18px rgba(0, 0, 0, .34);
-    }
+
+    .hero { max-width: 860px; text-shadow: 0 2px 20px rgba(0, 0, 0, .32); }
     .eyebrow {
       margin: 0 0 10px;
       font-size: 13px;
       letter-spacing: .08em;
       text-transform: uppercase;
-      font-weight: 800;
+      font-weight: 900;
     }
-    .eyebrow span { display: inline; }
+
     h1 {
       margin: 0;
-      font-size: clamp(42px, 7vw, 84px);
+      max-width: 820px;
+      font-size: clamp(42px, 7vw, 88px);
       line-height: .92;
       letter-spacing: 0;
-      max-width: 760px;
     }
+
     h1 span { display: block; }
     .hero p {
-      max-width: 680px;
+      max-width: 720px;
       margin: 18px 0 0;
-      font-size: clamp(17px, 2.2vw, 23px);
       color: rgba(255, 255, 255, .94);
+      font-size: clamp(17px, 2.2vw, 23px);
     }
+
+    .hero-actions, .actions, .filterbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .hero-actions { margin-top: 20px; text-shadow: none; }
+
     main { padding: 28px 0 64px; }
-    section { padding: 34px 0; border-top: 1px solid var(--line); }
+    section { padding: 38px 0; border-top: 1px solid var(--line); }
     section:first-child { border-top: 0; }
+
     h2 {
       margin: 0 0 12px;
-      font-size: clamp(28px, 4vw, 46px);
+      font-size: clamp(28px, 4vw, 48px);
       line-height: 1;
       letter-spacing: 0;
     }
-    h3 { margin: 0 0 8px; font-size: 19px; }
+
+    h3 { margin: 0 0 8px; font-size: 20px; line-height: 1.18; }
     p { margin: 0 0 14px; }
-    p, h1, h2, h3, .item, .card, .callout { overflow-wrap: anywhere; }
-    .lede { max-width: 820px; color: var(--muted); font-size: 18px; }
-    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
-    .grid.two { grid-template-columns: repeat(2, 1fr); }
-    .card {
-      background: var(--panel);
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      padding: 16px;
-      box-shadow: var(--shadow);
-    }
-    .tagrow { display: flex; flex-wrap: wrap; gap: 6px; margin: 12px 0 0; }
-    .tag {
-      display: inline-flex;
-      align-items: center;
-      border-radius: 999px;
-      background: var(--soft);
-      color: #24443c;
-      padding: 4px 8px;
-      font-size: 12px;
-      font-weight: 700;
-    }
-    .hot { background: #fff0ea; color: var(--hot); }
-    .blue { background: #e8f6f8; color: #075b6b; }
-    .gold { background: #fff5df; color: #80500d; }
-    .meta { color: var(--muted); font-size: 14px; margin: 0 0 10px; }
-    .callout {
-      background: #0f3f46;
-      color: #f7fffb;
-      border-radius: 8px;
-      padding: 18px;
-      display: grid;
-      grid-template-columns: 1.2fr .8fr;
-      gap: 18px;
-      align-items: start;
-      box-shadow: var(--shadow);
-    }
-    .callout strong { color: #fff6d8; }
-    .callout a { color: #b9f2ff; }
-    .list {
-      display: grid;
-      gap: 10px;
-      margin-top: 16px;
-    }
-    .item {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 12px;
-      align-items: start;
-      padding: 14px;
-      background: #fff;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-    }
-    .item p { margin: 0; color: var(--muted); }
-    .btn {
+    p, h1, h2, h3, .card, .item, .feature, .issue { overflow-wrap: anywhere; }
+    .lede { max-width: 840px; color: var(--muted); font-size: 18px; }
+    .fine { color: var(--muted); font-size: 13px; }
+
+    .btn, button.btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -172,346 +139,557 @@
       color: #fff;
       background: var(--water);
       text-decoration: none;
-      font-weight: 800;
+      font-weight: 850;
       white-space: nowrap;
+      cursor: pointer;
     }
+
     .btn.secondary {
       color: var(--water);
       background: #fff;
     }
-    .actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 10px;
+
+    .btn.dark {
+      border-color: rgba(255, 255, 255, .54);
+      background: rgba(255, 255, 255, .12);
+      color: #fff;
     }
-    .split {
+
+    .btn[aria-pressed="true"] {
+      background: var(--night);
+      border-color: var(--night);
+      color: #fff;
+    }
+
+    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .grid.two { grid-template-columns: repeat(2, 1fr); }
+    .split { display: grid; grid-template-columns: .9fr 1.1fr; gap: 18px; align-items: start; }
+
+    .card, .item, .issue, .feature {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }
+
+    .card { padding: 16px; }
+    .feature {
       display: grid;
-      grid-template-columns: .9fr 1.1fr;
+      grid-template-columns: 1fr .72fr;
+      gap: 18px;
+      align-items: stretch;
+      overflow: hidden;
+    }
+
+    .feature-copy { padding: 20px; }
+    .feature-art {
+      min-height: 260px;
+      background:
+        linear-gradient(140deg, rgba(11, 114, 133, .16), rgba(217, 138, 43, .18)),
+        var(--spotlight-image, url("https://upload.wikimedia.org/wikipedia/commons/f/fa/Three_sisters_springs_near_crystal_river_national_wildlife_refuge.jpg")) center/cover;
+    }
+
+    .feature .kicker, .kicker {
+      margin: 0 0 8px;
+      color: var(--coral);
+      font-size: 12px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      font-weight: 900;
+    }
+
+    .tagrow { display: flex; flex-wrap: wrap; gap: 6px; margin: 12px 0 0; }
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      background: var(--soft);
+      color: #24443c;
+      padding: 4px 8px;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .tag.blue { background: #e7f6f8; color: #075b6b; }
+    .tag.gold { background: #fff3db; color: #80500d; }
+    .tag.hot { background: #fff0ea; color: #9c392d; }
+    .tag.night { background: #edf1f8; color: #253247; }
+
+    .statbar {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-top: -24px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .stat {
+      padding: 14px;
+      border: 1px solid rgba(255, 255, 255, .62);
+      border-radius: 8px;
+      color: #fff;
+      background: rgba(19, 50, 55, .82);
+      backdrop-filter: blur(10px);
+      box-shadow: var(--shadow);
+    }
+
+    .stat strong { display: block; font-size: 23px; line-height: 1; }
+    .stat span { display: block; margin-top: 4px; font-size: 13px; color: rgba(255, 255, 255, .82); }
+
+    .filterbar { margin: 18px 0; }
+    .search {
+      width: min(420px, 100%);
+      min-height: 40px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #fff;
+      padding: 8px 12px;
+      color: var(--ink);
+    }
+
+    .place-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .place-card {
+      display: grid;
+      gap: 10px;
+      padding: 16px;
+    }
+
+    .place-card[hidden] { display: none; }
+    .meta { margin: 0; color: var(--muted); font-size: 14px; }
+    .rating { color: #6f4c0d; font-weight: 800; }
+
+    .item {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 12px;
+      align-items: start;
+      padding: 14px;
+    }
+
+    .item p { margin: 0; color: var(--muted); }
+    .list { display: grid; gap: 10px; margin-top: 16px; }
+
+    .issue { padding: 18px; }
+    .issue ol {
+      margin: 12px 0 0;
+      padding-left: 22px;
+    }
+    .issue li { margin: 8px 0; }
+
+    .signup {
+      display: grid;
+      gap: 8px;
+      margin-top: 14px;
+      max-width: 540px;
+    }
+
+    .signup-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 8px;
+    }
+
+    .signup input {
+      min-height: 42px;
+      border: 1px solid rgba(255, 255, 255, .62);
+      border-radius: 6px;
+      padding: 8px 12px;
+      background: rgba(255, 255, 255, .92);
+      color: var(--ink);
+    }
+
+    .callout {
+      background: #103f46;
+      color: #f7fffb;
+      border-radius: 8px;
+      padding: 18px;
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
       gap: 18px;
       align-items: start;
+      box-shadow: var(--shadow);
     }
-    .checklist {
+
+    .callout strong { color: #fff1c7; }
+    .callout a { color: #b9f2ff; }
+
+    .workflow {
+      counter-reset: step;
       display: grid;
-      gap: 8px;
-      margin-top: 16px;
-    }
-    label.check {
-      display: grid;
-      grid-template-columns: 22px 1fr;
       gap: 10px;
-      align-items: start;
-      padding: 12px;
-      border: 1px solid var(--line);
-      background: #fff;
-      border-radius: 8px;
     }
-    input[type="checkbox"] {
-      width: 18px;
-      height: 18px;
-      accent-color: var(--river);
-      margin-top: 2px;
+
+    .workflow .item { grid-template-columns: 42px 1fr; }
+    .workflow .item::before {
+      counter-increment: step;
+      content: counter(step);
+      display: grid;
+      place-items: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: var(--soft);
+      color: var(--river);
+      font-weight: 900;
     }
-    .checked span { color: var(--muted); text-decoration: line-through; }
-    .fine { color: var(--muted); font-size: 13px; }
+
     footer {
       padding: 28px 0 46px;
       color: var(--muted);
       border-top: 1px solid var(--line);
     }
-    @media (max-width: 850px) {
+
+    @media (max-width: 900px) {
       header { min-height: 74vh; }
-      .grid, .grid.two, .split, .callout { grid-template-columns: 1fr; }
+      .grid, .grid.two, .split, .feature, .callout, .statbar, .place-grid { grid-template-columns: 1fr; }
+      .feature-art { min-height: 220px; order: -1; }
       .item { grid-template-columns: 1fr; }
       .btn { width: fit-content; }
+      .signup-row { grid-template-columns: 1fr; }
       section { overflow: hidden; }
-      .callout, .card, .item { max-width: 100%; }
-      .callout > *, .card > *, .item > * { min-width: 0; }
+      .card, .item, .issue, .feature, .callout { max-width: 100%; }
+      .card > *, .item > *, .issue > *, .feature > *, .callout > * { min-width: 0; }
     }
+
     @media (max-width: 600px) {
       .wrap { width: calc(100% - 32px); max-width: none; }
-      header { min-height: 68vh; padding-bottom: 28px; }
+      header { min-height: 70vh; padding-bottom: 28px; }
       .eyebrow { font-size: 12px; }
-      .eyebrow span { display: block; }
-      h1 { font-size: 40px; max-width: 330px; }
-      .hero p { font-size: 17px; max-width: 330px; }
-      .callout { padding: 16px; min-width: 0; }
-      .card, .item { min-width: 0; }
+      h1 { font-size: 40px; max-width: 340px; }
+      .hero p { font-size: 17px; max-width: 340px; }
+      .statbar { margin-top: -16px; }
     }
   </style>
 </head>
 <body>
   <header>
     <div class="wrap hero">
-      <p class="eyebrow"><span>Hernando / Lecanto / Ocala</span><span>Gainesville / Crystal River</span></p>
-      <h1><span>Nature Coast</span><span>Move Guide</span></h1>
-      <p>A practical L.A.-transplant field guide: dirty burgers, healthy resets, springs, rivers, weird Florida day trips, and the jet ski verdict.</p>
+      <p class="eyebrow">Crystal River / Homosassa / Ocala / Gainesville</p>
+      <h1><span>Nature Coast</span><span>Pulse</span></h1>
+      <p>A living local guide plus weekly briefing: where to go, what to do, who to know, and how this weird beautiful chunk of Florida actually works.</p>
+      <div class="hero-actions">
+        <a class="btn" href="#places">Explore places</a>
+        <a class="btn dark" href="#issue">Read this week</a>
+        <a class="btn dark" href="#advertise">Advertise</a>
+      </div>
+      <form class="signup" id="signup">
+        <label class="fine" for="email">Pilot list placeholder. Saves locally until a newsletter provider is connected.</label>
+        <div class="signup-row">
+          <input id="email" type="email" autocomplete="email" placeholder="you@example.com" aria-label="Email address">
+          <button class="btn" type="submit">Join</button>
+        </div>
+        <p class="fine" id="signup-note" role="status"></p>
+      </form>
     </div>
   </header>
 
-  <nav aria-label="Guide sections">
+  <nav class="topbar" aria-label="Site sections">
     <div class="wrap">
-      <a href="#verdict">Verdict</a>
-      <a href="#water">Water</a>
-      <a href="#rentals">Rentals</a>
-      <a href="#food">Food</a>
-      <a href="#wacky">Wacky</a>
-      <a href="#checklist">Checklist</a>
-      <a href="#links">Sources</a>
+      <a href="#spotlight">Spotlight</a>
+      <a href="#issue">This Week</a>
+      <a href="#places">Places</a>
+      <a href="#trips">Day Trips</a>
+      <a href="#people">Meet People</a>
+      <a href="#moving">Moving Here</a>
+      <a href="#advertise">Advertise</a>
+      <a href="#workflow">Workflow</a>
     </div>
   </nav>
 
   <main class="wrap">
-    <section id="verdict">
+    <div class="statbar" aria-label="Current guide stats">
+      <div class="stat"><strong>26</strong><span>curated places</span></div>
+      <div class="stat"><strong>6</strong><span>local lanes</span></div>
+      <div class="stat"><strong>1</strong><span>weekly issue format</span></div>
+      <div class="stat"><strong>0</strong><span>guessed map links</span></div>
+    </div>
+
+    <section id="spotlight">
+      <div class="feature" id="spotlight-card">
+        <div class="feature-copy">
+          <p class="kicker">Place of the week</p>
+          <h2>Loading spotlight</h2>
+          <p class="lede">If you see this for more than a blink, JavaScript got blocked.</p>
+        </div>
+        <div class="feature-art" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <section id="issue">
+      <div class="split">
+        <div>
+          <h2>This week in the Nature Coast</h2>
+          <p class="lede">The newsletter is the push. The site is the destination. This pilot issue uses the Florida guide material we already verified, then leaves clear slots for real weekly events once the source map is running.</p>
+        </div>
+        <article class="issue">
+          <p class="kicker">Pilot issue 001</p>
+          <h3>Subject: Clear water, greasy breakfasts, and one smarter way to test the move</h3>
+          <ol>
+            <li><strong>Do first:</strong> paddle or snorkel Kings Bay before you make any emotional real-estate decisions.</li>
+            <li><strong>Place spotlight:</strong> Three Sisters / Hunter Springs for the postcard version of why people care about Crystal River.</li>
+            <li><strong>Good night out:</strong> Ozello sunset drive into Peck's Old Port Cove. Not polished. Correctly weird.</li>
+            <li><strong>Day trip:</strong> Silver Springs glass-bottom boats or paddling if you want old-school Florida without logistics hell.</li>
+            <li><strong>Meet people:</strong> start with guided paddles, marina hubs, parks programming, farmers markets, and volunteer/outdoor groups. The local social graph forms around repeated places.</li>
+          </ol>
+          <div class="actions">
+            <a class="btn" href="#places">Use the guide</a>
+            <a class="btn secondary" href="#sources">Source map</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="places">
+      <h2>Local field guide</h2>
+      <p class="lede">Filter by the job-to-be-done: water day, greasy food, clean reset, evening vibe, day trip, meet-people opportunity, or moving-scouting intel.</p>
+      <div class="filterbar" role="toolbar" aria-label="Place filters">
+        <input class="search" id="search" type="search" placeholder="Search places, towns, vibes..." aria-label="Search places">
+        <button class="btn secondary" type="button" data-filter="all" aria-pressed="true">All</button>
+        <button class="btn secondary" type="button" data-filter="water">Water</button>
+        <button class="btn secondary" type="button" data-filter="food">Food</button>
+        <button class="btn secondary" type="button" data-filter="night">Good nights</button>
+        <button class="btn secondary" type="button" data-filter="trip">Day trips</button>
+        <button class="btn secondary" type="button" data-filter="people">Meet people</button>
+        <button class="btn secondary" type="button" data-filter="moving">Moving intel</button>
+      </div>
+      <div class="place-grid" id="place-grid"></div>
+      <p class="fine" id="result-count"></p>
+    </section>
+
+    <section id="trips">
+      <h2>Day trip builder</h2>
+      <p class="lede">Three clean starter loops for visitors, locals, and move-scouting weekends.</p>
+      <div class="grid">
+        <article class="card">
+          <p class="kicker">Easy water day</p>
+          <h3>Crystal River / Kings Bay</h3>
+          <p>Morning clear-kayak or manatee tour, lunch at The Biscuit Barn or Sadie's, Hunter Springs decompression, sunset at Fort Island.</p>
+          <div class="tagrow"><span class="tag blue">Water</span><span class="tag gold">First-timer</span></div>
+        </article>
+        <article class="card">
+          <p class="kicker">Old Florida weird</p>
+          <h3>Homosassa / Ozello</h3>
+          <p>GoBoat or river tour, MacRae's vibe check, Ozello Trail drive, Peck's Old Port Cove for seafood and marsh-at-the-edge-of-the-world energy.</p>
+          <div class="tagrow"><span class="tag blue">Boat</span><span class="tag hot">Oddball</span></div>
+        </article>
+        <article class="card">
+          <p class="kicker">Civilization reset</p>
+          <h3>Ocala / Gainesville</h3>
+          <p>Silver Springs in the morning, downtown Ocala lunch, Gainesville for Satchel's, Curia, Kanapaha, or a night with actual college-town motion.</p>
+          <div class="tagrow"><span class="tag night">Evening</span><span class="tag gold">Food</span></div>
+        </article>
+      </div>
+    </section>
+
+    <section id="people">
       <div class="callout">
         <div>
-          <h2>The honest read</h2>
-          <p><strong>This is not a surf replacement.</strong> It is a water-life replacement: glass-clear springs, Gulf flats, scalloping, kayaks, SUP, fishing, manatees, swamp hikes, thunderstorms, and occasional drives to the Atlantic when you need waves.</p>
-          <p><strong>Jet ski verdict:</strong> rent first, buy later. A PWC is fun on the Gulf, Homosassa/Crystal River runs, and Tsala Apopka lakes, but the best Crystal River water is also manatee/spring habitat with idle zones, seasonal restrictions, and fragile areas. Spend the first trip renting a jet ski, kayak/SUP, and maybe a pontoon. Buy only after you know which launch you will actually use.</p>
+          <h2>How people meet here</h2>
+          <p><strong>Not by scrolling Yelp.</strong> The pattern is repeated physical overlap: paddling groups, marina/boat-ramp routines, parks programming, farmers markets, volunteer shifts, trivia/live music nights, local gyms, church/community orgs, and small-town business events.</p>
+          <p>The site should eventually publish a weekly "show up here" list: low-pressure events where a newcomer can actually talk to people without feeling like they wandered into somebody else's reunion.</p>
         </div>
         <div>
-          <h3>Best first-week formula</h3>
-          <p>Morning springs, lunch at a greasy local spot, afternoon scouting neighborhoods/boat ramps, sunset on Ozello or Fort Island, then one Gainesville/Ocala day for civilization.</p>
+          <h3>First source lanes to wire</h3>
           <div class="tagrow">
-            <span class="tag blue">Water-first</span>
-            <span class="tag hot">Greasy food allowed</span>
-            <span class="tag gold">Move scouting</span>
+            <span class="tag blue">Parks calendars</span>
+            <span class="tag gold">Farmers markets</span>
+            <span class="tag night">Live music</span>
+            <span class="tag">Volunteer groups</span>
+            <span class="tag hot">Classes</span>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="rentals">
-      <h2>Rentals and guided adventures</h2>
-      <p class="lede">Start with rentals and guided trips before buying gear. These are the stronger Google-rated operators I would actually shortlist for boats, kayaks, clear kayaks, manatee trips, scalloping, and Silver/Rainbow River days.</p>
-
-      <h3>Crystal River / Kings Bay</h3>
-      <div class="list">
-        <div class="item"><div><strong>Paddles Outdoor Rentals And Tours</strong><p>Kayaks, paddleboards, clear-kayak tours, manatee viewing. Closest-to-the-action option at Pete's Pier. 4.9, 3,621 reviews.</p><div class="actions"><a class="btn" href="https://maps.google.com/?cid=1687734555981973170">Map</a><a class="btn secondary" href="https://www.paddlesoutdoorrentals.com/">Website</a></div></div></div>
-        <div class="item"><div><strong>Crystal River Kayak Company and Dive Center</strong><p>Kayak rentals, clear kayaks, dive/scuba support, and direct access for paddling toward Three Sisters/Kings Bay. 4.9, 2,166 reviews.</p><div class="actions"><a class="btn" href="https://maps.google.com/?cid=1264277610466069862">Map</a><a class="btn secondary" href="http://www.crystalriverkayakcompany.com/">Website</a></div></div></div>
-        <div class="item"><div><strong>Get Up And Go Kayaking - Crystal River</strong><p>Clear-kayak guided tours from Kings Bay Park. Good choice if Andie wants the pretty water experience without you winging navigation. 4.9, 1,659 reviews.</p><div class="actions"><a class="btn" href="https://maps.google.com/?cid=5412595615230074147">Map</a><a class="btn secondary" href="https://getupandgokayaking.com/locations/florida/crystal-river/">Website</a></div></div></div>
-        <div class="item"><div><strong>Pete's Pier Marina</strong><p>Marina/boat-ramp hub and the practical place to understand the local motorboat scene before buying anything. 4.6, 883 reviews.</p><div class="actions"><a class="btn" href="https://maps.google.com/?cid=11913529722878333014">Map</a><a class="btn secondary" href="https://petespier.com/">Website</a></div></div></div>
-        <div class="item"><div><strong>Plantation Adventure Center and Manatee Tours</strong><p>Manatee tours, scalloping/fishing-style adventure center, and a resort-side water-activity base. 4.8, 803 reviews.</p><div class="actions"><a class="btn" href="https://maps.google.com/?cid=2427089641005030115">Map</a><a class="btn secondary" href="https://www.plantationadventurecenter.com/">Website</a></div></div></div>
-      </div>
-
-      <h3 style="margin-top:30px">Manatee snorkel / dive operators</h3>
-      <div class="list">
-        <div class="item"><div><strong>Bird's Underwater Manatee Dive Center</strong><p>Very highly rated manatee/swim/dive operator. If you only do one guided manatee experience, this is a serious contender. 5.0, 3,732 reviews.</p><div class="actions"><a class="btn" href="https://maps.google.com/?cid=15538185542493776417">Map</a><a class="btn secondary" href="https://birdsunderwater.com/">Website</a></div></div></div>
-        <div class="item"><div><strong>Fun 2 Dive - Swim with Manatees</strong><p>Another strong manatee-tour operator in downtown Crystal River. 4.9, 2,386 reviews.</p><div class="actions"><a class="btn" href="https://maps.google.com/?cid=11252631957270848449">Map</a><a class="btn secondary" href="https://www.fun2dive.com/">Website</a></div></div></div>
-        <div class="item"><div><strong>River Ventures</strong><p>Popular Crystal River manatee/snorkel/ecotour operator with heavy review volume. 4.9, 2,615 reviews.</p><div class="actions"><a class="btn" href="https://maps.google.com/?cid=5124563793558883556">Map</a><a class="btn secondary" href="http://www.riverventures.com/">Website</a></div></div></div>
-      </div>
-
-      <h3 style="margin-top:30px">Homosassa / Chassahowitzka</h3>
-      <div class="list">
-        <div class="item"><div><strong>GETAROUNDBOAT</strong><p>Best match for the “two people cruising, not hauling ass” idea. Their pitch is slow 5 mph cruising around the Homosassa/Halls River area in small GoBoats. 5.0, 65 reviews.</p><div class="actions"><a class="btn" href="https://maps.google.com/?cid=7821471315888065861">Map</a><a class="btn secondary" href="https://www.getaroundboat.com/">Website</a></div></div></div>
-        <div class="item"><div><strong>River Adventure Tours</strong><p>Homosassa kayak rentals, scalloping charters, fishing charters, and river adventures. Good for testing the Homosassa side of life. 4.8, 258 reviews.</p><div class="actions"><a class="btn" href="https://maps.google.com/?cid=15028931636059727724">Map</a><a class="btn secondary" href="http://www.riveradventuretours.com/">Website</a></div></div></div>
-        <div class="item"><div><strong>River Safaris - Homosassa Airboat Tours and Boat Rental</strong><p>Airboat tours, pontoon-style cruising, and guided river/Gulf-edge adventure options. Better than a jet ski if you want to look around and talk while moving. 4.7, 648 reviews.</p><div class="actions"><a class="btn" href="https://maps.google.com/?cid=13814862533367550590">Map</a><a class="btn secondary" href="http://riversafaris.com/">Website</a></div></div></div>
-        <div class="item"><div><strong>Get Up and Go Kayaking - The Chaz</strong><p>Clear-kayak guided tours on the Chassahowitzka River. This is the quieter, stranger, more jungle-river version of the clear-water thing. 4.9, 174 reviews.</p><div class="actions"><a class="btn" href="https://maps.google.com/?cid=5346657884656273838">Map</a><a class="btn secondary" href="https://getupandgokayaking.com/locations/florida/the-chaz/">Website</a></div></div></div>
-        <div class="item"><div><strong>MacRae's of Homosassa</strong><p>Old Florida river hub near Monkey Island. Useful for boat-ramp scouting, Homosassa vibe checks, and understanding the local water scene. 4.6, 1,645 reviews.</p><div class="actions"><a class="btn" href="https://maps.google.com/?cid=10239796381103447199">Map</a></div></div></div>
-      </div>
-
-      <h3 style="margin-top:30px">Two-person jet ski note</h3>
-      <div class="list">
-        <div class="item"><div><strong>MDR Jet Ski Rental - Crystal River</strong><p>Closest named Crystal River jet ski rental I found. Web presence is thin, so call before counting on it. Public listings show 8484 W Orange Tree St, Crystal River and phone (352) 361-2103. Ask specifically for a two-person/two-up ski and a mellow scenic route.</p><div class="actions"><a class="btn" href="https://www.google.com/maps/search/?api=1&query=MDR+Jet+Ski+Rental+8484+W+Orange+Tree+St+Crystal+River+FL">Map</a><a class="btn secondary" href="https://www.florida.com/crystal-river/business/mdr-jet-ski-rental">Listing</a></div></div></div>
-        <div class="item"><div><strong>Xtr3me Vortex Jet Ski Rentals</strong><p>Better modern web presence and actual jet-ski focus, but farther south around the Hernando/Hudson/Aripeka side. Google currently marks one listing temporarily closed, so verify direct before driving. 5.0, 69 Google reviews.</p><div class="actions"><a class="btn" href="https://maps.google.com/?cid=10611140671350223481">Map</a><a class="btn secondary" href="https://xtr3mevortex.com/">Website</a></div></div></div>
-        <div class="item"><div><strong>What to ask before booking</strong><p>Ask whether they have a two-person or three-seat PWC, whether passenger riding is allowed on your rental, whether there is a slow scenic route, where the no-wake/manatee zones are, and whether they provide a route briefing or GPS boundary. If the operator sounds speed-run focused, skip it.</p></div></div>
-        <div class="item"><div><strong>Crystal River Watersports</strong><p>Highly rated local watersports operator with eco tours, manatee tours, scalloping, diving, and captain-charter options. Call before assuming PWC rental is the right move in Kings Bay. 4.9, 1,563 reviews.</p><div class="actions"><a class="btn" href="https://maps.google.com/?cid=7305642242746148318">Map</a><a class="btn secondary" href="http://www.crystalriverwatersports.com/">Website</a></div></div></div>
-        <div class="item"><div><strong>Crystal River State Park Adventures</strong><p>Boat tours and kayak rentals from Crystal River Preserve State Park. Good low-chaos alternative to a jet ski if the goal is cruising and looking around. 4.9, 101 reviews.</p><div class="actions"><a class="btn" href="https://maps.google.com/?cid=6152804143386853999">Map</a><a class="btn secondary" href="https://crystalriverpreserveadventures.com/">Website</a></div></div></div>
-      </div>
-
-      <h3 style="margin-top:30px">Rainbow River / Silver Springs</h3>
-      <div class="list">
-        <div class="item"><div><strong>Rainbow River Canoe & Kayak</strong><p>Canoe, kayak, and pontoon rentals in Dunnellon for Rainbow River/Withlacoochee days. 4.8, 855 reviews.</p><div class="actions"><a class="btn" href="https://maps.google.com/?cid=60105153357689124">Map</a><a class="btn secondary" href="https://www.rainbowrivercanoeandkayak.com/">Website</a></div></div></div>
-        <div class="item"><div><strong>KP Hole Park</strong><p>Classic Rainbow River launch/tubing/kayak access point. Expect crowds in season, but it is a baseline experience you should understand. 4.6, 3,227 reviews.</p><div class="actions"><a class="btn" href="https://maps.google.com/?cid=18381095542337235899">Map</a><a class="btn secondary" href="http://www.kphole.org/">Website</a></div></div></div>
-        <div class="item"><div><strong>Silver Springs State Park Glass Bottom Boat Tours</strong><p>The old-school no-effort option: sit down, look through glass, see the spring. Good when you want water without logistics. 4.8, 4,610 reviews.</p><div class="actions"><a class="btn" href="https://maps.google.com/?cid=6102265546796155454">Map</a><a class="btn secondary" href="http://www.silversprings.com/glass-bottom-boats/">Website</a></div></div></div>
-        <div class="item"><div><strong>Silver Springs State Park Paddling Adventures</strong><p>Kayak, canoe, and SUP rentals inside Silver Springs State Park, including the downstream Silver River paddle. 4.7, 837 reviews.</p><div class="actions"><a class="btn" href="https://maps.google.com/?cid=5072709937958505574">Map</a><a class="btn secondary" href="https://silversprings.com/paddling/">Website</a></div></div></div>
-        <div class="item"><div><strong>Get Up And Go Kayaking - Silver Springs</strong><p>Clear-kayak guided tours at Silver Springs. Better if you want someone else handling the route and wildlife context. 4.9, 1,930 reviews.</p><div class="actions"><a class="btn" href="https://maps.google.com/?cid=3440347616377876975">Map</a><a class="btn secondary" href="https://getupandgokayaking.com/locations/silver-springs/">Website</a></div></div></div>
-      </div>
-    </section>
-
-    <section id="water">
-      <h2>Water and outdoor life</h2>
-      <p class="lede">The move makes sense if you lean into springs, rivers, Gulf access, and offbeat Florida terrain. Surf becomes a planned road trip: New Smyrna and St. Augustine are the realistic wave runs.</p>
-      <div class="grid">
-        <article class="card">
-          <h3>Crystal River / Kings Bay</h3>
-          <p class="meta">Springs, manatees, paddling, snorkel tours</p>
-          <p>Do this first. The water is the identity of the area. Three Sisters is the postcard, Hunter Springs is the easy local beach/launch vibe, and Kings Bay is where you test whether the whole move clicks.</p>
-          <div class="tagrow"><span class="tag blue">Kayak</span><span class="tag blue">SUP</span><span class="tag blue">Snorkel</span></div>
-          <p><a href="https://maps.google.com/?cid=303543040931506697">Three Sisters Springs map</a> / <a href="https://maps.google.com/?cid=1163569784933141902">Hunter Springs map</a></p>
-        </article>
-        <article class="card">
-          <h3>Homosassa and scalloping</h3>
-          <p class="meta">Old Florida river, wildlife park, Gulf grass flats</p>
-          <p>Book a scalloping charter if the season lines up. It is basically underwater Easter egg hunting with better snacks. Homosassa also has more of the old-Florida boat-ramp personality.</p>
-          <div class="tagrow"><span class="tag blue">Boat</span><span class="tag blue">Scallop</span><span class="tag gold">Wildlife</span></div>
-          <p><a href="https://maps.google.com/?cid=17868755225031989491">Homosassa Springs Wildlife State Park map</a></p>
-        </article>
-        <article class="card">
-          <h3>Fort Island / Ozello</h3>
-          <p class="meta">Sunsets, marsh roads, Gulf edge</p>
-          <p>Fort Island Beach is not Malibu, but it gives you sand, sunset, and salt air without driving to the Atlantic. Ozello Trail is the weird scenic marsh-road drive you do with windows down.</p>
-          <div class="tagrow"><span class="tag blue">Sunset</span><span class="tag gold">Drive</span><span class="tag">Low effort</span></div>
-          <p><a href="https://maps.google.com/?cid=17892165988211255246">Fort Island Beach map</a> / <a href="https://maps.google.com/?cid=1686410111005646324">Ozello Trail map</a></p>
-        </article>
-        <article class="card">
-          <h3>Rainbow and Silver Springs</h3>
-          <p class="meta">Top-tier clear water near Dunnellon/Ocala</p>
-          <p>Rainbow is swimming/tubing/kayaking. Silver Springs is glass-bottom boats, paddling, wildlife, and a classic Florida tourist thing that is actually still worth doing.</p>
-          <div class="tagrow"><span class="tag blue">Tubing</span><span class="tag blue">Kayak</span><span class="tag gold">Classic Florida</span></div>
-          <p><a href="https://maps.google.com/?cid=10451121493565970118">Rainbow Springs map</a> / <a href="https://maps.google.com/?cid=12418154748042724870">Silver Springs map</a></p>
-        </article>
-        <article class="card">
-          <h3>Ichetucknee / Devil's Den</h3>
-          <p class="meta">Day-trip springs north of Gainesville/Ocala</p>
-          <p>Ichetucknee is a lazy clear-water tube float. Devil's Den is the wacky one: prehistoric sinkhole, snorkel/scuba, very Florida, very memorable.</p>
-          <div class="tagrow"><span class="tag blue">Tube</span><span class="tag blue">Snorkel</span><span class="tag hot">Weird</span></div>
-          <p><a href="https://maps.google.com/?cid=9747088062916851134">Ichetucknee map</a> / <a href="https://maps.google.com/?cid=15461237083327636982">Devil's Den map</a></p>
-        </article>
-        <article class="card">
-          <h3>Surf runs</h3>
-          <p class="meta">Atlantic coast when you need actual waves</p>
-          <p>For surfing, plan road trips. New Smyrna Beach is the obvious Central Florida surf target; St. Augustine is another real option. From Citrus County, that is a day mission, not a daily habit.</p>
-          <div class="tagrow"><span class="tag blue">Surf</span><span class="tag gold">Road trip</span></div>
-          <p><a href="https://maps.google.com/?cid=10954868998661590645">New Smyrna Beach Jetty map</a> / <a href="https://maps.google.com/?cid=17658738029280141421">St. Augustine Pier map</a></p>
-        </article>
-      </div>
-    </section>
-
-    <section id="food">
-      <h2>Food map</h2>
-      <p class="lede">Two lanes: greasy-ass happiness and clean reset meals. Ratings/review counts came from Google Places on June 3, 2026; always check hours before driving.</p>
-
-      <h3>Greasy, fried, big, local</h3>
-      <div class="list">
-        <div class="item"><div><strong>The Biscuit Barn</strong><p>Crystal River. Breakfast, biscuits, country plates. High-confidence first greasy breakfast stop. 4.8, 2,377 reviews.</p></div><a class="btn" href="https://maps.google.com/?cid=10533198808350231525">Map</a></div>
-        <div class="item"><div><strong>Jr's Smashburgers</strong><p>Homosassa. Smashburger target for the Crystal River/Homosassa side. 4.8, 380 reviews.</p></div><a class="btn" href="https://maps.google.com/?cid=5263714089905554939">Map</a></div>
-        <div class="item"><div><strong>Coney Island Crystal River</strong><p>Hot dogs, burgers, cheap comfort-food energy. 4.4, 1,732 reviews.</p></div><a class="btn" href="https://maps.google.com/?cid=8107521352450508061">Map</a></div>
-        <div class="item"><div><strong>Peck's Old Port Cove</strong><p>Ozello seafood institution. Go for the drive and the old-school waterfront feel. 4.5, 4,267 reviews.</p></div><a class="btn" href="https://maps.google.com/?cid=7457366538817134625">Map</a></div>
-        <div class="item"><div><strong>Jaws Jumbo Burgers</strong><p>Ocala. Stupid-obvious burger pick. 4.8, 1,329 reviews.</p></div><a class="btn" href="https://maps.google.com/?cid=18279330027059787866">Map</a></div>
-        <div class="item"><div><strong>Terry's Place</strong><p>Ocala. Giant local burger/diner reputation. 4.5, 3,430 reviews.</p></div><a class="btn" href="https://maps.google.com/?cid=16428898089199223725">Map</a></div>
-        <div class="item"><div><strong>Brick City Southern Kitchen</strong><p>Ocala. BBQ/southern comfort when you want heavy food and a real downtown stop. 4.5, 2,674 reviews.</p></div><a class="btn" href="https://maps.google.com/?cid=13579743485134865977">Map</a></div>
-        <div class="item"><div><strong>Germain's Chicken Sandwiches</strong><p>Gainesville. Fried chicken sandwich energy, high rating, not precious. 4.8, 1,047 reviews.</p></div><a class="btn" href="https://maps.google.com/?cid=355961026975342704">Map</a></div>
-        <div class="item"><div><strong>Mac's Drive Thru</strong><p>Gainesville. Old-school burger run. 4.7, 1,511 reviews.</p></div><a class="btn" href="https://maps.google.com/?cid=14173177466192763889">Map</a></div>
-        <div class="item"><div><strong>Satchel's Pizza</strong><p>Gainesville. Wacky, beloved, very Gainesville. Pizza plus weird art-yard energy. 4.7, 4,507 reviews.</p></div><a class="btn" href="https://maps.google.com/?cid=4998934991424696352">Map</a></div>
-      </div>
-
-      <h3 style="margin-top:30px">Healthy / cleaner reset</h3>
-      <div class="list">
-        <div class="item"><div><strong>Beans and Greens Coffee House</strong><p>Crystal River. Best local healthy-ish starting point near the core area. 4.9, 180 reviews.</p></div><a class="btn secondary" href="https://maps.google.com/?cid=871693688436446123">Map</a></div>
-        <div class="item"><div><strong>Sadie's Corner Kitchen</strong><p>Crystal River. Cafe/lunch reset instead of another fried basket. 4.8, 150 reviews.</p></div><a class="btn secondary" href="https://maps.google.com/?cid=15031584423803594510">Map</a></div>
-        <div class="item"><div><strong>Brick & Iron Cafe</strong><p>Ocala. Cleaner downtown breakfast/lunch pick. 4.9, 255 reviews.</p></div><a class="btn secondary" href="https://maps.google.com/?cid=13764390901726299998">Map</a></div>
-        <div class="item"><div><strong>Impact Island Cafe</strong><p>Ocala. Smoothies/cleaner cafe lane. 4.9, 197 reviews.</p></div><a class="btn secondary" href="https://maps.google.com/?cid=14554622665482355436">Map</a></div>
-        <div class="item"><div><strong>The Gathering Cafe Downtown Ocala</strong><p>Ocala. Strong breakfast/lunch option when scouting downtown. 4.8, 1,066 reviews.</p></div><a class="btn secondary" href="https://maps.google.com/?cid=6991095452862333277">Map</a></div>
-        <div class="item"><div><strong>Vale Healthy Kitchen</strong><p>Gainesville. Bowls, meal-prep-ish healthy food, easy reset. 4.6, 2,109 reviews.</p></div><a class="btn secondary" href="https://maps.google.com/?cid=11376738994487134820">Map</a></div>
-        <div class="item"><div><strong>Fresh Kitchen</strong><p>Gainesville. Reliable bowls, protein, veggies. 4.6, 779 reviews.</p></div><a class="btn secondary" href="https://maps.google.com/?cid=1317010425371867255">Map</a></div>
-        <div class="item"><div><strong>Bolay Fresh Bold Kitchen</strong><p>Gainesville. Bowl chain, but useful when you want clean food fast. 4.7, 1,357 reviews.</p></div><a class="btn secondary" href="https://maps.google.com/?cid=17153384248724889587">Map</a></div>
-        <div class="item"><div><strong>Curia On The Drag</strong><p>Gainesville. Coffee/vegan/artist compound vibe. Good antidote to fried everything. 4.6, 960 reviews.</p></div><a class="btn secondary" href="https://maps.google.com/?cid=1946184159492113147">Map</a></div>
-      </div>
-    </section>
-
-    <section id="wacky">
-      <h2>Wacky and fun shit</h2>
-      <p class="lede">The region gets good when you stop looking for L.A. and start collecting strange Florida experiences.</p>
+    <section id="moving">
+      <h2>Moving-here intel</h2>
+      <p class="lede">A relocation guide earns trust by saying the quiet parts clearly. This becomes the evergreen SEO layer for people thinking about moving to the area.</p>
       <div class="grid two">
         <article class="card">
-          <h3>Zipline over old limestone canyons</h3>
-          <p>The Canyons in Ocala is the rare inland Florida thing that does not feel flat. Zipline, horseback, kayak options. Good first “wait, Florida has this?” stop.</p>
-          <p><a href="https://maps.google.com/?cid=17805121606427045858">The Canyons map</a></p>
+          <h3>The honest read</h3>
+          <p>This is not a surf replacement. It is a water-life replacement: springs, rivers, Gulf flats, scalloping, kayaks, fishing, manatees, storms, and occasional Atlantic surf missions.</p>
         </article>
         <article class="card">
-          <h3>Paynes Prairie bison/alligator watch</h3>
-          <p>South of Gainesville. Wide-open prairie, wildlife viewing, big sky, boardwalks. Feels more cinematic than the average Florida park.</p>
-          <p><a href="https://maps.google.com/?cid=1318105823112583428">Paynes Prairie map</a></p>
+          <h3>Scout before falling in love</h3>
+          <p>Drive the towns at night, check internet by exact address, price insurance/flood/wind coverage, visit boat ramps when they are busy, and spend one humid afternoon outside.</p>
         </article>
         <article class="card">
-          <h3>Withlacoochee State Trail</h3>
-          <p>Long paved rail-trail through Inverness/Hernando. Buy or bring a bike. This is the boring-looking thing that becomes useful if you live there.</p>
-          <p><a href="https://maps.google.com/?q=Withlacoochee+State+Trail,+Inverness,+FL,+USA&ftid=0x88e80c2740fba591:0x32b08bdaebe74e25">Trail map</a></p>
+          <h3>Rent before buying toys</h3>
+          <p>For water gear, rent first. A kayak, GoBoat, pontoon, captain tour, or two-up PWC all answer different lifestyle questions.</p>
         </article>
         <article class="card">
-          <h3>Cedar Key day trip</h3>
-          <p>Small Gulf island town, clams, old docks, weird quiet end-of-the-road mood. Not polished. That is the point.</p>
-          <p><a href="https://maps.google.com/?cid=1458953238002085119">Cedar Key map</a></p>
-        </article>
-        <article class="card">
-          <h3>Kanapaha Botanical Gardens</h3>
-          <p>Gainesville decompression. Big bamboo, gardens, shade, and a civilized reset after too much highway/boat-ramp scouting.</p>
-          <p><a href="https://maps.google.com/?cid=17157640016719459290">Kanapaha map</a></p>
-        </article>
-        <article class="card">
-          <h3>Crystal River Preserve</h3>
-          <p>Quiet trails and paddling near the Gulf side. Good for testing whether the daily nature access feels like home instead of just vacation.</p>
-          <p><a href="https://maps.google.com/?cid=5153834204250209235">Preserve map</a></p>
+          <h3>What the guide tracks next</h3>
+          <p>Neighborhood vibe notes, launch access, recurring events, local business spotlights, meeting-people opportunities, and reliable day-trip itineraries.</p>
         </article>
       </div>
     </section>
 
-    <section id="checklist">
+    <section id="advertise">
       <div class="split">
         <div>
-          <h2>Trip checklist</h2>
-          <p class="lede">Use this like a move-scouting punch list. It saves locally in your browser.</p>
+          <h2>Advertiser package</h2>
+          <p class="lede">Early-stage local sponsorship package. No fake audience numbers, no puffed-up media-kit nonsense. Sell useful placement to businesses that genuinely fit the guide.</p>
         </div>
         <div class="card">
-          <h3>Jet ski decision tree</h3>
-          <p><strong>Rent first</strong> if you do not know your likely launch, storage situation, maintenance tolerance, or whether you prefer Gulf runs vs spring/river cruising.</p>
-          <p><strong>For a two-person cruising day:</strong> ask for a stable two-up or three-seat ski and tell the operator you want scenic cruising, not speed runs. A GoBoat, small pontoon, or captain-led eco cruise may fit better than a PWC.</p>
-          <p><strong>Buy later</strong> if you confirm: nearby ramp, easy storage, actual weekly use, and comfort with idle/no-wake/manatee zones. A used center-console or small pontoon might beat a PWC depending on your routine.</p>
+          <h3>Founding sponsor slot</h3>
+          <p><strong>Best fit:</strong> outfitters, restaurants, realtors, marinas, guides, wellness studios, local shops, coworking, hotels, and day-trip operators.</p>
+          <p><strong>Inventory:</strong> one weekly newsletter native blurb, one site placement on a relevant category page, one social-ready local pick.</p>
+          <p><strong>Pilot pricing:</strong> keep this manual until subscriber numbers exist. Founding-rate pitch beats pretending we have a mature audience.</p>
+          <div class="actions">
+            <a class="btn" href="mailto:hello@example.com?subject=Nature%20Coast%20Pulse%20advertising">Advertise inquiry</a>
+          </div>
         </div>
-      </div>
-      <div class="checklist" id="todo">
-        <label class="check"><input type="checkbox" data-id="springs"><span>Swim/snorkel or paddle Crystal River/Kings Bay before making any emotional real-estate decisions.</span></label>
-        <label class="check"><input type="checkbox" data-id="jet-rental"><span>Rent a jet ski or boat once, then note launch, speed zones, traffic, storage, and whether it felt worth owning.</span></label>
-        <label class="check"><input type="checkbox" data-id="kayak"><span>Rent kayak/SUP at least once. If this feels better than the PWC, buy the quiet gear first.</span></label>
-        <label class="check"><input type="checkbox" data-id="boat-ramps"><span>Visit two real boat ramps at busy times: Crystal River/Homosassa plus Tsala Apopka or Dunnellon.</span></label>
-        <label class="check"><input type="checkbox" data-id="food"><span>Do one greasy breakfast, one burger, one seafood shack, and one healthy reset meal.</span></label>
-        <label class="check"><input type="checkbox" data-id="neighborhoods"><span>Drive Hernando, Lecanto, Crystal River, Inverness, Ocala, and Gainesville at night, not just pretty daytime hours.</span></label>
-        <label class="check"><input type="checkbox" data-id="internet"><span>Check actual fiber/cable availability by address. Do not trust neighborhood-level vibes.</span></label>
-        <label class="check"><input type="checkbox" data-id="heat"><span>Spend a humid afternoon outside and be honest about it. Florida summer is not a brochure.</span></label>
-        <label class="check"><input type="checkbox" data-id="surf"><span>Price the reality of surf drives: New Smyrna/St. Augustine time, tolls, gas, board storage, and how often you would really go.</span></label>
-        <label class="check"><input type="checkbox" data-id="insurance"><span>Before buying, get quotes for home insurance, flood zone, wind/hurricane, and dock/boat/PWC coverage.</span></label>
       </div>
     </section>
 
-    <section id="links">
-      <h2>Useful official links</h2>
-      <div class="grid two">
-        <div class="card">
-          <h3>Rules and water safety</h3>
-          <p><a href="https://myfwc.com/boating/regulations/">FWC boating regulations</a></p>
-          <p><a href="https://www.fws.gov/refuge/crystal-river">Crystal River National Wildlife Refuge</a></p>
-          <p><a href="https://www.fws.gov/refuge/crystal-river/visit-us">Crystal River NWR visit info</a></p>
-        </div>
-        <div class="card">
-          <h3>Local activity planning</h3>
-          <p><a href="https://www.discovercrystalriverfl.com/things-to-do/on-water/">Discover Crystal River water activities</a></p>
-          <p><a href="https://www.discovercrystalriverfl.com/things-to-do/on-water/scalloping/">Citrus County scalloping guide</a></p>
-          <p><a href="https://myfwc.com/fishing/saltwater/recreational/bay-scallops/">FWC bay scallop rules</a></p>
-        </div>
+    <section id="sources">
+      <h2>Source map</h2>
+      <p class="lede">The first operating system for this site is source discipline: official calendars, tourism boards, venue pages, parks feeds, chambers, and direct business pages. Social finds are leads, not facts.</p>
+      <div class="list">
+        <div class="item"><div><strong>Discover Crystal River</strong><p>Tourism/event/activity source for Citrus County water and visitor planning.</p></div><a class="btn secondary" href="https://www.discovercrystalriverfl.com/">Source</a></div>
+        <div class="item"><div><strong>FWC boating and scallop rules</strong><p>Rules, safety, seasons, and conservation constraints for water-life coverage.</p></div><a class="btn secondary" href="https://myfwc.com/boating/regulations/">Source</a></div>
+        <div class="item"><div><strong>Crystal River National Wildlife Refuge</strong><p>Manatee/spring access, closures, and sensitive habitat context.</p></div><a class="btn secondary" href="https://www.fws.gov/refuge/crystal-river">Source</a></div>
+        <div class="item"><div><strong>Silver Springs State Park</strong><p>Paddling, glass-bottom boats, park updates, and visitor info.</p></div><a class="btn secondary" href="https://silversprings.com/">Source</a></div>
       </div>
-      <p class="fine">Google Maps links use Google Places result URLs or Place IDs where available. Search-style map links are used only for broad destinations like surf areas or a named place when the exact Place Details lookup was unnecessary.</p>
+    </section>
+
+    <section id="workflow">
+      <h2>Weekly operating workflow</h2>
+      <p class="lede">This is the part to bake back into city-pulse: the site is no longer a brochure. It is the structured surface the newsletter feeds every week.</p>
+      <div class="workflow">
+        <div class="item"><div><strong>Monday source sweep</strong><p>Check official calendars, venue pages, parks, tourism boards, chambers, and reader tips. Add candidates to a source table with verification status.</p></div></div>
+        <div class="item"><div><strong>Tuesday curation</strong><p>Pick one place spotlight, five weekly events, one day trip, one meet-people opportunity, and one moving-here note.</p></div></div>
+        <div class="item"><div><strong>Wednesday publish draft</strong><p>Update site data first. The newsletter issue should be a digest of the canonical site entries, not a separate hand-built artifact.</p></div></div>
+        <div class="item"><div><strong>Thursday sponsor check</strong><p>Confirm sponsor copy, links, disclosure label, and category fit. Do not sell placements that make the guide worse.</p></div></div>
+        <div class="item"><div><strong>Friday send and archive</strong><p>Send the weekly issue, archive it on the site, track clicks, and promote the spotlight as a social post.</p></div></div>
+      </div>
     </section>
   </main>
 
   <footer>
     <div class="wrap">
-      Built as a fast static page. Last checked: June 3, 2026. Hero photo: <a href="https://commons.wikimedia.org/wiki/File:Three_sisters_springs_near_crystal_river_national_wildlife_refuge.jpg">Three Sisters Springs via Wikimedia Commons</a>.
+      Built as the first City Pulse interactive guide MVP. Last checked: June 4, 2026. Hero photo: <a href="https://commons.wikimedia.org/wiki/File:Three_sisters_springs_near_crystal_river_national_wildlife_refuge.jpg">Three Sisters Springs via Wikimedia Commons</a>.
     </div>
   </footer>
 
   <script>
-    const key = "nature-coast-guide-checklist-v1";
-    const saved = JSON.parse(localStorage.getItem(key) || "{}");
-    for (const box of document.querySelectorAll("input[type='checkbox'][data-id]")) {
-      box.checked = Boolean(saved[box.dataset.id]);
-      box.closest("label").classList.toggle("checked", box.checked);
-      box.addEventListener("change", () => {
-        saved[box.dataset.id] = box.checked;
-        localStorage.setItem(key, JSON.stringify(saved));
-        box.closest("label").classList.toggle("checked", box.checked);
-      });
+    const places = [
+      {name:"Three Sisters Springs", area:"Crystal River", category:"water", tags:["Springs","Manatees","First stop"], rating:"Official refuge", blurb:"The postcard. Clear spring water, manatee context, and the emotional reason this region makes sense.", map:"https://maps.google.com/?cid=303543040931506697", image:"https://upload.wikimedia.org/wikipedia/commons/f/fa/Three_sisters_springs_near_crystal_river_national_wildlife_refuge.jpg"},
+      {name:"Hunter Springs Park", area:"Crystal River", category:"water", tags:["Swim","Launch","Low effort"], rating:"Local beach/launch", blurb:"Easy access to water without turning the whole day into a logistics project.", map:"https://maps.google.com/?cid=1163569784933141902"},
+      {name:"Paddles Outdoor Rentals And Tours", area:"Crystal River", category:"people", tags:["Kayak","Tours","Meet people"], rating:"4.9 / 3,621", blurb:"Clear-kayak and paddleboard tours near Pete's Pier. Good first social/outdoor activity.", map:"https://maps.google.com/?cid=1687734555981973170", web:"https://www.paddlesoutdoorrentals.com/"},
+      {name:"Crystal River Kayak Company", area:"Crystal River", category:"water", tags:["Kayak","Dive","Rental"], rating:"4.9 / 2,166", blurb:"Practical rental base for paddling toward Three Sisters and Kings Bay.", map:"https://maps.google.com/?cid=1264277610466069862", web:"http://www.crystalriverkayakcompany.com/"},
+      {name:"Bird's Underwater", area:"Crystal River", category:"people", tags:["Manatee","Guided","Snorkel"], rating:"5.0 / 3,732", blurb:"Serious contender for a guided manatee experience, and guided trips are one of the easier newcomer social lanes.", map:"https://maps.google.com/?cid=15538185542493776417", web:"https://birdsunderwater.com/"},
+      {name:"GETAROUNDBOAT", area:"Homosassa", category:"water", tags:["Cruise","Two-person","Slow"], rating:"5.0 / 65", blurb:"Best fit for the two-people-cruising-not-hauling-ass idea. Small electric GoBoat style outings.", map:"https://maps.google.com/?cid=7821471315888065861", web:"https://www.getaroundboat.com/"},
+      {name:"MacRae's of Homosassa", area:"Homosassa", category:"night", tags:["Old Florida","River hub","Casual"], rating:"4.6 / 1,645", blurb:"Boat-ramp, river-hub, old-Florida personality. Useful for learning the local water scene.", map:"https://maps.google.com/?cid=10239796381103447199"},
+      {name:"Ozello Trail", area:"Crystal River / Ozello", category:"night", tags:["Sunset","Drive","Marsh"], rating:"Scenic drive", blurb:"Windows-down marsh-road drive that makes the Gulf edge feel strange in the right way.", map:"https://maps.google.com/?cid=1686410111005646324"},
+      {name:"Fort Island Beach", area:"Crystal River", category:"night", tags:["Sunset","Beach","Salt air"], rating:"Gulf beach", blurb:"Not Malibu. Still useful: sand, sunset, and salt air without committing to an Atlantic run.", map:"https://maps.google.com/?cid=17892165988211255246"},
+      {name:"Peck's Old Port Cove", area:"Ozello", category:"food", tags:["Seafood","Waterfront","Old-school"], rating:"4.5 / 4,267", blurb:"Go for the drive, seafood, and old-school waterfront feel.", map:"https://maps.google.com/?cid=7457366538817134625"},
+      {name:"The Biscuit Barn", area:"Crystal River", category:"food", tags:["Breakfast","Greasy","Local"], rating:"4.8 / 2,377", blurb:"High-confidence first greasy breakfast stop.", map:"https://maps.google.com/?cid=10533198808350231525"},
+      {name:"Jr's Smashburgers", area:"Homosassa", category:"food", tags:["Burger","Casual","Greasy"], rating:"4.8 / 380", blurb:"Smashburger target for the Crystal River/Homosassa side.", map:"https://maps.google.com/?cid=5263714089905554939"},
+      {name:"Beans and Greens Coffee House", area:"Crystal River", category:"food", tags:["Coffee","Healthy-ish","Reset"], rating:"4.9 / 180", blurb:"Local healthy-ish reset near the core area.", map:"https://maps.google.com/?cid=871693688436446123"},
+      {name:"Rainbow Springs State Park", area:"Dunnellon", category:"trip", tags:["Tubing","Kayak","Clear water"], rating:"State park", blurb:"Swimming, tubing, kayaking, and the easiest way to understand the Dunnellon side.", map:"https://maps.google.com/?cid=10451121493565970118"},
+      {name:"Silver Springs Glass Bottom Boats", area:"Ocala", category:"trip", tags:["Classic Florida","Boat","Low effort"], rating:"4.8 / 4,610", blurb:"Old-school no-effort water day: sit down, look through glass, see the spring.", map:"https://maps.google.com/?cid=6102265546796155454", web:"http://www.silversprings.com/glass-bottom-boats/"},
+      {name:"Silver Springs Paddling Adventures", area:"Ocala", category:"water", tags:["Kayak","SUP","Wildlife"], rating:"4.7 / 837", blurb:"Kayak, canoe, and SUP rentals inside Silver Springs State Park.", map:"https://maps.google.com/?cid=5072709937958505574", web:"https://silversprings.com/paddling/"},
+      {name:"The Canyons Zip Line", area:"Ocala", category:"trip", tags:["Zipline","Weird Florida","Adventure"], rating:"Ocala canyon park", blurb:"The rare inland Florida thing that does not feel flat.", map:"https://maps.google.com/?cid=17805121606427045858"},
+      {name:"Satchel's Pizza", area:"Gainesville", category:"night", tags:["Pizza","Art-yard","Gainesville"], rating:"4.7 / 4,507", blurb:"Beloved, wacky Gainesville stop. Pizza plus weird art-yard energy.", map:"https://maps.google.com/?cid=4998934991424696352"},
+      {name:"Curia On The Drag", area:"Gainesville", category:"people", tags:["Coffee","Vegan","Artist compound"], rating:"4.6 / 960", blurb:"Coffee/vegan/artist-compound vibe and a better social surface than another chain cafe.", map:"https://maps.google.com/?cid=1946184159492113147"},
+      {name:"Kanapaha Botanical Gardens", area:"Gainesville", category:"trip", tags:["Gardens","Decompression","Shade"], rating:"Botanical garden", blurb:"Bamboo, gardens, shade, and a civilized reset after highway/boat-ramp scouting.", map:"https://maps.google.com/?cid=17157640016719459290"},
+      {name:"Paynes Prairie", area:"Gainesville / Micanopy", category:"trip", tags:["Wildlife","Boardwalk","Big sky"], rating:"State preserve", blurb:"Bison/alligator watch, wide-open prairie, and a more cinematic Florida than expected.", map:"https://maps.google.com/?cid=1318105823112583428"},
+      {name:"Withlacoochee State Trail", area:"Inverness / Hernando", category:"moving", tags:["Bike","Daily life","Rail trail"], rating:"State trail", blurb:"The boring-looking thing that becomes very useful if you live nearby.", map:"https://maps.google.com/?q=Withlacoochee+State+Trail,+Inverness,+FL,+USA&ftid=0x88e80c2740fba591:0x32b08bdaebe74e25"},
+      {name:"Cedar Key", area:"Levy County", category:"trip", tags:["Island town","Clams","Quiet"], rating:"Day trip", blurb:"Small Gulf island town with old docks and end-of-the-road mood.", map:"https://maps.google.com/?cid=1458953238002085119"},
+      {name:"Crystal River Preserve", area:"Crystal River", category:"moving", tags:["Trails","Paddling","Quiet"], rating:"State park", blurb:"Good for testing whether daily nature access feels like home instead of vacation.", map:"https://maps.google.com/?cid=5153834204250209235"},
+      {name:"New Smyrna Beach Jetty", area:"Atlantic surf run", category:"trip", tags:["Surf","Road trip","Reality check"], rating:"Surf target", blurb:"The realistic Central Florida surf mission when Gulf life is not enough.", map:"https://maps.google.com/?cid=10954868998661590645"},
+      {name:"MDR Jet Ski Rental", area:"Crystal River", category:"water", tags:["PWC","Verify first","Two-up question"], rating:"Thin listing", blurb:"Closest named Crystal River jet ski rental found. Call first and ask about two-person scenic riding.", map:"https://www.google.com/maps/search/?api=1&query=MDR+Jet+Ski+Rental+8484+W+Orange+Tree+St+Crystal+River+FL", web:"https://www.florida.com/crystal-river/business/mdr-jet-ski-rental"}
+    ];
+
+    const categoryLabels = {
+      water: "Water",
+      food: "Food",
+      night: "Good night",
+      trip: "Day trip",
+      people: "Meet people",
+      moving: "Moving intel"
+    };
+
+    const grid = document.querySelector("#place-grid");
+    const search = document.querySelector("#search");
+    const resultCount = document.querySelector("#result-count");
+    const filterButtons = [...document.querySelectorAll("[data-filter]")];
+    let activeFilter = "all";
+
+    function placeCard(place) {
+      const tags = place.tags.map(tag => '<span class="tag">' + tag + '</span>').join("");
+      const web = place.web ? '<a class="btn secondary" href="' + place.web + '">Website</a>' : "";
+      return '<article class="card place-card" data-category="' + place.category + '" data-search="' + [place.name, place.area, place.category, place.tags.join(" "), place.blurb].join(" ").toLowerCase() + '">' +
+        '<div><p class="kicker">' + categoryLabels[place.category] + '</p><h3>' + place.name + '</h3><p class="meta">' + place.area + ' / <span class="rating">' + place.rating + '</span></p><p>' + place.blurb + '</p></div>' +
+        '<div class="tagrow">' + tags + '</div>' +
+        '<div class="actions"><a class="btn" href="' + place.map + '">Map</a>' + web + '</div>' +
+      '</article>';
     }
+
+    function renderPlaces() {
+      grid.innerHTML = places.map(placeCard).join("");
+      applyFilters();
+    }
+
+    function applyFilters() {
+      const q = search.value.trim().toLowerCase();
+      let shown = 0;
+      for (const card of grid.querySelectorAll(".place-card")) {
+        const categoryMatch = activeFilter === "all" || card.dataset.category === activeFilter;
+        const searchMatch = !q || card.dataset.search.includes(q);
+        const visible = categoryMatch && searchMatch;
+        card.hidden = !visible;
+        if (visible) shown += 1;
+      }
+      resultCount.textContent = shown + " of " + places.length + " places shown.";
+    }
+
+    filterButtons.forEach(button => {
+      button.addEventListener("click", () => {
+        activeFilter = button.dataset.filter;
+        filterButtons.forEach(btn => btn.setAttribute("aria-pressed", String(btn === button)));
+        applyFilters();
+      });
+    });
+
+    search.addEventListener("input", applyFilters);
+    renderPlaces();
+
+    const spotlightPool = places.filter(place => ["water", "night", "trip", "people"].includes(place.category));
+    const weekSeed = Math.floor(Date.now() / (1000 * 60 * 60 * 24 * 7));
+    const spotlight = spotlightPool[weekSeed % spotlightPool.length];
+    const spotlightEl = document.querySelector("#spotlight-card");
+    spotlightEl.style.setProperty("--spotlight-image", spotlight.image ? 'url("' + spotlight.image + '")' : 'linear-gradient(140deg, rgba(11, 114, 133, .24), rgba(217, 138, 43, .24))');
+    spotlightEl.querySelector(".feature-copy").innerHTML =
+      '<p class="kicker">Place of the week</p><h2>' + spotlight.name + '</h2><p class="meta">' + spotlight.area + ' / ' + categoryLabels[spotlight.category] + ' / ' + spotlight.rating + '</p><p class="lede">' + spotlight.blurb + '</p><div class="tagrow">' +
+      spotlight.tags.map(tag => '<span class="tag blue">' + tag + '</span>').join("") +
+      '</div><div class="actions"><a class="btn" href="' + spotlight.map + '">Open map</a><a class="btn secondary" href="#places">Browse all</a></div>';
+
+    const signupKey = "nature-coast-pulse-signup-v1";
+    const signup = document.querySelector("#signup");
+    const note = document.querySelector("#signup-note");
+    const email = document.querySelector("#email");
+    const savedEmail = localStorage.getItem(signupKey);
+    if (savedEmail) {
+      email.value = savedEmail;
+      note.textContent = "Saved locally: " + savedEmail + ". Newsletter provider hookup is the next ops step.";
+    }
+    signup.addEventListener("submit", event => {
+      event.preventDefault();
+      if (!email.checkValidity()) {
+        note.textContent = "Drop in a valid email first.";
+        return;
+      }
+      localStorage.setItem(signupKey, email.value);
+      note.textContent = "Saved locally. Next build step is connecting Beehiiv/Kit/Buttondown so this becomes a real list.";
+    });
   </script>
 </body>
 </html>
