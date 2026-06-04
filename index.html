@@ -106,6 +106,7 @@
     }
     h3 { margin: 0 0 8px; font-size: 19px; }
     p { margin: 0 0 14px; }
+    p, h1, h2, h3, .item, .card, .callout { overflow-wrap: anywhere; }
     .lede { max-width: 820px; color: var(--muted); font-size: 18px; }
     .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
     .grid.two { grid-template-columns: repeat(2, 1fr); }
@@ -178,6 +179,12 @@
       color: var(--water);
       background: #fff;
     }
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
     .split {
       display: grid;
       grid-template-columns: .9fr 1.1fr;
@@ -217,6 +224,9 @@
       .grid, .grid.two, .split, .callout { grid-template-columns: 1fr; }
       .item { grid-template-columns: 1fr; }
       .btn { width: fit-content; }
+      section { overflow: hidden; }
+      .callout, .card, .item { max-width: 100%; }
+      .callout > *, .card > *, .item > * { min-width: 0; }
     }
     @media (max-width: 600px) {
       .wrap { width: calc(100% - 32px); max-width: none; }
@@ -225,7 +235,8 @@
       .eyebrow span { display: block; }
       h1 { font-size: 40px; max-width: 330px; }
       .hero p { font-size: 17px; max-width: 330px; }
-      .callout { padding: 16px; }
+      .callout { padding: 16px; min-width: 0; }
+      .card, .item { min-width: 0; }
     }
   </style>
 </head>
@@ -242,6 +253,7 @@
     <div class="wrap">
       <a href="#verdict">Verdict</a>
       <a href="#water">Water</a>
+      <a href="#rentals">Rentals</a>
       <a href="#food">Food</a>
       <a href="#wacky">Wacky</a>
       <a href="#checklist">Checklist</a>
@@ -266,6 +278,43 @@
             <span class="tag gold">Move scouting</span>
           </div>
         </div>
+      </div>
+    </section>
+
+    <section id="rentals">
+      <h2>Rentals and guided adventures</h2>
+      <p class="lede">Start with rentals and guided trips before buying gear. These are the stronger Google-rated operators I would actually shortlist for boats, kayaks, clear kayaks, manatee trips, scalloping, and Silver/Rainbow River days.</p>
+
+      <h3>Crystal River / Kings Bay</h3>
+      <div class="list">
+        <div class="item"><div><strong>Paddles Outdoor Rentals And Tours</strong><p>Kayaks, paddleboards, clear-kayak tours, manatee viewing. Closest-to-the-action option at Pete's Pier. 4.9, 3,621 reviews.</p><div class="actions"><a class="btn" href="https://maps.google.com/?cid=1687734555981973170">Map</a><a class="btn secondary" href="https://www.paddlesoutdoorrentals.com/">Website</a></div></div></div>
+        <div class="item"><div><strong>Crystal River Kayak Company and Dive Center</strong><p>Kayak rentals, clear kayaks, dive/scuba support, and direct access for paddling toward Three Sisters/Kings Bay. 4.9, 2,166 reviews.</p><div class="actions"><a class="btn" href="https://maps.google.com/?cid=1264277610466069862">Map</a><a class="btn secondary" href="http://www.crystalriverkayakcompany.com/">Website</a></div></div></div>
+        <div class="item"><div><strong>Get Up And Go Kayaking - Crystal River</strong><p>Clear-kayak guided tours from Kings Bay Park. Good choice if Andie wants the pretty water experience without you winging navigation. 4.9, 1,659 reviews.</p><div class="actions"><a class="btn" href="https://maps.google.com/?cid=5412595615230074147">Map</a><a class="btn secondary" href="https://getupandgokayaking.com/locations/florida/crystal-river/">Website</a></div></div></div>
+        <div class="item"><div><strong>Pete's Pier Marina</strong><p>Marina/boat-ramp hub and the practical place to understand the local motorboat scene before buying anything. 4.6, 883 reviews.</p><div class="actions"><a class="btn" href="https://maps.google.com/?cid=11913529722878333014">Map</a><a class="btn secondary" href="https://petespier.com/">Website</a></div></div></div>
+        <div class="item"><div><strong>Plantation Adventure Center and Manatee Tours</strong><p>Manatee tours, scalloping/fishing-style adventure center, and a resort-side water-activity base. 4.8, 803 reviews.</p><div class="actions"><a class="btn" href="https://maps.google.com/?cid=2427089641005030115">Map</a><a class="btn secondary" href="https://www.plantationadventurecenter.com/">Website</a></div></div></div>
+      </div>
+
+      <h3 style="margin-top:30px">Manatee snorkel / dive operators</h3>
+      <div class="list">
+        <div class="item"><div><strong>Bird's Underwater Manatee Dive Center</strong><p>Very highly rated manatee/swim/dive operator. If you only do one guided manatee experience, this is a serious contender. 5.0, 3,732 reviews.</p><div class="actions"><a class="btn" href="https://maps.google.com/?cid=15538185542493776417">Map</a><a class="btn secondary" href="https://birdsunderwater.com/">Website</a></div></div></div>
+        <div class="item"><div><strong>Fun 2 Dive - Swim with Manatees</strong><p>Another strong manatee-tour operator in downtown Crystal River. 4.9, 2,386 reviews.</p><div class="actions"><a class="btn" href="https://maps.google.com/?cid=11252631957270848449">Map</a><a class="btn secondary" href="https://www.fun2dive.com/">Website</a></div></div></div>
+        <div class="item"><div><strong>River Ventures</strong><p>Popular Crystal River manatee/snorkel/ecotour operator with heavy review volume. 4.9, 2,615 reviews.</p><div class="actions"><a class="btn" href="https://maps.google.com/?cid=5124563793558883556">Map</a><a class="btn secondary" href="http://www.riverventures.com/">Website</a></div></div></div>
+      </div>
+
+      <h3 style="margin-top:30px">Homosassa / Chassahowitzka</h3>
+      <div class="list">
+        <div class="item"><div><strong>River Adventure Tours</strong><p>Homosassa kayak rentals, scalloping charters, fishing charters, and river adventures. Good for testing the Homosassa side of life. 4.8, 258 reviews.</p><div class="actions"><a class="btn" href="https://maps.google.com/?cid=15028931636059727724">Map</a><a class="btn secondary" href="http://www.riveradventuretours.com/">Website</a></div></div></div>
+        <div class="item"><div><strong>Get Up and Go Kayaking - The Chaz</strong><p>Clear-kayak guided tours on the Chassahowitzka River. This is the quieter, stranger, more jungle-river version of the clear-water thing. 4.9, 174 reviews.</p><div class="actions"><a class="btn" href="https://maps.google.com/?cid=5346657884656273838">Map</a><a class="btn secondary" href="https://getupandgokayaking.com/locations/florida/the-chaz/">Website</a></div></div></div>
+        <div class="item"><div><strong>MacRae's of Homosassa</strong><p>Old Florida river hub near Monkey Island. Useful for boat-ramp scouting, Homosassa vibe checks, and understanding the local water scene. 4.6, 1,645 reviews.</p><div class="actions"><a class="btn" href="https://maps.google.com/?cid=10239796381103447199">Map</a></div></div></div>
+      </div>
+
+      <h3 style="margin-top:30px">Rainbow River / Silver Springs</h3>
+      <div class="list">
+        <div class="item"><div><strong>Rainbow River Canoe & Kayak</strong><p>Canoe, kayak, and pontoon rentals in Dunnellon for Rainbow River/Withlacoochee days. 4.8, 855 reviews.</p><div class="actions"><a class="btn" href="https://maps.google.com/?cid=60105153357689124">Map</a><a class="btn secondary" href="https://www.rainbowrivercanoeandkayak.com/">Website</a></div></div></div>
+        <div class="item"><div><strong>KP Hole Park</strong><p>Classic Rainbow River launch/tubing/kayak access point. Expect crowds in season, but it is a baseline experience you should understand. 4.6, 3,227 reviews.</p><div class="actions"><a class="btn" href="https://maps.google.com/?cid=18381095542337235899">Map</a><a class="btn secondary" href="http://www.kphole.org/">Website</a></div></div></div>
+        <div class="item"><div><strong>Silver Springs State Park Glass Bottom Boat Tours</strong><p>The old-school no-effort option: sit down, look through glass, see the spring. Good when you want water without logistics. 4.8, 4,610 reviews.</p><div class="actions"><a class="btn" href="https://maps.google.com/?cid=6102265546796155454">Map</a><a class="btn secondary" href="http://www.silversprings.com/glass-bottom-boats/">Website</a></div></div></div>
+        <div class="item"><div><strong>Silver Springs State Park Paddling Adventures</strong><p>Kayak, canoe, and SUP rentals inside Silver Springs State Park, including the downstream Silver River paddle. 4.7, 837 reviews.</p><div class="actions"><a class="btn" href="https://maps.google.com/?cid=5072709937958505574">Map</a><a class="btn secondary" href="https://silversprings.com/paddling/">Website</a></div></div></div>
+        <div class="item"><div><strong>Get Up And Go Kayaking - Silver Springs</strong><p>Clear-kayak guided tours at Silver Springs. Better if you want someone else handling the route and wildlife context. 4.9, 1,930 reviews.</p><div class="actions"><a class="btn" href="https://maps.google.com/?cid=3440347616377876975">Map</a><a class="btn secondary" href="https://getupandgokayaking.com/locations/silver-springs/">Website</a></div></div></div>
       </div>
     </section>
 
