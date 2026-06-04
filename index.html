@@ -14,6 +14,8 @@
       --paper: #fbfcf8;
       --panel: #ffffff;
       --soft: #eef6f1;
+      --cream: #f3f1ea;
+      --pulse-blue: #3a7fb5;
       --water: #0b7285;
       --river: #236345;
       --sun: #d98a2b;
@@ -45,7 +47,8 @@
       padding: 24px 0 42px;
       color: #fff;
       background:
-        linear-gradient(180deg, rgba(8, 29, 34, .55), rgba(8, 29, 34, .22) 42%, rgba(251, 252, 248, .98) 100%),
+        radial-gradient(circle at 82% 18%, rgba(58, 127, 181, .72), transparent 28%),
+        linear-gradient(180deg, rgba(8, 29, 34, .58), rgba(8, 29, 34, .22) 42%, rgba(251, 252, 248, .98) 100%),
         url("https://upload.wikimedia.org/wikipedia/commons/f/fa/Three_sisters_springs_near_crystal_river_national_wildlife_refuge.jpg") center/cover;
     }
 
@@ -79,6 +82,34 @@
     }
 
     .hero { max-width: 860px; text-shadow: 0 2px 20px rgba(0, 0, 0, .32); }
+    .brand-lockup {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+
+    .pulse-mark {
+      width: 74px;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle, var(--cream) 0 23%, rgba(243, 241, 234, .72) 24% 26%, transparent 27% 45%, rgba(243, 241, 234, .52) 46% 49%, transparent 50%),
+        var(--pulse-blue);
+      border: 2px solid rgba(243, 241, 234, .68);
+      box-shadow: 0 10px 28px rgba(0, 0, 0, .2);
+      flex: 0 0 auto;
+    }
+
+    .brand-name {
+      margin: 0;
+      color: var(--cream);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 20px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
     .eyebrow {
       margin: 0 0 10px;
       font-size: 13px;
@@ -295,6 +326,74 @@
     }
     .issue li { margin: 8px 0; }
 
+    .issue-cover {
+      min-height: 100%;
+      padding: 22px;
+      color: var(--cream);
+      background: var(--pulse-blue);
+      border-color: rgba(13, 64, 96, .2);
+      box-shadow: var(--shadow);
+    }
+
+    .issue-cover .pulse-mark {
+      width: 132px;
+      margin-bottom: 18px;
+      box-shadow: none;
+    }
+
+    .issue-cover h2 {
+      color: var(--cream);
+      font-family: Georgia, "Times New Roman", serif;
+      font-weight: 700;
+    }
+
+    .issue-cover p { color: rgba(243, 241, 234, .92); }
+    .issue-cover .kicker { color: #fff1c7; }
+
+    .issue-board {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .brief-card {
+      min-height: 144px;
+      padding: 14px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+
+    .brief-card strong {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--ink);
+      font-size: 17px;
+      line-height: 1.2;
+    }
+
+    .brief-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .issue-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .issue-strip .stat {
+      background: #fff;
+      color: var(--ink);
+      border-color: var(--line);
+    }
+
+    .issue-strip .stat span { color: var(--muted); }
+
     .weather-grid {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
@@ -394,7 +493,7 @@
 
     @media (max-width: 900px) {
       header { min-height: 74vh; }
-      .grid, .grid.two, .split, .feature, .callout, .statbar, .place-grid, .weather-grid { grid-template-columns: 1fr; }
+      .grid, .grid.two, .split, .feature, .callout, .statbar, .place-grid, .weather-grid, .issue-board, .issue-strip { grid-template-columns: 1fr; }
       .feature-art { min-height: 220px; order: -1; }
       .item { grid-template-columns: 1fr; }
       .btn { width: fit-content; }
@@ -410,6 +509,8 @@
       .eyebrow { font-size: 12px; }
       h1 { font-size: 40px; max-width: 340px; }
       .hero p { font-size: 17px; max-width: 340px; }
+      .pulse-mark { width: 58px; }
+      .brand-name { font-size: 16px; }
       .statbar { margin-top: -16px; }
     }
   </style>
@@ -417,9 +518,13 @@
 <body>
   <header>
     <div class="wrap hero">
+      <div class="brand-lockup" aria-label="Nature Coast Pulse brand">
+        <div class="pulse-mark" aria-hidden="true"></div>
+        <p class="brand-name">Nature Coast Pulse</p>
+      </div>
       <p class="eyebrow">Crystal River / Homosassa / Ocala / Gainesville</p>
-      <h1><span>Nature Coast</span><span>Pulse</span></h1>
-      <p>A living local guide plus weekly briefing: where to go, what to do, who to know, and how this weird beautiful chunk of Florida actually works.</p>
+      <h1 aria-label="Nature Coast Pulse"><span>Nature Coast</span><span>Pulse</span></h1>
+      <p>This Week on Florida's Nature Coast: where to go, what to do, who to know, and how this weird beautiful chunk of Florida actually works.</p>
       <div class="hero-actions">
         <a class="btn" href="#places">Explore places</a>
         <a class="btn dark" href="#issue">Read this week</a>
@@ -471,9 +576,17 @@
 
     <section id="issue">
       <div class="split">
-        <div>
+        <div class="issue-cover card">
+          <div class="pulse-mark" aria-hidden="true"></div>
+          <p class="kicker">Weekly issue / pilot 001</p>
           <h2>This week in the Nature Coast</h2>
-          <p class="lede">The newsletter is the push. The site is the destination. This pilot issue uses the Florida guide material we already verified, then leaves clear slots for real weekly events once the source map is running.</p>
+          <p>The newsletter is the push. The site is the destination. This issue surface turns the offline template idea into a live, Vercel-readable product: weekly picks, weather, guide cards, sponsor inventory, and source discipline in one place.</p>
+          <div class="issue-strip" aria-label="Issue summary">
+            <div class="stat"><strong>5</strong><span>weekly picks</span></div>
+            <div class="stat"><strong>1</strong><span>place spotlight</span></div>
+            <div class="stat"><strong>5</strong><span>weather zones</span></div>
+            <div class="stat"><strong>26</strong><span>field guide cards</span></div>
+          </div>
         </div>
         <article class="issue">
           <p class="kicker">Pilot issue 001</p>
@@ -489,6 +602,28 @@
             <a class="btn" href="#places">Use the guide</a>
             <a class="btn secondary" href="#sources">Source map</a>
           </div>
+        </article>
+      </div>
+      <div class="issue-board" aria-label="This week quick cards">
+        <article class="brief-card">
+          <p class="kicker">Place of the week</p>
+          <strong>Three Sisters Springs</strong>
+          <p>Start here for the cleanest emotional proof of the Nature Coast: clear spring water, manatee context, and the reason the region has pull.</p>
+        </article>
+        <article class="brief-card">
+          <p class="kicker">Weather-aware plan</p>
+          <strong>Morning water, flexible afternoon</strong>
+          <p>Build the day around heat, wind, and thunderstorm risk. The Weather Pulse turns that into a quick go/no-go layer.</p>
+        </article>
+        <article class="brief-card">
+          <p class="kicker">Good night out</p>
+          <strong>Ozello Trail into Peck's</strong>
+          <p>Windows down, marsh edge, seafood, sunset. It is not polished. That is the point.</p>
+        </article>
+        <article class="brief-card">
+          <p class="kicker">Social surface</p>
+          <strong>Guided paddles and markets</strong>
+          <p>The meet-people plan starts with repeated, low-pressure local overlap instead of awkward generic networking.</p>
         </article>
       </div>
     </section>
