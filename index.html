@@ -257,10 +257,23 @@
     .place-card {
       display: grid;
       gap: 10px;
-      padding: 16px;
+      padding: 0;
+      overflow: hidden;
     }
 
     .place-card[hidden] { display: none; }
+    .place-image {
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+      background: var(--soft);
+      border-bottom: 1px solid var(--line);
+    }
+    .place-body {
+      display: grid;
+      gap: 10px;
+      padding: 16px;
+    }
     .meta { margin: 0; color: var(--muted); font-size: 14px; }
     .rating { color: #6f4c0d; font-weight: 800; }
 
@@ -641,30 +654,30 @@
 
     const places = [
       {name:"Three Sisters Springs", area:"Crystal River", category:"water", tags:["Springs","Manatees","First stop"], rating:"Official refuge", blurb:"The postcard. Clear spring water, manatee context, and the emotional reason this region makes sense.", map:"https://maps.google.com/?cid=303543040931506697", image:"https://upload.wikimedia.org/wikipedia/commons/f/fa/Three_sisters_springs_near_crystal_river_national_wildlife_refuge.jpg"},
-      {name:"Hunter Springs Park", area:"Crystal River", category:"water", tags:["Swim","Launch","Low effort"], rating:"Local beach/launch", blurb:"Easy access to water without turning the whole day into a logistics project.", map:"https://maps.google.com/?cid=1163569784933141902"},
-      {name:"Paddles Outdoor Rentals And Tours", area:"Crystal River", category:"people", tags:["Kayak","Tours","Meet people"], rating:"4.9 / 3,621", blurb:"Clear-kayak and paddleboard tours near Pete's Pier. Good first social/outdoor activity.", map:"https://maps.google.com/?cid=1687734555981973170", web:"https://www.paddlesoutdoorrentals.com/"},
-      {name:"Crystal River Kayak Company", area:"Crystal River", category:"water", tags:["Kayak","Dive","Rental"], rating:"4.9 / 2,166", blurb:"Practical rental base for paddling toward Three Sisters and Kings Bay.", map:"https://maps.google.com/?cid=1264277610466069862", web:"http://www.crystalriverkayakcompany.com/"},
-      {name:"Bird's Underwater", area:"Crystal River", category:"people", tags:["Manatee","Guided","Snorkel"], rating:"5.0 / 3,732", blurb:"Serious contender for a guided manatee experience, and guided trips are one of the easier newcomer social lanes.", map:"https://maps.google.com/?cid=15538185542493776417", web:"https://birdsunderwater.com/"},
-      {name:"GETAROUNDBOAT", area:"Homosassa", category:"water", tags:["Cruise","Two-person","Slow"], rating:"5.0 / 65", blurb:"Best fit for the two-people-cruising-not-hauling-ass idea. Small electric GoBoat style outings.", map:"https://maps.google.com/?cid=7821471315888065861", web:"https://www.getaroundboat.com/"},
-      {name:"MacRae's of Homosassa", area:"Homosassa", category:"night", tags:["Old Florida","River hub","Casual"], rating:"4.6 / 1,645", blurb:"Boat-ramp, river-hub, old-Florida personality. Useful for learning the local water scene.", map:"https://maps.google.com/?cid=10239796381103447199"},
+      {name:"Hunter Springs Park", area:"Crystal River", category:"water", tags:["Swim","Launch","Low effort"], rating:"Local beach/launch", blurb:"Easy access to water without turning the whole day into a logistics project.", map:"https://maps.google.com/?cid=1163569784933141902", image:"https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Crystal_River_NWR_2.jpg/330px-Crystal_River_NWR_2.jpg"},
+      {name:"Paddles Outdoor Rentals And Tours", area:"Crystal River", category:"people", tags:["Kayak","Tours","Meet people"], rating:"4.9 / 3,621", blurb:"Clear-kayak and paddleboard tours near Pete's Pier. Good first social/outdoor activity.", map:"https://maps.google.com/?cid=1687734555981973170", web:"https://www.paddlesoutdoorrentals.com/", image:"https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Crystal_River_NWR_2.jpg/330px-Crystal_River_NWR_2.jpg"},
+      {name:"Crystal River Kayak Company", area:"Crystal River", category:"water", tags:["Kayak","Dive","Rental"], rating:"4.9 / 2,166", blurb:"Practical rental base for paddling toward Three Sisters and Kings Bay.", map:"https://maps.google.com/?cid=1264277610466069862", web:"http://www.crystalriverkayakcompany.com/", image:"https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Crystal_River_NWR_2.jpg/330px-Crystal_River_NWR_2.jpg"},
+      {name:"Bird's Underwater", area:"Crystal River", category:"people", tags:["Manatee","Guided","Snorkel"], rating:"5.0 / 3,732", blurb:"Serious contender for a guided manatee experience, and guided trips are one of the easier newcomer social lanes.", map:"https://maps.google.com/?cid=15538185542493776417", web:"https://birdsunderwater.com/", image:"https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Crystal_River_NWR_2.jpg/330px-Crystal_River_NWR_2.jpg"},
+      {name:"GETAROUNDBOAT", area:"Homosassa", category:"water", tags:["Cruise","Two-person","Slow"], rating:"5.0 / 65", blurb:"Best fit for the two-people-cruising-not-hauling-ass idea. Small electric GoBoat style outings.", map:"https://maps.google.com/?cid=7821471315888065861", web:"https://www.getaroundboat.com/", image:"https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Crystal_River_NWR_2.jpg/330px-Crystal_River_NWR_2.jpg"},
+      {name:"MacRae's of Homosassa", area:"Homosassa", category:"night", tags:["Old Florida","River hub","Casual"], rating:"4.6 / 1,645", blurb:"Boat-ramp, river-hub, old-Florida personality. Useful for learning the local water scene.", map:"https://maps.google.com/?cid=10239796381103447199", image:"https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Crystal_River_NWR_2.jpg/330px-Crystal_River_NWR_2.jpg"},
       {name:"Ozello Trail", area:"Crystal River / Ozello", category:"night", tags:["Sunset","Drive","Marsh"], rating:"Scenic drive", blurb:"Windows-down marsh-road drive that makes the Gulf edge feel strange in the right way.", map:"https://maps.google.com/?cid=1686410111005646324"},
       {name:"Fort Island Beach", area:"Crystal River", category:"night", tags:["Sunset","Beach","Salt air"], rating:"Gulf beach", blurb:"Not Malibu. Still useful: sand, sunset, and salt air without committing to an Atlantic run.", map:"https://maps.google.com/?cid=17892165988211255246"},
-      {name:"Peck's Old Port Cove", area:"Ozello", category:"food", tags:["Seafood","Waterfront","Old-school"], rating:"4.5 / 4,267", blurb:"Go for the drive, seafood, and old-school waterfront feel.", map:"https://maps.google.com/?cid=7457366538817134625"},
+      {name:"Peck's Old Port Cove", area:"Ozello", category:"food", tags:["Seafood","Waterfront","Old-school"], rating:"4.5 / 4,267", blurb:"Go for the drive, seafood, and old-school waterfront feel.", map:"https://maps.google.com/?cid=7457366538817134625", image:"https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Crystal_River_NWR_2.jpg/330px-Crystal_River_NWR_2.jpg"},
       {name:"The Biscuit Barn", area:"Crystal River", category:"food", tags:["Breakfast","Greasy","Local"], rating:"4.8 / 2,377", blurb:"High-confidence first greasy breakfast stop.", map:"https://maps.google.com/?cid=10533198808350231525"},
       {name:"Jr's Smashburgers", area:"Homosassa", category:"food", tags:["Burger","Casual","Greasy"], rating:"4.8 / 380", blurb:"Smashburger target for the Crystal River/Homosassa side.", map:"https://maps.google.com/?cid=5263714089905554939"},
       {name:"Beans and Greens Coffee House", area:"Crystal River", category:"food", tags:["Coffee","Healthy-ish","Reset"], rating:"4.9 / 180", blurb:"Local healthy-ish reset near the core area.", map:"https://maps.google.com/?cid=871693688436446123"},
-      {name:"Rainbow Springs State Park", area:"Dunnellon", category:"trip", tags:["Tubing","Kayak","Clear water"], rating:"State park", blurb:"Swimming, tubing, kayaking, and the easiest way to understand the Dunnellon side.", map:"https://maps.google.com/?cid=10451121493565970118"},
-      {name:"Silver Springs Glass Bottom Boats", area:"Ocala", category:"trip", tags:["Classic Florida","Boat","Low effort"], rating:"4.8 / 4,610", blurb:"Old-school no-effort water day: sit down, look through glass, see the spring.", map:"https://maps.google.com/?cid=6102265546796155454", web:"http://www.silversprings.com/glass-bottom-boats/"},
-      {name:"Silver Springs Paddling Adventures", area:"Ocala", category:"water", tags:["Kayak","SUP","Wildlife"], rating:"4.7 / 837", blurb:"Kayak, canoe, and SUP rentals inside Silver Springs State Park.", map:"https://maps.google.com/?cid=5072709937958505574", web:"https://silversprings.com/paddling/"},
-      {name:"The Canyons Zip Line", area:"Ocala", category:"trip", tags:["Zipline","Weird Florida","Adventure"], rating:"Ocala canyon park", blurb:"The rare inland Florida thing that does not feel flat.", map:"https://maps.google.com/?cid=17805121606427045858"},
-      {name:"Satchel's Pizza", area:"Gainesville", category:"night", tags:["Pizza","Art-yard","Gainesville"], rating:"4.7 / 4,507", blurb:"Beloved, wacky Gainesville stop. Pizza plus weird art-yard energy.", map:"https://maps.google.com/?cid=4998934991424696352"},
-      {name:"Curia On The Drag", area:"Gainesville", category:"people", tags:["Coffee","Vegan","Artist compound"], rating:"4.6 / 960", blurb:"Coffee/vegan/artist-compound vibe and a better social surface than another chain cafe.", map:"https://maps.google.com/?cid=1946184159492113147"},
-      {name:"Kanapaha Botanical Gardens", area:"Gainesville", category:"trip", tags:["Gardens","Decompression","Shade"], rating:"Botanical garden", blurb:"Bamboo, gardens, shade, and a civilized reset after highway/boat-ramp scouting.", map:"https://maps.google.com/?cid=17157640016719459290"},
-      {name:"Paynes Prairie", area:"Gainesville / Micanopy", category:"trip", tags:["Wildlife","Boardwalk","Big sky"], rating:"State preserve", blurb:"Bison/alligator watch, wide-open prairie, and a more cinematic Florida than expected.", map:"https://maps.google.com/?cid=1318105823112583428"},
-      {name:"Withlacoochee State Trail", area:"Inverness / Hernando", category:"moving", tags:["Bike","Daily life","Rail trail"], rating:"State trail", blurb:"The boring-looking thing that becomes very useful if you live nearby.", map:"https://maps.google.com/?q=Withlacoochee+State+Trail,+Inverness,+FL,+USA&ftid=0x88e80c2740fba591:0x32b08bdaebe74e25"},
-      {name:"Cedar Key", area:"Levy County", category:"trip", tags:["Island town","Clams","Quiet"], rating:"Day trip", blurb:"Small Gulf island town with old docks and end-of-the-road mood.", map:"https://maps.google.com/?cid=1458953238002085119"},
-      {name:"Crystal River Preserve", area:"Crystal River", category:"moving", tags:["Trails","Paddling","Quiet"], rating:"State park", blurb:"Good for testing whether daily nature access feels like home instead of vacation.", map:"https://maps.google.com/?cid=5153834204250209235"},
-      {name:"New Smyrna Beach Jetty", area:"Atlantic surf run", category:"trip", tags:["Surf","Road trip","Reality check"], rating:"Surf target", blurb:"The realistic Central Florida surf mission when Gulf life is not enough.", map:"https://maps.google.com/?cid=10954868998661590645"},
+      {name:"Rainbow Springs State Park", area:"Dunnellon", category:"trip", tags:["Tubing","Kayak","Clear water"], rating:"State park", blurb:"Swimming, tubing, kayaking, and the easiest way to understand the Dunnellon side.", map:"https://maps.google.com/?cid=10451121493565970118", image:"https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Rainbow_spgs_florida.JPG/330px-Rainbow_spgs_florida.JPG"},
+      {name:"Silver Springs Glass Bottom Boats", area:"Ocala", category:"trip", tags:["Classic Florida","Boat","Low effort"], rating:"4.8 / 4,610", blurb:"Old-school no-effort water day: sit down, look through glass, see the spring.", map:"https://maps.google.com/?cid=6102265546796155454", web:"http://www.silversprings.com/glass-bottom-boats/", image:"https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Silver_Springs_State_Park_-_Headspring_Entrance_Sign.jpg/330px-Silver_Springs_State_Park_-_Headspring_Entrance_Sign.jpg"},
+      {name:"Silver Springs Paddling Adventures", area:"Ocala", category:"water", tags:["Kayak","SUP","Wildlife"], rating:"4.7 / 837", blurb:"Kayak, canoe, and SUP rentals inside Silver Springs State Park.", map:"https://maps.google.com/?cid=5072709937958505574", web:"https://silversprings.com/paddling/", image:"https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Silver_Springs_State_Park_-_Headspring_Entrance_Sign.jpg/330px-Silver_Springs_State_Park_-_Headspring_Entrance_Sign.jpg"},
+      {name:"The Canyons Zip Line", area:"Ocala", category:"trip", tags:["Zipline","Weird Florida","Adventure"], rating:"Ocala canyon park", blurb:"The rare inland Florida thing that does not feel flat.", map:"https://maps.google.com/?cid=17805121606427045858", image:"https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/OcalaFLMontage.png/330px-OcalaFLMontage.png"},
+      {name:"Satchel's Pizza", area:"Gainesville", category:"night", tags:["Pizza","Art-yard","Gainesville"], rating:"4.7 / 4,507", blurb:"Beloved, wacky Gainesville stop. Pizza plus weird art-yard energy.", map:"https://maps.google.com/?cid=4998934991424696352", image:"https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Gainesville_FL_Kanapaha_Botanical_Gardens_bldg01.jpg/330px-Gainesville_FL_Kanapaha_Botanical_Gardens_bldg01.jpg"},
+      {name:"Curia On The Drag", area:"Gainesville", category:"people", tags:["Coffee","Vegan","Artist compound"], rating:"4.6 / 960", blurb:"Coffee/vegan/artist-compound vibe and a better social surface than another chain cafe.", map:"https://maps.google.com/?cid=1946184159492113147", image:"https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Gainesville_FL_Kanapaha_Botanical_Gardens_bldg01.jpg/330px-Gainesville_FL_Kanapaha_Botanical_Gardens_bldg01.jpg"},
+      {name:"Kanapaha Botanical Gardens", area:"Gainesville", category:"trip", tags:["Gardens","Decompression","Shade"], rating:"Botanical garden", blurb:"Bamboo, gardens, shade, and a civilized reset after highway/boat-ramp scouting.", map:"https://maps.google.com/?cid=17157640016719459290", image:"https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Gainesville_FL_Kanapaha_Botanical_Gardens_bldg01.jpg/330px-Gainesville_FL_Kanapaha_Botanical_Gardens_bldg01.jpg"},
+      {name:"Paynes Prairie", area:"Gainesville / Micanopy", category:"trip", tags:["Wildlife","Boardwalk","Big sky"], rating:"State preserve", blurb:"Bison/alligator watch, wide-open prairie, and a more cinematic Florida than expected.", map:"https://maps.google.com/?cid=1318105823112583428", image:"https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Paynes_Prairie_observation_tower_view.jpg/330px-Paynes_Prairie_observation_tower_view.jpg"},
+      {name:"Withlacoochee State Trail", area:"Inverness / Hernando", category:"moving", tags:["Bike","Daily life","Rail trail"], rating:"State trail", blurb:"The boring-looking thing that becomes very useful if you live nearby.", map:"https://maps.google.com/?q=Withlacoochee+State+Trail,+Inverness,+FL,+USA&ftid=0x88e80c2740fba591:0x32b08bdaebe74e25", image:"https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Withlacoochee_State_Trail_looking_north_at_point_where_it_makes_a_tee_intersection_with_the_Good_Neighbor_Trail_Aug_8_2020_at_location_28%C2%B035%2722.2%22N_82%C2%B013%2742.3%22W.jpg/330px-thumbnail.jpg"},
+      {name:"Cedar Key", area:"Levy County", category:"trip", tags:["Island town","Clams","Quiet"], rating:"Day trip", blurb:"Small Gulf island town with old docks and end-of-the-road mood.", map:"https://maps.google.com/?cid=1458953238002085119", image:"https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Cedar_Key_Aerial.jpg/330px-Cedar_Key_Aerial.jpg"},
+      {name:"Crystal River Preserve", area:"Crystal River", category:"moving", tags:["Trails","Paddling","Quiet"], rating:"State park", blurb:"Good for testing whether daily nature access feels like home instead of vacation.", map:"https://maps.google.com/?cid=5153834204250209235", image:"https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Crystal_River_NWR_2.jpg/330px-Crystal_River_NWR_2.jpg"},
+      {name:"New Smyrna Beach Jetty", area:"Atlantic surf run", category:"trip", tags:["Surf","Road trip","Reality check"], rating:"Surf target", blurb:"The realistic Central Florida surf mission when Gulf life is not enough.", map:"https://maps.google.com/?cid=10954868998661590645", image:"https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Cedar_Key_Aerial.jpg/330px-Cedar_Key_Aerial.jpg"},
       {name:"MDR Jet Ski Rental", area:"Crystal River", category:"water", tags:["PWC","Verify first","Two-up question"], rating:"Thin listing", blurb:"Closest named Crystal River jet ski rental found. Call first and ask about two-person scenic riding.", map:"https://www.google.com/maps/search/?api=1&query=MDR+Jet+Ski+Rental+8484+W+Orange+Tree+St+Crystal+River+FL", web:"https://www.florida.com/crystal-river/business/mdr-jet-ski-rental"}
     ];
 
@@ -675,6 +688,15 @@
       trip: "Day trip",
       people: "Meet people",
       moving: "Moving intel"
+    };
+
+    const categoryImages = {
+      water: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Crystal_River_NWR_2.jpg/330px-Crystal_River_NWR_2.jpg",
+      food: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/OcalaFLMontage.png/330px-OcalaFLMontage.png",
+      night: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Gainesville_FL_Kanapaha_Botanical_Gardens_bldg01.jpg/330px-Gainesville_FL_Kanapaha_Botanical_Gardens_bldg01.jpg",
+      trip: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Rainbow_spgs_florida.JPG/330px-Rainbow_spgs_florida.JPG",
+      people: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Gainesville_FL_Kanapaha_Botanical_Gardens_bldg01.jpg/330px-Gainesville_FL_Kanapaha_Botanical_Gardens_bldg01.jpg",
+      moving: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/NB_US_19-98_Crystal_River_Sign.JPG/330px-NB_US_19-98_Crystal_River_Sign.JPG"
     };
 
     const weatherGrid = document.querySelector("#weather-grid");
@@ -722,10 +744,12 @@
     function placeCard(place) {
       const tags = place.tags.map(tag => '<span class="tag">' + tag + '</span>').join("");
       const web = place.web ? '<a class="btn secondary" href="' + place.web + '">Website</a>' : "";
+      const image = place.image || categoryImages[place.category];
       return '<article class="card place-card" data-category="' + place.category + '" data-search="' + [place.name, place.area, place.category, place.tags.join(" "), place.blurb].join(" ").toLowerCase() + '">' +
-        '<div><p class="kicker">' + categoryLabels[place.category] + '</p><h3>' + place.name + '</h3><p class="meta">' + place.area + ' / <span class="rating">' + place.rating + '</span></p><p>' + place.blurb + '</p></div>' +
+        '<img class="place-image" loading="eager" decoding="async" src="' + image + '" alt="' + place.name + '">' +
+        '<div class="place-body"><div><p class="kicker">' + categoryLabels[place.category] + '</p><h3>' + place.name + '</h3><p class="meta">' + place.area + ' / <span class="rating">' + place.rating + '</span></p><p>' + place.blurb + '</p></div>' +
         '<div class="tagrow">' + tags + '</div>' +
-        '<div class="actions"><a class="btn" href="' + place.map + '">Map</a>' + web + '</div>' +
+        '<div class="actions"><a class="btn" href="' + place.map + '">Map</a>' + web + '</div></div>' +
       '</article>';
     }
 
