@@ -12,6 +12,7 @@ This started as a relocation guide and is now the first City Pulse-style local s
 
 - Place of the week
 - Weekly issue preview
+- Live weather pulse
 - Curated field guide with filters
 - Day-trip builder
 - Meet-people and moving-here sections
@@ -25,4 +26,3 @@ Vercel imports this repository directly. Changes pushed to `main` redeploy autom
 ## Next Ops Step
 
 Connect a real newsletter provider and replace the local-only signup placeholder with an embedded form or API-backed subscription flow.
-

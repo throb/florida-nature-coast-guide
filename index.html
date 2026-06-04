@@ -282,6 +282,40 @@
     }
     .issue li { margin: 8px 0; }
 
+    .weather-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .weather-card {
+      min-height: 178px;
+      padding: 14px;
+      display: grid;
+      gap: 8px;
+      align-content: start;
+    }
+
+    .weather-temp {
+      margin: 0;
+      font-size: 34px;
+      line-height: 1;
+      font-weight: 900;
+    }
+
+    .weather-card dl {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 4px 8px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .weather-card dt { font-weight: 850; color: var(--ink); }
+    .weather-card dd { margin: 0; }
+
     .signup {
       display: grid;
       gap: 8px;
@@ -347,7 +381,7 @@
 
     @media (max-width: 900px) {
       header { min-height: 74vh; }
-      .grid, .grid.two, .split, .feature, .callout, .statbar, .place-grid { grid-template-columns: 1fr; }
+      .grid, .grid.two, .split, .feature, .callout, .statbar, .place-grid, .weather-grid { grid-template-columns: 1fr; }
       .feature-art { min-height: 220px; order: -1; }
       .item { grid-template-columns: 1fr; }
       .btn { width: fit-content; }
@@ -393,6 +427,7 @@
     <div class="wrap">
       <a href="#spotlight">Spotlight</a>
       <a href="#issue">This Week</a>
+      <a href="#weather">Weather</a>
       <a href="#places">Places</a>
       <a href="#trips">Day Trips</a>
       <a href="#people">Meet People</a>
@@ -442,6 +477,23 @@
             <a class="btn secondary" href="#sources">Source map</a>
           </div>
         </article>
+      </div>
+    </section>
+
+    <section id="weather">
+      <div class="split">
+        <div>
+          <h2>Weather pulse</h2>
+          <p class="lede">Florida plans need weather attached. This strip checks the main scouting zones plus an Atlantic surf-run proxy, so the guide can answer: water day, city day, or stay flexible?</p>
+        </div>
+        <article class="card">
+          <h3>How to read it</h3>
+          <p>Heat index, rain chance, wind, and humidity matter more than a pretty icon. Thunderstorms can turn a perfect morning into a hard no by afternoon.</p>
+          <p class="fine">Live data comes from wttr.in. For severe weather, marine decisions, or official planning, use the National Weather Service and local marine forecasts.</p>
+        </article>
+      </div>
+      <div class="weather-grid" id="weather-grid" aria-live="polite">
+        <article class="card weather-card"><h3>Loading weather</h3><p class="meta">Checking current conditions...</p></article>
       </div>
     </section>
 
@@ -579,6 +631,14 @@
   </footer>
 
   <script>
+    const weatherLocations = [
+      { name: "Crystal River", query: "Crystal River,FL", use: "Springs / Kings Bay" },
+      { name: "Homosassa", query: "Homosassa,FL", use: "River cruising" },
+      { name: "Ocala", query: "Ocala,FL", use: "Silver Springs" },
+      { name: "Gainesville", query: "Gainesville,FL", use: "Night / city reset" },
+      { name: "New Smyrna", query: "New Smyrna Beach,FL", use: "Surf run proxy" }
+    ];
+
     const places = [
       {name:"Three Sisters Springs", area:"Crystal River", category:"water", tags:["Springs","Manatees","First stop"], rating:"Official refuge", blurb:"The postcard. Clear spring water, manatee context, and the emotional reason this region makes sense.", map:"https://maps.google.com/?cid=303543040931506697", image:"https://upload.wikimedia.org/wikipedia/commons/f/fa/Three_sisters_springs_near_crystal_river_national_wildlife_refuge.jpg"},
       {name:"Hunter Springs Park", area:"Crystal River", category:"water", tags:["Swim","Launch","Low effort"], rating:"Local beach/launch", blurb:"Easy access to water without turning the whole day into a logistics project.", map:"https://maps.google.com/?cid=1163569784933141902"},
@@ -616,6 +676,42 @@
       people: "Meet people",
       moving: "Moving intel"
     };
+
+    const weatherGrid = document.querySelector("#weather-grid");
+
+    function weatherCard(location, data) {
+      const current = data.current_condition && data.current_condition[0];
+      if (!current) throw new Error("Missing current condition");
+      const today = data.weather && data.weather[0];
+      const desc = current.weatherDesc && current.weatherDesc[0] ? current.weatherDesc[0].value : "Current conditions";
+      const rain = today && today.hourly && today.hourly[4] ? today.hourly[4].chanceofrain : current.precipMM;
+      return '<article class="card weather-card">' +
+        '<div><p class="kicker">' + location.use + '</p><h3>' + location.name + '</h3></div>' +
+        '<p class="weather-temp">' + current.temp_F + 'F</p>' +
+        '<p class="meta">' + desc + '</p>' +
+        '<dl>' +
+          '<dt>Feels</dt><dd>' + current.FeelsLikeF + 'F</dd>' +
+          '<dt>Rain</dt><dd>' + rain + '%</dd>' +
+          '<dt>Wind</dt><dd>' + current.windspeedMiles + ' mph</dd>' +
+          '<dt>Humidity</dt><dd>' + current.humidity + '%</dd>' +
+        '</dl>' +
+      '</article>';
+    }
+
+    async function loadWeather() {
+      try {
+        const cards = await Promise.all(weatherLocations.map(async location => {
+          const response = await fetch("https://wttr.in/" + encodeURIComponent(location.query) + "?format=j1");
+          if (!response.ok) throw new Error("Weather fetch failed for " + location.name);
+          return weatherCard(location, await response.json());
+        }));
+        weatherGrid.innerHTML = cards.join("");
+      } catch (error) {
+        weatherGrid.innerHTML = '<article class="card weather-card"><h3>Weather unavailable</h3><p class="meta">Live weather did not load. Check wttr.in, NWS, or your weather app before planning a water day.</p></article>';
+      }
+    }
+
+    loadWeather();
 
     const grid = document.querySelector("#place-grid");
     const search = document.querySelector("#search");
