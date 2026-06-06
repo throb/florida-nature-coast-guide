@@ -38,10 +38,16 @@ Required Supabase env vars for live mode:
 
 - `SUPABASE_URL`
 - `SUPABASE_SERVICE_ROLE_KEY`
+- `EMAILOCTOPUS_API_KEY`
+- `EMAILOCTOPUS_LIST_ID`
+
+Optional:
+
+- `EMAILOCTOPUS_STATUS` if the signup endpoint should force `PENDING` or `SUBSCRIBED`; omit it to use the list's double-opt-in behavior.
 
 ## Next Ops Step
 
-Apply the Supabase schema, sync the Nature Coast seed, then add the weekly source sweep that writes source candidates as drafts for review.
+Apply the Supabase schema, sync the Nature Coast seed, set the Supabase and EmailOctopus env vars in Vercel, then add the weekly source sweep that writes source candidates as drafts for review.
 
 ## Template Direction
 

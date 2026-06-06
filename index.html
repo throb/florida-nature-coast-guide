@@ -531,7 +531,7 @@
         <a class="btn dark" href="#advertise">Advertise</a>
       </div>
       <form class="signup" id="signup">
-        <label class="fine" for="email">Pilot list placeholder. Saves locally until a newsletter provider is connected.</label>
+        <label class="fine" for="email">Get the weekly Nature Coast Pulse.</label>
         <div class="signup-row">
           <input id="email" type="email" autocomplete="email" placeholder="you@example.com" aria-label="Email address">
           <button class="btn" type="submit">Join</button>
@@ -977,16 +977,30 @@
       const savedEmail = localStorage.getItem(signupKey);
       if (savedEmail) {
         email.value = savedEmail;
-        note.textContent = "Saved locally: " + savedEmail + ". Newsletter provider hookup is the next ops step.";
+        note.textContent = "Saved: " + savedEmail + ".";
       }
-      signup.addEventListener("submit", event => {
+      signup.addEventListener("submit", async event => {
         event.preventDefault();
         if (!email.checkValidity()) {
           note.textContent = "Drop in a valid email first.";
           return;
         }
-        localStorage.setItem(signupKey, email.value);
-        note.textContent = "Saved locally. Next build step is connecting Beehiiv/Kit/Buttondown so this becomes a real list.";
+        const value = email.value.trim().toLowerCase();
+        note.textContent = "Adding you...";
+        try {
+          const response = await fetch("/api/subscribe", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email: value })
+          });
+          const result = await response.json().catch(() => ({}));
+          if (!response.ok) throw new Error(result.error || "Signup is unavailable right now.");
+          localStorage.setItem(signupKey, value);
+          note.textContent = result.status === "PENDING" ? "Check your email to confirm." : "You're on the list.";
+        } catch (error) {
+          localStorage.setItem(signupKey, value);
+          note.textContent = "Saved locally. EmailOctopus will activate when the list keys are configured.";
+        }
       });
     }
 

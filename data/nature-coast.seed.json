@@ -131,7 +131,31 @@
       "name": "Discover Crystal River",
       "url": "https://www.discovercrystalriverfl.com/",
       "lane": "tourism",
-      "note": "Tourism/event/activity source for Citrus County water and visitor planning."
+      "note": "Primary visitor, activity, and tourism source for Citrus County and Crystal River."
+    },
+    {
+      "name": "City of Crystal River calendar",
+      "url": "https://www.crystalriverfl.org/calendar",
+      "lane": "city-calendar",
+      "note": "Official city calendar for meetings, concerts, events, departments, and local civic updates."
+    },
+    {
+      "name": "Citrus County Chamber community calendar",
+      "url": "https://business.citruscountychamber.com/eventcalendar/Search",
+      "lane": "chamber-calendar",
+      "note": "Business/community events, mixers, festivals, and recurring local happenings across Citrus County."
+    },
+    {
+      "name": "Crystal River National Wildlife Refuge",
+      "url": "https://www.fws.gov/refuge/crystal-river",
+      "lane": "refuge",
+      "note": "Official refuge updates for manatee context, closures, access, conservation, and sensitive habitat."
+    },
+    {
+      "name": "Three Sisters Springs",
+      "url": "https://www.crystalriverfl.org/threesisterssprings",
+      "lane": "parks",
+      "note": "Official city-managed access details for Three Sisters Springs."
     },
     {
       "name": "FWC boating and scallop rules",
@@ -140,16 +164,76 @@
       "note": "Rules, safety, seasons, and conservation constraints for water-life coverage."
     },
     {
-      "name": "Crystal River National Wildlife Refuge",
-      "url": "https://www.fws.gov/refuge/crystal-river",
-      "lane": "parks",
-      "note": "Manatee/spring access, closures, and sensitive habitat context."
+      "name": "Ellie Schiller Homosassa Springs Wildlife State Park",
+      "url": "https://www.floridastateparks.org/parks-and-trails/ellie-schiller-homosassa-springs-wildlife-state-park",
+      "lane": "state-park",
+      "note": "Official park hours, fees, wildlife programming, closures, and access notes."
+    },
+    {
+      "name": "Crystal River Preserve State Park",
+      "url": "https://www.floridastateparks.org/parks-and-trails/crystal-river-preserve-state-park",
+      "lane": "state-park",
+      "note": "Official preserve trail, paddling, park update, and access source."
+    },
+    {
+      "name": "Rainbow Springs State Park",
+      "url": "https://www.floridastateparks.org/parks-and-trails/rainbow-springs-state-park",
+      "lane": "state-park",
+      "note": "Official source for tubing, headspring access, reservations, closures, and park updates."
     },
     {
       "name": "Silver Springs State Park",
       "url": "https://silversprings.com/",
-      "lane": "parks",
-      "note": "Paddling, glass-bottom boats, park updates, and visitor info."
+      "lane": "state-park",
+      "note": "Paddling, glass-bottom boats, park updates, ticketing, and visitor info."
+    },
+    {
+      "name": "Ocala / Marion County community calendar",
+      "url": "https://www.ocalamarion.com/events/community-calendar/",
+      "lane": "tourism-calendar",
+      "note": "Official tourism calendar for Ocala and Marion County events."
+    },
+    {
+      "name": "City of Ocala event calendar",
+      "url": "https://www.ocalafl.gov/our-city/living/city-event-calendar",
+      "lane": "city-calendar",
+      "note": "Official City of Ocala concerts, civic events, downtown programming, and public activities."
+    },
+    {
+      "name": "Marion County calendar",
+      "url": "https://www.marionfl.org/our-county/calendar",
+      "lane": "county-calendar",
+      "note": "County calendar for library programs, parks, civic events, and meetings."
+    },
+    {
+      "name": "Visit Gainesville events",
+      "url": "https://www.visitgainesville.com/events/",
+      "lane": "tourism-calendar",
+      "note": "Alachua County tourism calendar covering Gainesville, High Springs, Micanopy, Newberry, and nearby towns."
+    },
+    {
+      "name": "Visit Gainesville What's Good",
+      "url": "https://www.visitgainesville.com/whats-good/",
+      "lane": "weekly-guide",
+      "note": "Weekly guide and editorial signal for Gainesville and Alachua County events."
+    },
+    {
+      "name": "Cedar Key Chamber calendar",
+      "url": "https://www.cedarkey.org/calendar/",
+      "lane": "chamber-calendar",
+      "note": "Cedar Key Chamber calendar for island events, festivals, markets, and visitor timing."
+    },
+    {
+      "name": "Levy County events calendar",
+      "url": "https://levycounty.org/calendar.aspx?CID=14",
+      "lane": "county-calendar",
+      "note": "Official Levy County events calendar for countywide happenings."
+    },
+    {
+      "name": "Levy County Visitors Bureau",
+      "url": "https://www.levycounty.org/209/Visitors-Bureau",
+      "lane": "tourism",
+      "note": "Official Levy County tourism office and visitor bureau source."
     }
   ],
   "places": [
@@ -596,5 +680,21 @@
       "map": "https://www.google.com/maps/search/?api=1&query=MDR+Jet+Ski+Rental+8484+W+Orange+Tree+St+Crystal+River+FL",
       "web": "https://www.florida.com/crystal-river/business/mdr-jet-ski-rental"
     }
-  ]
+  ],
+  "updateScope": [
+    "places",
+    "source_candidates",
+    "weekly_issue",
+    "day_trips",
+    "newsletter_archive",
+    "email_octopus_signup",
+    "weather_context"
+  ],
+  "operatingCadence": {
+    "monday": "Sweep source list and create source candidates as drafts.",
+    "tuesday": "Review places, event candidates, day trip candidates, and weekly picks.",
+    "wednesday": "Publish approved site/archive updates from canonical data.",
+    "thursday": "Prepare EmailOctopus campaign from approved weekly issue.",
+    "friday": "Send newsletter from EmailOctopus dashboard and archive final issue."
+  }
 }
