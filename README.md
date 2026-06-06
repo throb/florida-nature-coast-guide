@@ -37,7 +37,8 @@ The site now has a City Pulse data layer:
 Required Supabase env vars for live mode:
 
 - `SUPABASE_URL`
-- `SUPABASE_SERVICE_ROLE_KEY`
+- `SUPABASE_PUBLISHABLE_KEY`
+- `SUPABASE_SECRET_KEY` or legacy `SUPABASE_SERVICE_ROLE_KEY`
 - `EMAILOCTOPUS_API_KEY`
 - `EMAILOCTOPUS_LIST_ID`
 
