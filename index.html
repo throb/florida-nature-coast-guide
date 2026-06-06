@@ -779,7 +779,7 @@
   </footer>
 
   <script>
-    const weatherLocations = [
+    let weatherLocations = [
       { name: "Crystal River", query: "Crystal River,FL", use: "Springs / Kings Bay" },
       { name: "Homosassa", query: "Homosassa,FL", use: "River cruising" },
       { name: "Ocala", query: "Ocala,FL", use: "Silver Springs" },
@@ -787,7 +787,7 @@
       { name: "New Smyrna", query: "New Smyrna Beach,FL", use: "Surf run proxy" }
     ];
 
-    const places = [
+    let places = [
       {name:"Three Sisters Springs", area:"Crystal River", category:"water", tags:["Springs","Manatees","First stop"], rating:"Official refuge", blurb:"The postcard. Clear spring water, manatee context, and the emotional reason this region makes sense.", map:"https://maps.google.com/?cid=303543040931506697", image:"https://upload.wikimedia.org/wikipedia/commons/f/fa/Three_sisters_springs_near_crystal_river_national_wildlife_refuge.jpg"},
       {name:"Hunter Springs Park", area:"Crystal River", category:"water", tags:["Swim","Launch","Low effort"], rating:"Local beach/launch", blurb:"Easy access to water without turning the whole day into a logistics project.", map:"https://maps.google.com/?cid=1163569784933141902", image:"https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Crystal_River_NWR_2.jpg/330px-Crystal_River_NWR_2.jpg"},
       {name:"Paddles Outdoor Rentals And Tours", area:"Crystal River", category:"people", tags:["Kayak","Tours","Meet people"], rating:"4.9 / 3,621", blurb:"Clear-kayak and paddleboard tours near Pete's Pier. Good first social/outdoor activity.", map:"https://maps.google.com/?cid=1687734555981973170", web:"https://www.paddlesoutdoorrentals.com/", image:"https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Crystal_River_NWR_2.jpg/330px-Crystal_River_NWR_2.jpg"},
@@ -816,7 +816,7 @@
       {name:"MDR Jet Ski Rental", area:"Crystal River", category:"water", tags:["PWC","Verify first","Two-up question"], rating:"Thin listing", blurb:"Closest named Crystal River jet ski rental found. Call first and ask about two-person scenic riding.", map:"https://www.google.com/maps/search/?api=1&query=MDR+Jet+Ski+Rental+8484+W+Orange+Tree+St+Crystal+River+FL", web:"https://www.florida.com/crystal-river/business/mdr-jet-ski-rental"}
     ];
 
-    const categoryLabels = {
+    let categoryLabels = {
       water: "Water",
       food: "Food",
       night: "Good night",
@@ -825,7 +825,7 @@
       moving: "Moving intel"
     };
 
-    const categoryImages = {
+    let categoryImages = {
       water: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Crystal_River_NWR_2.jpg/330px-Crystal_River_NWR_2.jpg",
       food: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/OcalaFLMontage.png/330px-OcalaFLMontage.png",
       night: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Gainesville_FL_Kanapaha_Botanical_Gardens_bldg01.jpg/330px-Gainesville_FL_Kanapaha_Botanical_Gardens_bldg01.jpg",
@@ -867,8 +867,6 @@
         weatherGrid.innerHTML = '<article class="card weather-card"><h3>Weather unavailable</h3><p class="meta">Live weather did not load. Check wttr.in, NWS, or your weather app before planning a water day.</p></article>';
       }
     }
-
-    loadWeather();
 
     const grid = document.querySelector("#place-grid");
     const search = document.querySelector("#search");
@@ -915,36 +913,92 @@
     });
 
     search.addEventListener("input", applyFilters);
-    renderPlaces();
-
-    const spotlightPool = places.filter(place => ["water", "night", "trip", "people"].includes(place.category));
-    const weekSeed = Math.floor(Date.now() / (1000 * 60 * 60 * 24 * 7));
-    const spotlight = spotlightPool[weekSeed % spotlightPool.length];
-    const spotlightEl = document.querySelector("#spotlight-card");
-    spotlightEl.style.setProperty("--spotlight-image", spotlight.image ? 'url("' + spotlight.image + '")' : 'linear-gradient(140deg, rgba(11, 114, 133, .24), rgba(217, 138, 43, .24))');
-    spotlightEl.querySelector(".feature-copy").innerHTML =
-      '<p class="kicker">Place of the week</p><h2>' + spotlight.name + '</h2><p class="meta">' + spotlight.area + ' / ' + categoryLabels[spotlight.category] + ' / ' + spotlight.rating + '</p><p class="lede">' + spotlight.blurb + '</p><div class="tagrow">' +
-      spotlight.tags.map(tag => '<span class="tag blue">' + tag + '</span>').join("") +
-      '</div><div class="actions"><a class="btn" href="' + spotlight.map + '">Open map</a><a class="btn secondary" href="#places">Browse all</a></div>';
-
-    const signupKey = "nature-coast-pulse-signup-v1";
-    const signup = document.querySelector("#signup");
-    const note = document.querySelector("#signup-note");
-    const email = document.querySelector("#email");
-    const savedEmail = localStorage.getItem(signupKey);
-    if (savedEmail) {
-      email.value = savedEmail;
-      note.textContent = "Saved locally: " + savedEmail + ". Newsletter provider hookup is the next ops step.";
+    function renderSpotlight() {
+      const spotlightPool = places.filter(place => ["water", "night", "trip", "people"].includes(place.category));
+      const weekSeed = Math.floor(Date.now() / (1000 * 60 * 60 * 24 * 7));
+      const spotlight = spotlightPool[weekSeed % spotlightPool.length];
+      const spotlightEl = document.querySelector("#spotlight-card");
+      spotlightEl.style.setProperty("--spotlight-image", spotlight.image ? 'url("' + spotlight.image + '")' : 'linear-gradient(140deg, rgba(11, 114, 133, .24), rgba(217, 138, 43, .24))');
+      spotlightEl.querySelector(".feature-copy").innerHTML =
+        '<p class="kicker">Place of the week</p><h2>' + spotlight.name + '</h2><p class="meta">' + spotlight.area + ' / ' + categoryLabels[spotlight.category] + ' / ' + spotlight.rating + '</p><p class="lede">' + spotlight.blurb + '</p><div class="tagrow">' +
+        spotlight.tags.map(tag => '<span class="tag blue">' + tag + '</span>').join("") +
+        '</div><div class="actions"><a class="btn" href="' + spotlight.map + '">Open map</a><a class="btn secondary" href="#places">Browse all</a></div>';
     }
-    signup.addEventListener("submit", event => {
-      event.preventDefault();
-      if (!email.checkValidity()) {
-        note.textContent = "Drop in a valid email first.";
-        return;
+
+    function renderIssue(issue) {
+      if (!issue) return;
+      const cover = document.querySelector(".issue-cover");
+      const issueArticle = document.querySelector("article.issue");
+      const board = document.querySelector(".issue-board");
+      cover.querySelector(".kicker").textContent = issue.label || "Weekly issue";
+      cover.querySelector("h2").textContent = issue.title;
+      cover.querySelector("p:not(.kicker)").textContent = issue.summary;
+      issueArticle.innerHTML =
+        '<p class="kicker">' + (issue.kicker || "Draft issue") + '</p>' +
+        '<h3>Subject: ' + issue.subject + '</h3>' +
+        '<ol>' + (issue.picks || []).map(pick => '<li>' + pick + '</li>').join("") + '</ol>' +
+        '<div class="actions"><a class="btn" href="#places">Use the guide</a><a class="btn secondary" href="#sources">Source map</a></div>';
+      board.innerHTML = (issue.cards || []).map(card =>
+        '<article class="brief-card"><p class="kicker">' + card.kicker + '</p><strong>' + card.title + '</strong><p>' + card.body + '</p></article>'
+      ).join("");
+    }
+
+    function renderDayTrips(dayTrips) {
+      if (!dayTrips || !dayTrips.length) return;
+      const tripGrid = document.querySelector("#trips .grid");
+      tripGrid.innerHTML = dayTrips.map(trip =>
+        '<article class="card"><p class="kicker">' + trip.kicker + '</p><h3>' + trip.title + '</h3><p>' + trip.body + '</p><div class="tagrow">' +
+        (trip.tags || []).map((tag, index) => '<span class="tag ' + (index === 0 ? "blue" : "gold") + '">' + tag + '</span>').join("") +
+        '</div></article>'
+      ).join("");
+    }
+
+    async function loadCityPulseData() {
+      try {
+        const response = await fetch("/api/city-pulse?city=nature-coast");
+        if (!response.ok) throw new Error("City Pulse data unavailable");
+        const data = await response.json();
+        weatherLocations = data.weatherLocations || weatherLocations;
+        places = data.places || places;
+        categoryLabels = data.categoryLabels || categoryLabels;
+        categoryImages = data.categoryImages || categoryImages;
+        renderIssue(data.issue);
+        renderDayTrips(data.dayTrips);
+      } catch (error) {
+        console.warn(error);
       }
-      localStorage.setItem(signupKey, email.value);
-      note.textContent = "Saved locally. Next build step is connecting Beehiiv/Kit/Buttondown so this becomes a real list.";
-    });
+    }
+
+    function setupSignup() {
+      const signupKey = "nature-coast-pulse-signup-v1";
+      const signup = document.querySelector("#signup");
+      const note = document.querySelector("#signup-note");
+      const email = document.querySelector("#email");
+      const savedEmail = localStorage.getItem(signupKey);
+      if (savedEmail) {
+        email.value = savedEmail;
+        note.textContent = "Saved locally: " + savedEmail + ". Newsletter provider hookup is the next ops step.";
+      }
+      signup.addEventListener("submit", event => {
+        event.preventDefault();
+        if (!email.checkValidity()) {
+          note.textContent = "Drop in a valid email first.";
+          return;
+        }
+        localStorage.setItem(signupKey, email.value);
+        note.textContent = "Saved locally. Next build step is connecting Beehiiv/Kit/Buttondown so this becomes a real list.";
+      });
+    }
+
+    async function init() {
+      await loadCityPulseData();
+      loadWeather();
+      renderPlaces();
+      renderSpotlight();
+      setupSignup();
+    }
+
+    init();
   </script>
 </body>
 </html>

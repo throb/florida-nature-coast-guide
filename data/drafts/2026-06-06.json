@@ -1,0 +1,49 @@
+{
+  "city": "nature-coast",
+  "status": "draft",
+  "publishWeek": "2026-06-06",
+  "title": "Nature Coast Pulse draft for 2026-06-06",
+  "subject": "Bird's Underwater, Paynes Prairie, and a smarter Nature Coast week",
+  "spotlight": "bird-s-underwater",
+  "dayTripCandidates": [
+    {
+      "placeId": "paynes-prairie",
+      "title": "Paynes Prairie",
+      "area": "Gainesville / Micanopy",
+      "tags": [
+        "Wildlife",
+        "Boardwalk",
+        "Big sky"
+      ],
+      "reason": "Bison/alligator watch, wide-open prairie, and a more cinematic Florida than expected."
+    },
+    {
+      "placeId": "cedar-key",
+      "title": "Cedar Key",
+      "area": "Levy County",
+      "tags": [
+        "Island town",
+        "Clams",
+        "Quiet"
+      ],
+      "reason": "Small Gulf island town with old docks and end-of-the-road mood."
+    },
+    {
+      "placeId": "new-smyrna-beach-jetty",
+      "title": "New Smyrna Beach Jetty",
+      "area": "Atlantic surf run",
+      "tags": [
+        "Surf",
+        "Road trip",
+        "Reality check"
+      ],
+      "reason": "The realistic Central Florida surf mission when Gulf life is not enough."
+    }
+  ],
+  "reviewChecklist": [
+    "Verify official source links and hours before publishing.",
+    "Check weather/marine risk before recommending water-heavy plans.",
+    "Confirm sponsor copy is labeled and category-fit.",
+    "Publish only after human review."
+  ]
+}

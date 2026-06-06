@@ -1,0 +1,15 @@
+{
+  "name": "nature-coast-pulse",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "npx vercel dev",
+    "draft:weekly": "node scripts/weekly-draft.mjs",
+    "check:data": "node scripts/check-data.mjs",
+    "sync:supabase": "node scripts/sync-supabase.mjs"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.45.4"
+  }
+}

@@ -23,9 +23,25 @@ This started as a relocation guide and is now the first City Pulse-style local s
 
 Vercel imports this repository directly. Changes pushed to `main` redeploy automatically.
 
+## Live App Foundation
+
+The site now has a City Pulse data layer:
+
+- `data/nature-coast.seed.json` is the local fallback and pilot content seed.
+- `api/city-pulse.js` serves published Supabase rows when env vars are present, and falls back to seed data if Supabase is not configured yet.
+- `api/cron/weekly-draft.js` is the Monday scheduled draft generator declared in `vercel.json`.
+- `supabase/schema.sql` defines the draft-first content model for cities, places, day trips, weekly issues, sources, and source candidates.
+- `npm run draft:weekly` creates a review draft in `data/drafts/`.
+- `npm run sync:supabase` syncs the seed into Supabase after `schema.sql` has been applied.
+
+Required Supabase env vars for live mode:
+
+- `SUPABASE_URL`
+- `SUPABASE_SERVICE_ROLE_KEY`
+
 ## Next Ops Step
 
-Connect a real newsletter provider and replace the local-only signup placeholder with an embedded form or API-backed subscription flow.
+Apply the Supabase schema, sync the Nature Coast seed, then add the weekly source sweep that writes source candidates as drafts for review.
 
 ## Template Direction
 
