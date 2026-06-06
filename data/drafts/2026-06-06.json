@@ -40,6 +40,60 @@
       "reason": "The realistic Central Florida surf mission when Gulf life is not enough."
     }
   ],
+  "weatherSnapshot": {
+    "label": "Today · Crystal River",
+    "summary": "Sunny and hot Saturday with a high near 92, light east wind, and no active NWS point alerts at sweep time. Lead with morning water plans and heat-aware afternoon options.",
+    "updatedAt": "2026-06-06T03:00:00-04:00",
+    "source": "https://api.weather.gov/gridpoints/TBW/62,139/forecast"
+  },
+  "sourceCandidates": [
+    {
+      "status": "review",
+      "title": "Summer Kickoff at Crystal River Kayak Company",
+      "url": "https://business.citruscountychamber.com/eventcalendar/Search",
+      "startsAt": "2026-06-06T08:00:00-04:00",
+      "location": "Crystal River Kayak Company & Dive Center",
+      "reason": "Strong water-day fit, direct chamber calendar source, but should stay review until venue details are checked."
+    },
+    {
+      "status": "review",
+      "title": "Small Town Saturday Night in Downtown Inverness",
+      "url": "https://www.discovercrystalriverfl.com/events/",
+      "startsAt": "2026-06-13T17:00:00-04:00",
+      "location": "1 Courthouse Sq, Inverness, FL 34450",
+      "reason": "Good evening/community pick from tourism calendar."
+    },
+    {
+      "status": "review",
+      "title": "Homosassa Fireworks Festival",
+      "url": "https://www.discovercrystalriverfl.com/events/",
+      "startsAt": "2026-06-27",
+      "location": "MacRae's, Homosassa",
+      "reason": "Good late-June event lead; verify final schedule and parking/access before publishing."
+    },
+    {
+      "status": "review",
+      "title": "Homosassa Springs shuttle boat unavailable",
+      "url": "https://www.floridastateparks.org/parks-and-trails/ellie-schiller-homosassa-springs-wildlife-state-park",
+      "location": "Ellie Schiller Homosassa Springs Wildlife State Park",
+      "reason": "Important access note for trip planning."
+    },
+    {
+      "status": "review",
+      "title": "Levy/Citrus/Hernando scallop season opens July 1",
+      "url": "https://myfwc.com/fishing/saltwater/recreational/bay-scallops/",
+      "startsAt": "2026-07-01",
+      "location": "Levy, Citrus, and Hernando county state waters",
+      "reason": "Useful rules/context item for July planning; source-backed by FWC."
+    },
+    {
+      "status": "review",
+      "title": "Ocala Phase III Extreme Water Shortage Advisory",
+      "url": "https://www.ocalafl.gov/our-city/living/city-event-calendar",
+      "location": "Ocala / Marion County",
+      "reason": "Important local-context item for Ocala/Marion lane; keep factual and official-source-backed."
+    }
+  ],
   "reviewChecklist": [
     "Verify official source links and hours before publishing.",
     "Check weather/marine risk before recommending water-heavy plans.",

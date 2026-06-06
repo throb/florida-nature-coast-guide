@@ -103,3 +103,46 @@ create table if not exists source_candidates (
   created_at timestamptz not null default now(),
   reviewed_at timestamptz
 );
+
+create table if not exists city_settings (
+  id uuid primary key default gen_random_uuid(),
+  city_id uuid not null references cities(id) on delete cascade,
+  key text not null,
+  value jsonb not null default '{}'::jsonb,
+  updated_at timestamptz not null default now(),
+  unique(city_id, key)
+);
+
+create table if not exists newsletter_signups (
+  id uuid primary key default gen_random_uuid(),
+  email text unique not null,
+  city_slug text not null default 'nature-coast',
+  source text not null default 'site-signup',
+  status text not null default 'subscribed',
+  provider text not null default 'supabase',
+  metadata jsonb not null default '{}'::jsonb,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
+);
+
+grant usage on schema public to anon, authenticated, service_role;
+
+grant select on table
+  cities,
+  places,
+  day_trips,
+  weekly_issues,
+  sources,
+  city_settings
+to anon, authenticated;
+
+grant select, insert, update, delete on table
+  cities,
+  places,
+  day_trips,
+  weekly_issues,
+  sources,
+  source_candidates,
+  city_settings,
+  newsletter_signups
+to service_role;

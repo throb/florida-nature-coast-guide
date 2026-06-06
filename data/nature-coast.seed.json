@@ -78,6 +78,13 @@
       "use": "Surf run proxy"
     }
   ],
+  "weatherSnapshot": {
+    "label": "Today · Crystal River",
+    "summary": "Sunny and hot Saturday with a high near 92, light east wind, and no active NWS point alerts at sweep time. Morning water plans look cleaner than late-day heat.",
+    "updatedAt": "2026-06-06T03:00:00-04:00",
+    "source": "https://api.weather.gov/gridpoints/TBW/62,139/forecast",
+    "alerts": []
+  },
   "categoryLabels": {
     "water": "Water",
     "food": "Food",
@@ -234,6 +241,87 @@
       "url": "https://www.levycounty.org/209/Visitors-Bureau",
       "lane": "tourism",
       "note": "Official Levy County tourism office and visitor bureau source."
+    }
+  ],
+  "sourceCandidates": [
+    {
+      "status": "review",
+      "title": "Summer Kickoff at Crystal River Kayak Company",
+      "url": "https://business.citruscountychamber.com/eventcalendar/Search",
+      "startsAt": "2026-06-06T08:00:00-04:00",
+      "endsAt": "2026-06-06T17:30:00-04:00",
+      "location": "Crystal River Kayak Company & Dive Center",
+      "summary": "Chamber calendar lists food truck, ice cream truck, kayak demos, rental specials, and a limited-spots sunset paddle.",
+      "raw": {
+        "source": "Citrus County Chamber community calendar",
+        "lane": "chamber-calendar",
+        "checkedAt": "2026-06-06T06:09:00Z"
+      }
+    },
+    {
+      "status": "review",
+      "title": "Small Town Saturday Night in Downtown Inverness",
+      "url": "https://www.discovercrystalriverfl.com/events/",
+      "startsAt": "2026-06-13T17:00:00-04:00",
+      "endsAt": "2026-06-13T21:00:00-04:00",
+      "location": "1 Courthouse Sq, Inverness, FL 34450",
+      "summary": "Discover Crystal River lists a free June 13 music event on the square with Absolute Def Leppard headlining.",
+      "raw": {
+        "source": "Discover Crystal River events",
+        "lane": "tourism-calendar",
+        "checkedAt": "2026-06-06T06:09:00Z"
+      }
+    },
+    {
+      "status": "review",
+      "title": "Homosassa Fireworks Festival",
+      "url": "https://www.discovercrystalriverfl.com/events/",
+      "startsAt": "2026-06-27",
+      "location": "5300 S. Cherokee Way, Homosassa, FL 34448",
+      "summary": "Discover Crystal River lists MacRae's annual Homosassa Fireworks Festival for June 27.",
+      "raw": {
+        "source": "Discover Crystal River events",
+        "lane": "tourism-calendar",
+        "checkedAt": "2026-06-06T06:09:00Z"
+      }
+    },
+    {
+      "status": "review",
+      "title": "Homosassa Springs shuttle boat unavailable",
+      "url": "https://www.floridastateparks.org/parks-and-trails/ellie-schiller-homosassa-springs-wildlife-state-park",
+      "location": "Ellie Schiller Homosassa Springs Wildlife State Park",
+      "summary": "Florida State Parks says shuttle boat service is currently unavailable due to low water levels; tram and park access should be checked before recommending the visit.",
+      "raw": {
+        "source": "Florida State Parks",
+        "lane": "state-park",
+        "checkedAt": "2026-06-06T06:09:00Z"
+      }
+    },
+    {
+      "status": "review",
+      "title": "Levy, Citrus, and Hernando scallop season opens July 1",
+      "url": "https://myfwc.com/fishing/saltwater/recreational/bay-scallops/",
+      "startsAt": "2026-07-01",
+      "endsAt": "2026-09-24",
+      "location": "Levy, Citrus, and Hernando county state waters",
+      "summary": "FWC lists the 2026 Levy/Citrus/Hernando bay scallop season as July 1 through Sept. 24, including Cedar Key, Crystal River, and Homosassa.",
+      "raw": {
+        "source": "FWC bay scallop regulations",
+        "lane": "rules",
+        "checkedAt": "2026-06-06T06:09:00Z"
+      }
+    },
+    {
+      "status": "review",
+      "title": "Ocala Phase III Extreme Water Shortage Advisory",
+      "url": "https://www.ocalafl.gov/our-city/living/city-event-calendar",
+      "location": "Ocala / Marion County",
+      "summary": "City of Ocala page notes most of Marion County is under a Phase III Extreme Water Shortage Advisory with one-day-per-week irrigation limits.",
+      "raw": {
+        "source": "City of Ocala",
+        "lane": "city-alert",
+        "checkedAt": "2026-06-06T06:09:00Z"
+      }
     }
   ],
   "places": [

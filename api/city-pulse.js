@@ -26,21 +26,44 @@ async function loadPublishedFromSupabase(citySlug) {
     .single();
   if (cityError) throw cityError;
 
-  const [{ data: places, error: placesError }, { data: trips, error: tripsError }, { data: issue, error: issueError }, { data: sources, error: sourcesError }] = await Promise.all([
+  const [
+    { data: places, error: placesError },
+    { data: trips, error: tripsError },
+    { data: issue, error: issueError },
+    { data: sources, error: sourcesError },
+    { data: settings, error: settingsError },
+    { data: settingsFallback, error: settingsFallbackError }
+  ] = await Promise.all([
     supabase.from("places").select("*").eq("city_id", city.id).eq("status", "published").order("sort_order"),
     supabase.from("day_trips").select("*").eq("city_id", city.id).eq("status", "published").order("sort_order"),
     supabase.from("weekly_issues").select("*").eq("city_id", city.id).eq("status", "published").order("publish_date", { ascending: false }).limit(1).maybeSingle(),
-    supabase.from("sources").select("*").eq("city_id", city.id).eq("active", true).order("name")
+    supabase.from("sources").select("*").eq("city_id", city.id).eq("active", true).order("name"),
+    supabase.from("city_settings").select("key,value").eq("city_id", city.id),
+    supabase.from("source_candidates").select("title,raw,created_at").eq("city_id", city.id).order("created_at", { ascending: false })
   ]);
 
   if (placesError) throw placesError;
   if (tripsError) throw tripsError;
   if (issueError) throw issueError;
   if (sourcesError) throw sourcesError;
+  if (settingsError && settingsError.code !== "PGRST205" && settingsError.code !== "42P01") throw settingsError;
+  if (settingsFallbackError) throw settingsFallbackError;
 
   const seed = await loadSeed();
+  const settingsByKey = settingsError ? {} : Object.fromEntries((settings || []).map(setting => [setting.key, setting.value]));
+  for (const row of (settingsFallback || []).filter(row => row.title?.startsWith("__setting:"))) {
+    const key = row.title.replace("__setting:", "");
+    if (!(key in settingsByKey) && row.raw && "value" in row.raw) {
+      settingsByKey[key] = row.raw.value;
+    }
+  }
   return {
     ...seed,
+    weatherLocations: settingsByKey.weatherLocations || seed.weatherLocations,
+    categoryLabels: settingsByKey.categoryLabels || seed.categoryLabels,
+    categoryImages: settingsByKey.categoryImages || seed.categoryImages,
+    updateScope: settingsByKey.updateScope || seed.updateScope,
+    operatingCadence: settingsByKey.operatingCadence || seed.operatingCadence,
     city: {
       slug: city.slug,
       name: city.name,

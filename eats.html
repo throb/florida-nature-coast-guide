@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Eats | Nature Coast Pulse</title>
+  <link rel="icon" type="image/png" href="assets/nature-coast-insider-webicon.png">
+  <link rel="apple-touch-icon" href="assets/nature-coast-insider-webicon.png">
+  <link rel="stylesheet" href="guide-pages.css">
+</head>
+<body>
+  <header class="bar" id="bar">
+    <a class="word" href="index.html" aria-label="Nature Coast Insider home"><img src="assets/nature-coast-insider-header-icon.png" alt="Nature Coast Insider"></a>
+    <nav class="site-nav" aria-label="Guide pages">
+      <a href="index.html">This Week</a>
+      <a href="daytrips.html">Day Trips</a>
+      <a href="eats.html" aria-current="page">Eats</a>
+    </nav>
+    <div class="bar-cta">
+      <span class="iss">Eats Guide</span>
+      <a href="index.html#join" class="btn">Join the list</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <img alt="Homosassa fish market" src="https://commons.wikimedia.org/wiki/Special:FilePath/The_fish_market_in_Homosassa,_Florida.jpg?width=1800">
+      <div class="wrap">
+        <div class="kicker">Nature Coast Pulse - Eats</div>
+        <h1>Food stops with a reason to go.</h1>
+        <p>A practical food guide for the Nature Coast: route-friendly seafood, breakfast anchors, local lunch stops, and places that make a day trip easier to plan.</p>
+        <div class="hero-actions">
+          <a class="btn primary" href="#radar">Today&apos;s picks</a>
+          <a class="btn" href="daytrips.html">Pair with a route</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="radar">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <div class="kicker">Refresh often</div>
+            <h2>Today&apos;s Three</h2>
+            <p>The lead slots are built for fresh, useful picks: recent buzz, waterfront classics, and restaurants that plug naturally into this week&apos;s routes.</p>
+          </div>
+          <a href="index.html#advertise" class="btn">Sponsor Eats</a>
+        </div>
+        <div id="eats-radar" class="eat-grid"></div>
+      </div>
+    </section>
+
+    <section class="section" id="evergreen">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <div class="kicker">Keep handy</div>
+            <h2>Highly Rated And Off The Obvious Path</h2>
+            <p>Evergreen local picks that give the guide depth beyond whatever is newest this morning.</p>
+          </div>
+        </div>
+        <div id="eats-evergreen" class="eat-grid"></div>
+        <div class="sponsor-strip">
+          <p><b>Restaurant sponsor idea:</b> one category sponsor for Eats, plus native placement on relevant day trips like seafood runs, breakfast loops, date nights, and post-spring lunch stops.</p>
+          <a href="mailto:sponsors@naturecoastpulse.com?subject=Eats%20sponsorship%20inquiry" class="btn earth">Ask about Eats sponsorship</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">Nature Coast Pulse - Crystal River, Homosassa, Ocala, Gainesville.</div>
+  </footer>
+
+  <script src="guide-data.js"></script>
+  <script>
+    (function(){
+      var guide = window.NCP_GUIDE;
+      var radar = document.getElementById('eats-radar');
+      var evergreen = document.getElementById('eats-evergreen');
+      if(!guide || !radar || !evergreen) return;
+      function card(item){
+        return '<a class="eat-card' + (item.featured ? ' featured' : '') + '" href="' + guide.esc(item.href) + '" target="_blank" rel="noopener">' +
+          '<div class="ph"><img alt="' + guide.esc(item.imageLabel || item.title) + '" src="' + guide.esc(item.image) + '"></div>' +
+          '<div class="eat-body">' +
+            '<div class="card-top"><span class="card-kicker">' + guide.esc(item.lane) + '</span></div>' +
+            '<h3>' + guide.esc(item.title) + '</h3>' +
+            '<p>' + guide.esc(item.dek) + '</p>' +
+            '<div class="rating-row"><span>' + guide.esc(item.place) + '</span></div>' +
+            '<div class="card-tags">' + guide.chips(item.badges) + '</div>' +
+          '</div>' +
+        '</a>';
+      }
+      radar.innerHTML = guide.eats.filter(function(item){ return item.featured; }).map(card).join('');
+      evergreen.innerHTML = guide.eats.filter(function(item){ return !item.featured; }).map(card).join('');
+    })();
+  </script>
+</body>
+</html>

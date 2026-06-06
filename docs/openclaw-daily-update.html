@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OpenClaw Daily Update Instructions | Nature Coast Pulse</title>
+  <style>
+    body {
+      max-width: 860px;
+      margin: 40px auto;
+      padding: 0 20px 60px;
+      color: #18242f;
+      background: #fbf8ef;
+      font: 16px/1.55 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    h1, h2 { line-height: 1.08; }
+    h1 { font-size: 38px; margin-bottom: 8px; }
+    h2 { margin-top: 34px; }
+    code, pre { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+    pre {
+      overflow: auto;
+      padding: 16px;
+      border: 1px solid rgba(24,36,47,.18);
+      border-radius: 10px;
+      background: #fffdf7;
+    }
+    .note {
+      padding: 14px 16px;
+      border-left: 4px solid #3a7fb5;
+      background: #edf5f8;
+    }
+    li { margin: 7px 0; }
+  </style>
+</head>
+<body>
+  <h1>OpenClaw Daily Update Instructions</h1>
+  <p class="note">
+    Use this file as the daily operating prompt for OpenClaw. In production, OpenClaw is remote from Vercel, so it must publish over HTTPS to the deployed site. Do not use localhost except for local testing.
+  </p>
+
+  <h2>Goal</h2>
+  <p>
+    Update Nature Coast Pulse daily with fresh, source-backed local guide data: images, weather/context settings, places, day trips, weekly issue content, source candidates, and source metadata.
+  </p>
+
+  <h2>Production Endpoint</h2>
+  <pre><code>POST https://&lt;VERCEL_DOMAIN&gt;/api/publish
+Authorization: Bearer &lt;PUBLISH_API_KEY&gt;
+Content-Type: application/json</code></pre>
+
+  <p>
+    The publish secret must come from OpenClaw's secure environment. Never write it into a repo file, prompt transcript, or public artifact.
+  </p>
+
+  <h2>Daily Checklist</h2>
+  <ol>
+    <li>Fetch the current public payload from <code>GET https://&lt;VERCEL_DOMAIN&gt;/api/city-pulse?city=nature-coast</code>.</li>
+    <li>Check official sources first: city/county calendars, parks, tourism boards, chambers, direct venue pages, FWC, NWS/weather sources.</li>
+    <li>Update only rows/settings that changed. Stable slugs make publishes idempotent.</li>
+    <li>Use <code>draft</code> or <code>review</code> for AI-generated or unapproved editorial picks.</li>
+    <li>Use <code>published</code> only for content that should appear publicly.</li>
+    <li>Publish found images as stable public URLs, or publish generated images as <code>images[].dataBase64</code> so the API can store them in Supabase Storage.</li>
+    <li>Publish weather/context updates under <code>settings.weatherLocations</code> or <code>settings.weatherSnapshot</code>.</li>
+    <li>After publishing, fetch <code>/api/city-pulse</code> again and verify the changed values are present.</li>
+  </ol>
+
+  <h2>Payload Template</h2>
+  <pre><code>{
+  "city": "nature-coast",
+  "dryRun": false,
+  "publish": {
+    "settings": {
+      "weatherLocations": [
+        { "name": "Crystal River", "query": "Crystal River,FL", "use": "Springs / Kings Bay" }
+      ],
+      "weatherSnapshot": {
+        "label": "Today · Crystal River",
+        "summary": "Hot, humid, watch afternoon storms",
+        "updatedAt": "2026-06-06T09:00:00-04:00"
+      },
+      "categoryImages": {
+        "water": "https://example.com/current-water-image.jpg"
+      }
+    },
+    "images": [
+      {
+        "id": "three-sisters-generated-hero",
+        "filename": "three-sisters-generated-hero.png",
+        "contentType": "image/png",
+        "dataBase64": "&lt;base64 image bytes&gt;",
+        "target": {
+          "type": "place",
+          "id": "three-sisters-springs"
+        }
+      },
+      {
+        "id": "water-category",
+        "url": "https://example.com/current-water-image.jpg",
+        "target": {
+          "type": "categoryImage",
+          "category": "water"
+        }
+      }
+    ],
+    "places": [
+      {
+        "id": "three-sisters-springs",
+        "status": "published",
+        "sortOrder": 1,
+        "name": "Three Sisters Springs",
+        "area": "Crystal River",
+        "category": "water",
+        "tags": ["Springs", "Manatees", "First stop"],
+        "rating": "Official refuge",
+        "blurb": "Current, approved place description.",
+        "map": "https://maps.google.com/?cid=303543040931506697",
+        "web": "https://www.crystalriverfl.org/threesisterssprings",
+        "image": "https://example.com/three-sisters-current.jpg",
+        "sourceUrl": "https://www.crystalriverfl.org/threesisterssprings",
+        "verifiedAt": "2026-06-06T09:00:00-04:00"
+      }
+    ],
+    "dayTrips": [],
+    "sources": [],
+    "sourceCandidates": [],
+    "issue": null
+  }
+}</code></pre>
+
+  <h2>Dry Run First</h2>
+  <pre><code>{
+  "city": "nature-coast",
+  "dryRun": true,
+  "publish": {
+    "settings": {
+      "weatherSnapshot": { "summary": "dry run only" }
+    }
+  }
+}</code></pre>
+
+  <h2>Expected Response</h2>
+  <pre><code>{
+  "ok": true,
+  "city": "nature-coast",
+  "counts": {
+    "places": 1,
+    "dayTrips": 0,
+    "sources": 0,
+    "sourceCandidates": 0,
+    "settings": 3,
+    "issue": 0
+  },
+  "storage": {
+    "settings": {
+      "weatherSnapshot": "city_settings"
+    }
+  }
+}</code></pre>
+
+  <p>
+    If <code>storage.settings</code> reports <code>source_candidates</code>, that is still valid. It means the API used the durable fallback store because Supabase REST has not exposed <code>city_settings</code> yet. <code>/api/city-pulse</code> reads both paths.
+  </p>
+
+  <h2>Rules</h2>
+  <ul>
+    <li>Do not publish unsourced facts as final public content.</li>
+    <li>Do not hard-delete historical content; archive instead.</li>
+    <li>Do not overwrite approved public content with AI-only guesses.</li>
+    <li>Do not use social posts as authoritative sources; use them as leads.</li>
+    <li>Keep image URLs stable and publicly accessible. For generated images, use the API upload path instead of Vercel filesystem writes.</li>
+  </ul>
+
+  <h2>More Detail</h2>
+  <p>
+    Full API documentation lives in <code>docs/openclaw-publish-api.md</code>.
+  </p>
+</body>
+</html>

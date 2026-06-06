@@ -1,0 +1,373 @@
+{
+  "city": "nature-coast",
+  "mode": "local-first",
+  "checkedAt": "2026-06-06T07:00:00Z",
+  "localDate": "2026-06-06",
+  "cron": "629a2f29-d06e-408e-94d4-2e4d44196321",
+  "summary": "Daily sweep checked official tourism, chamber, city/county, parks/refuge, FWC, and NWS inputs. Only the NWS-backed weather snapshot changed locally; existing review candidates remain draft/review-first.",
+  "currentPayloadBefore": {
+    "places": 26,
+    "dayTrips": 3,
+    "sources": 18,
+    "sourceCandidates": 6,
+    "issue": "pilot-001",
+    "weatherUpdatedAt": "2026-06-06T02:09:00-04:00"
+  },
+  "sourcesChecked": [
+    {
+      "name": "Discover Crystal River",
+      "url": "https://www.discovercrystalriverfl.com/",
+      "status": "checked",
+      "httpStatus": 200,
+      "notes": "Loaded source surface. Snippet: Official Guide to Crystal River and Citrus County, Florida Skip to content CRYSTAL RIVER HOMOSASSA INVERNESS FLORAL CITY 68 &deg; MENU Search Term Search CRYSTAL RIVER HOMOSASSA INVERNESS FLORAL CITY Things to Do Events Where to Stay Dining Cities & Neighborhoods Plan Your Visit AR Experience Meeting Planners Citrus County Partners In Tourism Media Contact Us Visitors Guide Blog Email Signup Deals Facebook Instagram Twitter YouTube Pi"
+    },
+    {
+      "name": "Discover Crystal River events",
+      "url": "https://www.discovercrystalriverfl.com/events/",
+      "status": "checked",
+      "httpStatus": 200,
+      "notes": "Loaded source surface. Snippet: Upcoming Events in Crystal River & Citrus County, FL Skip to content CRYSTAL RIVER HOMOSASSA INVERNESS FLORAL CITY 68 &deg; MENU Search Term Search CRYSTAL RIVER HOMOSASSA INVERNESS FLORAL CITY Things to Do Events Where to Stay Dining Cities & Neighborhoods Plan Your Visit AR Experience Meeting Planners Citrus County Partners In Tourism Media Contact Us Visitors Guide Blog Email Signup Deals Facebook Instagram Twitter YouTube"
+    },
+    {
+      "name": "City of Crystal River calendar",
+      "url": "https://www.crystalriverfl.org/calendar",
+      "status": "limited:403",
+      "httpStatus": 403,
+      "notes": "Could not fully inspect text view: Just a moment... Enable JavaScript and cookies to continue"
+    },
+    {
+      "name": "Citrus County Chamber community calendar",
+      "url": "https://business.citruscountychamber.com/eventcalendar/Search",
+      "status": "checked",
+      "httpStatus": 200,
+      "notes": "Loaded source surface. Snippet: Calendar - Citrus County Chamber of Commerce Skip to content Menu Find a Business Search Member Directory Business/ Community Guide About About Us Chamber Leadership Volunteer Chamber News Chamber’s Chronicle Connection Chamber Chat Contact Us Members Member Application Membership Benefits Advocacy and Business Support Services Marketing Opportunities Networking Member Login Member to Member Deals Committees Business"
+    },
+    {
+      "name": "Crystal River National Wildlife Refuge",
+      "url": "https://www.fws.gov/refuge/crystal-river",
+      "status": "checked",
+      "httpStatus": 200,
+      "notes": "Loaded source surface. Snippet: Crystal River National Wildlife Refuge | U.S. Fish & Wildlife Service Skip to main content An official website of the United States government Here’s how you know Here’s how you know Official websites use .gov A .gov website belongs to an official government organization in the United States. Secure .gov websites use HTTPS A lock ( Lock Locked padlock icon ) or https:// means you’ve safely connected to the .gov websi"
+    },
+    {
+      "name": "Three Sisters Springs",
+      "url": "https://www.crystalriverfl.org/threesisterssprings",
+      "status": "limited:403",
+      "httpStatus": 403,
+      "notes": "Could not fully inspect text view: Just a moment... Enable JavaScript and cookies to continue"
+    },
+    {
+      "name": "FWC bay scallop regulations",
+      "url": "https://myfwc.com/fishing/saltwater/recreational/bay-scallops/",
+      "status": "checked",
+      "httpStatus": 200,
+      "notes": "Loaded source surface. Snippet: Bay Scallops: Seasons and Bag Limits | FWC Skip to main content Buy and Apply Recreational Fishing & Hunting How to Order Do I Need a License? Limited Entry/Quota Hunts Public Land Use Accessibility Accommodations Commercial Commercial Licenses Commercial Saltwater Commercial Freshwater CLS Online Login Charter Licenses Vessel Pier Licenses Wildlife Wildlife Permits Nuisance Wildlife Permits Captive Wildlife Permits More"
+    },
+    {
+      "name": "FWC boating regulations",
+      "url": "https://myfwc.com/boating/regulations/",
+      "status": "checked",
+      "httpStatus": 200,
+      "notes": "Loaded source surface. Snippet: ta Hunts Public Land Use Accessibility Accommodations Commercial Commercial Licenses Commercial Saltwater Commercial Freshwater CLS Online Login Charter Licenses Vessel Pier Licenses Wildlife Wildlife Permits Nuisance Wildlife Permits Captive Wildlife Permits More ... Application Forms Boating & Navigation Resolve a Wildlife Conflict Wildlife Alert Report a Violation Know the Rules Captive Wildlife Saltwater Recreational Regulations Freshwater Recreational Regulations Hunting Regulations Boating Regulations See All"
+    },
+    {
+      "name": "Homosassa Springs Wildlife State Park",
+      "url": "https://www.floridastateparks.org/parks-and-trails/ellie-schiller-homosassa-springs-wildlife-state-park",
+      "status": "limited:403",
+      "httpStatus": 403,
+      "notes": "Could not fully inspect text view: Attention Required! | Cloudflare Please enable cookies. Sorry, you have been blocked You are unable to access floridastateparks.org Why have I been blocked? This website is using a security service to protect itself from online attacks. The action you just performed triggered the security solution. There are several actions that could trigger this block including submitting a certain word or phrase, a SQL command or "
+    },
+    {
+      "name": "Crystal River Preserve State Park",
+      "url": "https://www.floridastateparks.org/parks-and-trails/crystal-river-preserve-state-park",
+      "status": "limited:403",
+      "httpStatus": 403,
+      "notes": "Could not fully inspect text view: Attention Required! | Cloudflare Please enable cookies. Sorry, you have been blocked You are unable to access floridastateparks.org Why have I been blocked? This website is using a security service to protect itself from online attacks. The action you just performed triggered the security solution. There are several actions that could trigger this block including submitting a certain word or phrase, a SQL command or "
+    },
+    {
+      "name": "Rainbow Springs State Park",
+      "url": "https://www.floridastateparks.org/parks-and-trails/rainbow-springs-state-park",
+      "status": "limited:403",
+      "httpStatus": 403,
+      "notes": "Could not fully inspect text view: Attention Required! | Cloudflare Please enable cookies. Sorry, you have been blocked You are unable to access floridastateparks.org Why have I been blocked? This website is using a security service to protect itself from online attacks. The action you just performed triggered the security solution. There are several actions that could trigger this block including submitting a certain word or phrase, a SQL command or "
+    },
+    {
+      "name": "Silver Springs State Park",
+      "url": "https://silversprings.com/",
+      "status": "checked",
+      "httpStatus": 200,
+      "notes": "Loaded source surface. Snippet: m Boats Paddling Hiking Wildlife Birding Camping Silver River Museum Pioneer Village Dining Options Events Gallery Weddings/Catering About the Park Getting Here Frequently Asked Questions Park History Park Hours Guidelines Group Rates HOME Plan Your Day Glass Bottom Boats Paddling Hiking Wildlife Birding Camping Silver River Museum Pioneer Village Dining Options Events Gallery Weddings/Catering About the Park Getting Here Frequently Asked Questions Park History Park Hours Guidelines Group Rates Search Search BOOK N"
+    },
+    {
+      "name": "Ocala Marion community calendar",
+      "url": "https://www.ocalamarion.com/events/community-calendar/",
+      "status": "checked",
+      "httpStatus": 200,
+      "notes": "Loaded source surface. Snippet: Community Calendar | Ocala / Marion County Florida Skip to content Shop 0 Saved Plan Your Trip Get Our App Equestrian Content Navigation Things to Do Equestrian Outdoor Adventures Indoor Adventures Shopping Arts & Culture Golf Agritourism Spas & Wellness Day Trips & Scenic Drives Events Annual Events Horse Shows & Events Submit Your Event Community Calendar Where to Stay Hotels & Motels Campgrounds & RV Parks Vacation Rentals "
+    },
+    {
+      "name": "City of Ocala event calendar",
+      "url": "https://www.ocalafl.gov/our-city/living/city-event-calendar",
+      "status": "checked",
+      "httpStatus": 200,
+      "notes": "Loaded source surface. Snippet: Event Calendar | City of Ocala Please enable JavaScript in your browser for a better user experience. Show/Hide Due to ongoing drought conditions, most of Marion County, including the City of Ocala, is now under a Phase III Extreme Water Shortage Advisory. Irrigation is restricted to one day per week: odd-numbered addresses water on Saturdays; even-numbered addresses water on Sundays; non-residential properties water"
+    },
+    {
+      "name": "Marion County calendar",
+      "url": "https://www.marionfl.org/our-county/calendar",
+      "status": "checked",
+      "httpStatus": 200,
+      "notes": "Loaded source surface. Snippet: Powered and protected by Privacy"
+    },
+    {
+      "name": "Visit Gainesville events",
+      "url": "https://www.visitgainesville.com/events/",
+      "status": "checked",
+      "httpStatus": 200,
+      "notes": "Loaded source surface. Snippet: Events - Visit Gainesville Cookie Settings Close About cookies Essential Analytics Targeting Social media About cookies This control panel describes what kinds of cookies are present on this website and allows you to enable or disable different types of cookies. Cookies are small pieces of text saved by websites to your computer. Cookies are how your computer remembers things you&rsquo;ve already done on the internet"
+    },
+    {
+      "name": "Visit Gainesville Whats Good",
+      "url": "https://www.visitgainesville.com/whats-good/",
+      "status": "checked",
+      "httpStatus": 200,
+      "notes": "Loaded source surface. Snippet: What s Good - Visit Gainesville Cookie Settings Close About cookies Essential Analytics Targeting Social media About cookies This control panel describes what kinds of cookies are present on this website and allows you to enable or disable different types of cookies. Cookies are small pieces of text saved by websites to your computer. Cookies are how your computer remembers things you&rsquo;ve already done on the internet and are an imp"
+    },
+    {
+      "name": "Cedar Key Chamber calendar",
+      "url": "https://www.cedarkey.org/calendar/",
+      "status": "checked",
+      "httpStatus": 200,
+      "notes": "Loaded source surface. Snippet: Calendar Toggle Navigation EAT & DRINK PLAY STAY EXPLORE Shopping Services Nonprofit Organizations Events Member Directory About Us Contact About Cedar Key Membership Benefits Join Today City of Cedar Key Calendar of Events Add Search Criteria Select View List Card Agenda Filter by Date Filter by Type Events Classes Deadlines Meetings Search by Keyword Search Clear Events Happening This Week Last Week Next Week Monda"
+    },
+    {
+      "name": "Levy County events calendar",
+      "url": "https://levycounty.org/calendar.aspx?CID=14",
+      "status": "checked",
+      "httpStatus": 200,
+      "notes": "Loaded source surface. Snippet: Calendar • Events Skip to Main Content Create a Website Account - Manage notification subscriptions, save form progress and more. Website Sign In Board of County Commissioners Departments Government Agencies How Do I... Search Home Calendar Calendar View All Calendars is the default. Choose Select a Calendar to view a specific calendar. Subscribe to calendar notifications by clicking on the Notify Me® button, and you"
+    },
+    {
+      "name": "Levy County Visitors Bureau",
+      "url": "https://www.levycounty.org/209/Visitors-Bureau",
+      "status": "checked",
+      "httpStatus": 200,
+      "notes": "Loaded source surface. Snippet: ors Bureau (LCVB) and the Levy County Tourist Development Council (TDC) oversee the development and marketing of Levy County as a vacation destination. The goal of the Visitors Bureau is to generate tax revenues for the county, including but not limited to sales tax, tourist development tax, and fuel taxes. Social Media Levy County Visitors Bureau Website Levy County Visitors Bureau Facebook /QuickLinks.aspx 9 1 1 2 Tourist Development Council View all members of the Levy County s Tourist Development Council. Touri"
+    },
+    {
+      "name": "NWS Crystal River forecast",
+      "url": "https://api.weather.gov/gridpoints/TBW/62,139/forecast",
+      "status": "checked",
+      "httpStatus": 200,
+      "notes": "Forecast says Saturday sunny, high near 92, light east wind."
+    },
+    {
+      "name": "NWS alerts FL",
+      "url": "https://api.weather.gov/alerts/active?area=FL",
+      "status": "checked",
+      "httpStatus": 200,
+      "notes": "Statewide alert endpoint checked; separate Crystal River point alert check found zero active alerts."
+    }
+  ],
+  "settingsWeatherSnapshot": {
+    "label": "Today · Crystal River",
+    "summary": "Sunny and hot Saturday with a high near 92, light east wind, and no active NWS point alerts at sweep time. Morning water plans look cleaner than late-day heat.",
+    "updatedAt": "2026-06-06T03:00:00-04:00",
+    "source": "https://api.weather.gov/gridpoints/TBW/62,139/forecast",
+    "alerts": []
+  },
+  "candidates": [
+    {
+      "status": "review",
+      "title": "Summer Kickoff at Crystal River Kayak Company",
+      "url": "https://business.citruscountychamber.com/eventcalendar/Search",
+      "startsAt": "2026-06-06T08:00:00-04:00",
+      "endsAt": "2026-06-06T17:30:00-04:00",
+      "location": "Crystal River Kayak Company & Dive Center",
+      "summary": "Chamber calendar lists food truck, ice cream truck, kayak demos, rental specials, and a limited-spots sunset paddle.",
+      "raw": {
+        "source": "Citrus County Chamber community calendar",
+        "lane": "chamber-calendar",
+        "checkedAt": "2026-06-06T06:09:00Z"
+      }
+    },
+    {
+      "status": "review",
+      "title": "Small Town Saturday Night in Downtown Inverness",
+      "url": "https://www.discovercrystalriverfl.com/events/",
+      "startsAt": "2026-06-13T17:00:00-04:00",
+      "endsAt": "2026-06-13T21:00:00-04:00",
+      "location": "1 Courthouse Sq, Inverness, FL 34450",
+      "summary": "Discover Crystal River lists a free June 13 music event on the square with Absolute Def Leppard headlining.",
+      "raw": {
+        "source": "Discover Crystal River events",
+        "lane": "tourism-calendar",
+        "checkedAt": "2026-06-06T06:09:00Z"
+      }
+    },
+    {
+      "status": "review",
+      "title": "Homosassa Fireworks Festival",
+      "url": "https://www.discovercrystalriverfl.com/events/",
+      "startsAt": "2026-06-27",
+      "location": "5300 S. Cherokee Way, Homosassa, FL 34448",
+      "summary": "Discover Crystal River lists MacRae's annual Homosassa Fireworks Festival for June 27.",
+      "raw": {
+        "source": "Discover Crystal River events",
+        "lane": "tourism-calendar",
+        "checkedAt": "2026-06-06T06:09:00Z"
+      }
+    },
+    {
+      "status": "review",
+      "title": "Homosassa Springs shuttle boat unavailable",
+      "url": "https://www.floridastateparks.org/parks-and-trails/ellie-schiller-homosassa-springs-wildlife-state-park",
+      "location": "Ellie Schiller Homosassa Springs Wildlife State Park",
+      "summary": "Florida State Parks says shuttle boat service is currently unavailable due to low water levels; tram and park access should be checked before recommending the visit.",
+      "raw": {
+        "source": "Florida State Parks",
+        "lane": "state-park",
+        "checkedAt": "2026-06-06T06:09:00Z"
+      }
+    },
+    {
+      "status": "review",
+      "title": "Levy, Citrus, and Hernando scallop season opens July 1",
+      "url": "https://myfwc.com/fishing/saltwater/recreational/bay-scallops/",
+      "startsAt": "2026-07-01",
+      "endsAt": "2026-09-24",
+      "location": "Levy, Citrus, and Hernando county state waters",
+      "summary": "FWC lists the 2026 Levy/Citrus/Hernando bay scallop season as July 1 through Sept. 24, including Cedar Key, Crystal River, and Homosassa.",
+      "raw": {
+        "source": "FWC bay scallop regulations",
+        "lane": "rules",
+        "checkedAt": "2026-06-06T06:09:00Z"
+      }
+    },
+    {
+      "status": "review",
+      "title": "Ocala Phase III Extreme Water Shortage Advisory",
+      "url": "https://www.ocalafl.gov/our-city/living/city-event-calendar",
+      "location": "Ocala / Marion County",
+      "summary": "City of Ocala page notes most of Marion County is under a Phase III Extreme Water Shortage Advisory with one-day-per-week irrigation limits.",
+      "raw": {
+        "source": "City of Ocala",
+        "lane": "city-alert",
+        "checkedAt": "2026-06-06T06:09:00Z"
+      }
+    }
+  ],
+  "imageActions": [],
+  "localDataChanges": [
+    {
+      "file": "data/nature-coast.seed.json",
+      "changes": [
+        "Refreshed weatherSnapshot timestamp/wording from NWS Crystal River forecast and point-alert check."
+      ]
+    },
+    {
+      "file": "data/drafts/2026-06-06.json",
+      "changes": [
+        "Refreshed draft weatherSnapshot to match the latest local-first sweep."
+      ]
+    },
+    {
+      "file": "data/daily-updates/2026-06-06.json",
+      "changes": [
+        "Updated local-first daily sweep artifact with source results, publish blocker, and verification notes."
+      ]
+    }
+  ],
+  "publishPayloadShape": {
+    "city": "nature-coast",
+    "dryRun": false,
+    "publish": {
+      "settings": {
+        "weatherSnapshot": {
+          "label": "Today · Crystal River",
+          "summary": "Sunny and hot Saturday with a high near 92, light east wind, and no active NWS point alerts at sweep time. Morning water plans look cleaner than late-day heat.",
+          "updatedAt": "2026-06-06T03:00:00-04:00",
+          "source": "https://api.weather.gov/gridpoints/TBW/62,139/forecast",
+          "alerts": []
+        }
+      },
+      "sourceCandidates": [],
+      "images": []
+    }
+  },
+  "publishResponse": {
+    "dryRunAttempted": true,
+    "publishAttempted": true,
+    "localEndpoint": "direct local handler api/publish.js",
+    "httpStatusCode": 200,
+    "body": {
+      "ok": true,
+      "city": "nature-coast",
+      "counts": {
+        "places": 0,
+        "dayTrips": 0,
+        "sources": 0,
+        "sourceCandidates": 0,
+        "images": 0,
+        "settings": 1,
+        "issue": 0
+      },
+      "storage": {
+        "settings": {
+          "weatherSnapshot": "source_candidates"
+        },
+        "images": []
+      }
+    },
+    "published": true,
+    "reason": "Published the weatherSnapshot setting through api/publish.js using local .env credentials; Supabase stored it in the source_candidates fallback path."
+  },
+  "verification": {
+    "afterFetch": {
+      "endpoint": "http://127.0.0.1:3000/api/city-pulse?city=nature-coast",
+      "weatherUpdatedAt": "2026-06-06T03:00:00-04:00",
+      "weatherSummary": "Sunny and hot Saturday with a high near 92, light east wind, and no active NWS point alerts at sweep time. Morning water plans look cleaner than late-day heat.",
+      "places": 26,
+      "dayTrips": 3,
+      "sources": 18,
+      "sourceCandidates": 6,
+      "liveError": null
+    },
+    "checks": [
+      {
+        "name": "npm run check:data",
+        "status": "passed",
+        "detail": "Data OK: 26 places, 3 day trips, 18 sources."
+      },
+      {
+        "name": "api/city-pulse.js handler smoke",
+        "status": "passed-with-fallback",
+        "detail": "Returned 200 with seed fallback and refreshed weather snapshot; Supabase reported missing public.cities schema cache."
+      },
+      {
+        "name": "local /api/city-pulse curl after update",
+        "status": "passed",
+        "detail": "Returned refreshed weatherUpdatedAt 2026-06-06T03:00:00-04:00 and 6 review candidates."
+      },
+      {
+        "name": "local /api/publish dry-run",
+        "status": "passed",
+        "detail": "Direct local handler dry run returned 200 with valid auth from .env."
+      },
+      {
+        "name": "local /api/publish write",
+        "status": "passed",
+        "detail": "Direct local handler write returned 200 and stored weatherSnapshot via source_candidates fallback."
+      },
+      {
+        "name": "api/city-pulse.js post-publish readback",
+        "status": "passed",
+        "detail": "Returned weatherUpdatedAt 2026-06-06T03:00:00-04:00, the expected summary, 6 source candidates, and no liveError."
+      }
+    ]
+  },
+  "blockers": [
+    "Deployed https://florida-guide-zeta.vercel.app currently returns 404 for /api/publish and /api/city-pulse, so production serving still depends on pushing/deploying the latest repo code.",
+    "City of Crystal River, Three Sisters Springs, and Florida State Parks pages returned anti-bot/Cloudflare-limited text views; retained existing source-backed candidates instead of making new public claims from blocked pages."
+  ]
+}

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Day Trip Archive | Nature Coast Pulse</title>
+  <link rel="icon" type="image/png" href="assets/nature-coast-insider-webicon.png">
+  <link rel="apple-touch-icon" href="assets/nature-coast-insider-webicon.png">
+  <link rel="stylesheet" href="guide-pages.css">
+</head>
+<body>
+  <header class="bar" id="bar">
+    <a class="word" href="index.html" aria-label="Nature Coast Insider home"><img src="assets/nature-coast-insider-header-icon.png" alt="Nature Coast Insider"></a>
+    <nav class="site-nav" aria-label="Guide pages">
+      <a href="index.html">This Week</a>
+      <a href="daytrips.html" aria-current="page">Day Trips</a>
+      <a href="eats.html">Eats</a>
+    </nav>
+    <div class="bar-cta">
+      <span class="iss">Route Archive</span>
+      <a href="index.html#join" class="btn">Join the list</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <img alt="Crystal River water near Hunter Spring Run" src="https://commons.wikimedia.org/wiki/Special:FilePath/Crystal_River_near_Hunter_Spring_Run_-_panoramio.jpg?width=1800">
+      <div class="wrap">
+        <div class="kicker">Nature Coast Pulse - Day Trips</div>
+        <h1>Weekend routes worth keeping.</h1>
+        <p>Browse the standing archive of Florida Nature Coast loops: springs, seafood roads, Gulf sunsets, and low-friction days you can actually pull off.</p>
+        <div class="hero-actions">
+          <a class="btn primary" href="#archive">Browse routes</a>
+          <a class="btn" href="eats.html">Find food stops</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="archive">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <div class="kicker">Permanent archive</div>
+            <h2>Day Trip Archive</h2>
+            <p>Each route keeps the same practical shape: a header image, timing, stops, source links, and enough context to choose the right day without digging.</p>
+          </div>
+          <a href="index.html#advertise" class="btn">Sponsor a route</a>
+        </div>
+        <div id="daytrip-archive" class="daytrip-library"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">Nature Coast Pulse - Crystal River, Homosassa, Ocala, Gainesville.</div>
+  </footer>
+
+  <script src="guide-data.js"></script>
+  <script>
+    (function(){
+      var guide = window.NCP_GUIDE;
+      var archive = document.getElementById('daytrip-archive');
+      if(!guide || !archive) return;
+      archive.innerHTML = guide.dayTrips.map(function(trip){
+        var legs = trip.stops.map(function(stop, idx){
+          return '<div class="leg">' +
+            '<div><span class="t">' + guide.esc(stop[0]) + '</span></div>' +
+            '<div class="dotline"><i></i>' + (idx < trip.stops.length - 1 ? '<span class="ln"></span>' : '') + '</div>' +
+            '<h4>' + guide.esc(stop[1]) + '</h4>' +
+            '<p>' + guide.esc(stop[2]) + '</p>' +
+          '</div>';
+        }).join('');
+        var links = (trip.links || []).map(function(link){
+          return '<a class="biz" href="' + guide.esc(link[1]) + '" target="_blank" rel="noopener">' + guide.esc(link[0]) + ' <span>open</span></a>';
+        }).join('');
+        return '<article class="archive-trip">' +
+          '<div class="archive-trip-head">' +
+            '<div class="archive-trip-copy">' +
+              '<div class="card-top"><span class="card-kicker">' + guide.esc(trip.status) + ' - ' + guide.esc(trip.issue) + '</span><span class="card-date">' + guide.esc(trip.date) + '</span></div>' +
+              '<h3>' + guide.esc(trip.title) + '</h3>' +
+              '<p>' + guide.esc(trip.dek) + '</p>' +
+              '<div class="card-tags">' + guide.chips(trip.tags) + '</div>' +
+            '</div>' +
+            '<div class="ph"><img alt="' + guide.esc(trip.imageLabel || trip.title) + '" src="' + guide.esc(trip.image) + '"></div>' +
+          '</div>' +
+          '<div class="trip">' + legs + '</div>' +
+          '<div class="bizlinks"><span class="bl-label">Plan this itinerary</span><div class="bl-row">' + links + '<a class="biz" href="index.html#advertise">Sponsor this itinerary</a></div></div>' +
+        '</article>';
+      }).join('');
+    })();
+  </script>
+</body>
+</html>

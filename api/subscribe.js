@@ -1,3 +1,5 @@
+import { createClient } from "@supabase/supabase-js";
+
 function parseBody(req) {
   if (!req.body) return {};
   if (typeof req.body === "string") return JSON.parse(req.body || "{}");
@@ -6,6 +8,38 @@ function parseBody(req) {
 
 function isEmail(value) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+}
+
+function supabaseClient() {
+  const url = process.env.SUPABASE_URL;
+  const key = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_SECRET_KEY;
+  if (!url || !key) return null;
+  return createClient(url, key, { auth: { persistSession: false } });
+}
+
+async function saveSignupToSupabase(email, body) {
+  const supabase = supabaseClient();
+  if (!supabase) return null;
+
+  const { data, error } = await supabase
+    .from("newsletter_signups")
+    .upsert({
+      email,
+      city_slug: String(body.city || "nature-coast"),
+      source: String(body.source || "site-signup"),
+      status: "subscribed",
+      provider: "supabase",
+      metadata: {
+        path: body.path || null,
+        userAgent: body.userAgent || null
+      },
+      updated_at: new Date().toISOString()
+    }, { onConflict: "email" })
+    .select("email,status,provider")
+    .single();
+
+  if (error) throw error;
+  return data;
 }
 
 export default async function handler(req, res) {
@@ -29,7 +63,22 @@ export default async function handler(req, res) {
   const apiKey = process.env.EMAILOCTOPUS_API_KEY;
   const listId = process.env.EMAILOCTOPUS_LIST_ID;
   if (!apiKey || !listId) {
-    return res.status(503).json({ error: "EmailOctopus is not configured yet." });
+    try {
+      const signup = await saveSignupToSupabase(email, body);
+      if (signup) {
+        return res.status(200).json({
+          ok: true,
+          status: signup.status,
+          provider: signup.provider,
+          email
+        });
+      }
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ error: "Signup storage failed." });
+    }
+
+    return res.status(503).json({ error: "Signup storage is not configured yet." });
   }
 
   const payload = {
@@ -56,9 +105,19 @@ export default async function handler(req, res) {
     });
   }
 
+  try {
+    await saveSignupToSupabase(email, {
+      ...body,
+      source: body.source || "site-signup-emailoctopus"
+    });
+  } catch (error) {
+    console.error(error);
+  }
+
   return res.status(200).json({
     ok: true,
     status: result.status || "EXISTING",
+    provider: "emailoctopus",
     email
   });
 }
