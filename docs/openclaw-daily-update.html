@@ -218,6 +218,8 @@ Content-Type: application/json</code></pre>
     <li>Browser-render the public Eats page and visually reject generic scenery, repeated fallback images, unrelated water/tree/street shots, tourism filler, or another business.</li>
     <li>If the exact Google Place ID still returns a bad first photo, publish a reviewed image from the business-owned site/social/source when allowed, or mark <code>photoStatus</code> as <code>BLOCKED needs human image</code>.</li>
     <li>Verification must be per place: <code>PASS exact place photo</code>, <code>PASS reviewed fallback</code>, or <code>BLOCKED needs human image</code>. DOM counts and HTTP 200 checks are not enough.</li>
+    <li>Do not download/rehost Google Places, Google Maps, or copyrighted business/social photos into site storage. Durable Eats images must be app-owned or rights-cleared: advertiser/business-provided, user-submitted with permission, generated, public-domain/compatible-license, or paid/licensed stock.</li>
+    <li>For approved non-Google image URLs, run <code>npm run import:image -- --url "&lt;approved-image-url&gt;" --id "&lt;place-slug&gt;" --label "&lt;place name&gt;" --credit "&lt;credit&gt;"</code>, then publish the returned storage URL in <code>settings.guidePages.eats</code>.</li>
   </ul>
 
   <h3>Review-ready Business Link</h3>

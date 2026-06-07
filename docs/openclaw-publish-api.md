@@ -290,6 +290,16 @@ Place photo success is not proven by DOM `src` values, HTTP 200s, attribution co
 - Record per-place evidence as `PASS exact place photo`, `PASS reviewed fallback`, or `BLOCKED needs human image`.
 - If the exact Place ID still returns a poor first photo, publish a reviewed image from a business-owned site/social/source when allowed, or leave the item marked for human image review. Do not claim the photo work is fixed.
 
+Do not download, rehost, strip attribution from, or launder Google Places/Maps photos or copyrighted business/social photos into site storage. Google Places is useful for identity and live attributed display; it is not the permanent asset library. Durable `image` fields should be app-owned or rights-cleared: advertiser/business-provided media, user-submitted photos with permission, generated images, public-domain/compatible-license assets, or paid/licensed stock.
+
+For approved non-Google image URLs, OpenClaw can import the file into Supabase Storage:
+
+```bash
+npm run import:image -- --url "https://example.com/approved-photo.jpg" --id "pecks-old-port-cove" --label "Peck's Old Port Cove" --credit "Provided by Peck's Old Port Cove"
+```
+
+The command returns a stable public storage URL. Publish that returned URL as the Eats card `image` inside `settings.guidePages.eats`, keep the source/credit/evidence fields, then browser-verify the card.
+
 Example:
 
 ```json
