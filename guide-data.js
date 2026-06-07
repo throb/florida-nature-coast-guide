@@ -59,7 +59,7 @@ window.NCP_GUIDE = (function(){
       ],
       links: [
         ['Ozello Park', 'https://www.discovercrystalriverfl.com/directory/ozello-park/'],
-        ['Peck\'s Old Port Cove', 'https://www.discovercrystalriverfl.com/directory/pecks-old-port-cove/'],
+        ['Peck\'s Old Port Cove', 'https://pecksoldportcove.com/'],
         ['Backwater Fins', 'https://backwater-fins.com/']
       ]
     },
@@ -93,8 +93,11 @@ window.NCP_GUIDE = (function(){
       place: 'Ozello Trail - seafood',
       badges: ['Waterfront', 'Brunch', 'Seafood'],
       href: 'https://backwater-fins.com/',
+      websiteUrl: 'https://backwater-fins.com/',
+      mapQuery: 'Backwater Fins Ozello FL',
+      placePhotoQuery: 'Backwater Fins Ozello FL',
       image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Crystal_River_Preserve_State_Park.jpg?width=1000',
-      imageLabel: 'Crystal River Preserve near Ozello',
+      imageLabel: 'Backwater Fins',
       featured: true
     },
     {
@@ -103,9 +106,12 @@ window.NCP_GUIDE = (function(){
       dek: 'A long-running Ozello stop for seafood, old-Florida atmosphere, and a route-friendly dinner after the marsh drive.',
       place: 'Ozello - seafood',
       badges: ['Classic', 'Dinner', 'Drive-worthy'],
-      href: 'https://www.discovercrystalriverfl.com/directory/pecks-old-port-cove/',
+      href: 'https://pecksoldportcove.com/',
+      websiteUrl: 'https://pecksoldportcove.com/',
+      mapQuery: 'Peck\'s Old Port Cove Crystal River FL',
+      placePhotoQuery: 'Peck\'s Old Port Cove Crystal River FL',
       image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Crystal_River_Preserve_State_Park_2.jpg?width=1000',
-      imageLabel: 'Ozello-area marshland',
+      imageLabel: 'Peck\'s Old Port Cove',
       featured: true
     },
     {
@@ -115,8 +121,11 @@ window.NCP_GUIDE = (function(){
       place: 'Homosassa - tiki bar',
       badges: ['Unique', 'Casual', 'Shrimp'],
       href: 'https://the-freezer-homosassa.com/',
+      websiteUrl: 'https://the-freezer-homosassa.com/',
+      mapQuery: 'The Freezer Tiki Bar Homosassa FL',
+      placePhotoQuery: 'The Freezer Tiki Bar Homosassa FL',
       image: 'https://commons.wikimedia.org/wiki/Special:FilePath/The_fish_market_in_Homosassa,_Florida.jpg?width=1000',
-      imageLabel: 'Homosassa fish market',
+      imageLabel: 'The Freezer Tiki Bar',
       featured: true
     },
     {
@@ -125,9 +134,12 @@ window.NCP_GUIDE = (function(){
       dek: 'A useful breakfast anchor before springs, paddles, errands, or a Crystal River loop.',
       place: 'Crystal River - breakfast',
       badges: ['Breakfast', 'Local', 'Quick stop'],
-      href: 'https://www.discovercrystalriverfl.com/directory/biscuit-barn-north-crystal-river-breakfast-diners/',
+      href: 'https://www.biscuitbarn.net/',
+      websiteUrl: 'https://www.biscuitbarn.net/',
+      mapQuery: 'The Biscuit Barn Crystal River FL',
+      placePhotoQuery: 'The Biscuit Barn Crystal River FL',
       image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Crystal_Street_in_Crystal_River,_Florida.jpg?width=1000',
-      imageLabel: 'Crystal River streetscape'
+      imageLabel: 'The Biscuit Barn'
     },
     {
       lane: 'Local lunch',
@@ -136,8 +148,203 @@ window.NCP_GUIDE = (function(){
       place: 'Crystal River - lunch',
       badges: ['Local', 'Lunch', 'Loop stop'],
       href: 'https://m.facebook.com/SadiesCornerKitchen/',
+      websiteUrl: 'https://m.facebook.com/SadiesCornerKitchen/',
+      mapQuery: 'Sadie\'s Corner Kitchen Crystal River FL',
+      placePhotoQuery: 'Sadie\'s Corner Kitchen Crystal River FL',
       image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Crystal_River_in_Crystal_River05.jpg?width=1000',
-      imageLabel: 'Crystal River waterway'
+      imageLabel: 'Sadie\'s Corner Kitchen'
+    }
+  ];
+
+  var mealStops = [
+    {
+      slot: 'Breakfast',
+      title: 'The Biscuit Barn',
+      area: 'Crystal River',
+      timing: 'Before water',
+      dek: 'Biscuits and breakfast plates before springs, paddles, or errands.',
+      href: 'https://www.biscuitbarn.net/',
+      websiteUrl: 'https://www.biscuitbarn.net/',
+      mapQuery: 'The Biscuit Barn Crystal River FL',
+      placePhotoQuery: 'The Biscuit Barn Crystal River FL',
+      image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Crystal_Street_in_Crystal_River,_Florida.jpg?width=1000',
+      imageLabel: 'The Biscuit Barn',
+      layout: 'lead',
+      badges: ['Breakfast', 'Local', 'Quick start']
+    },
+    {
+      slot: 'Coffee + pastry',
+      title: 'Cattle Dog Coffee Roasters',
+      area: 'Crystal River / Homosassa / Inverness',
+      timing: 'First stop',
+      dek: 'Coffee, pastries, breakfast, lunch, and weekend brunch fuel.',
+      href: 'https://www.cattledogcoffeeroasters.net/',
+      websiteUrl: 'https://www.cattledogcoffeeroasters.net/',
+      mapQuery: 'Cattle Dog Coffee Roasters Crystal River FL',
+      placePhotoQuery: 'Cattle Dog Coffee Roasters Crystal River FL',
+      image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Crystal_River_in_Crystal_River05.jpg?width=1000',
+      imageLabel: 'Cattle Dog Coffee Roasters',
+      layout: 'portrait',
+      badges: ['Coffee', 'Pastries', 'Weekend brunch']
+    },
+    {
+      slot: 'Lunch',
+      title: 'Sadie\'s Corner Kitchen',
+      area: 'Crystal River',
+      timing: 'Midday reset',
+      dek: 'A small, easy lunch stop for sandwiches and baked goods.',
+      href: 'https://m.facebook.com/SadiesCornerKitchen/',
+      websiteUrl: 'https://m.facebook.com/SadiesCornerKitchen/',
+      mapQuery: 'Sadie\'s Corner Kitchen Crystal River FL',
+      placePhotoQuery: 'Sadie\'s Corner Kitchen Crystal River FL',
+      image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Crystal_River_near_Hunter_Spring_Run_-_panoramio.jpg?width=1000',
+      imageLabel: 'Sadie\'s Corner Kitchen',
+      layout: 'square',
+      badges: ['Lunch', 'Sandwiches', 'Low friction']
+    },
+    {
+      slot: 'Waterfront lunch',
+      title: 'Waterfront Social',
+      area: 'Crystal River',
+      timing: 'Lunch or drinks',
+      dek: 'Coastal plates, handhelds, shrimp, and drinks near the water.',
+      href: 'https://waterfrontsocialcr.com/menu/',
+      websiteUrl: 'https://waterfrontsocialcr.com/menu/',
+      mapQuery: 'Waterfront Social Crystal River FL',
+      placePhotoQuery: 'Waterfront Social Crystal River FL',
+      image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Dolphin_at_Fort_Island_Gulf_Beach.jpg?width=1000',
+      imageLabel: 'Waterfront Social',
+      layout: 'wide',
+      badges: ['Waterfront', 'Lunch', 'Cocktails']
+    },
+    {
+      slot: 'Dinner',
+      title: 'Peck\'s Old Port Cove',
+      area: 'Ozello',
+      timing: 'Golden hour',
+      dek: 'Classic Ozello seafood after the marsh drive.',
+      href: 'https://pecksoldportcove.com/',
+      websiteUrl: 'https://pecksoldportcove.com/',
+      mapQuery: 'Peck\'s Old Port Cove Crystal River FL',
+      placePhotoQuery: 'Peck\'s Old Port Cove Crystal River FL',
+      image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Crystal_River_Preserve_State_Park_2.jpg?width=1000',
+      imageLabel: 'Peck\'s Old Port Cove',
+      layout: 'tall',
+      badges: ['Seafood', 'Sunset', 'Drive-worthy']
+    },
+    {
+      slot: 'Dinner date',
+      title: 'Vintage on 5th',
+      area: 'Crystal River',
+      timing: 'Evening',
+      dek: 'Downtown dinner, wine, and a slower post-outdoor pace.',
+      href: 'https://www.vintageon5th.com/',
+      websiteUrl: 'https://www.vintageon5th.com/',
+      mapQuery: 'Vintage on 5th Crystal River FL',
+      placePhotoQuery: 'Vintage on 5th Crystal River FL',
+      image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Crystal_Street_in_Crystal_River,_Florida.jpg?width=1000',
+      imageLabel: 'Vintage on 5th',
+      layout: 'portrait',
+      badges: ['Dinner', 'Wine', 'Downtown']
+    },
+    {
+      slot: 'Weekend brunch',
+      title: 'Cattle Dog Brunch - Hernando',
+      area: 'Hernando',
+      timing: 'Sat-Sun 9-1',
+      dek: 'Weekend brunch and coffee before a slower explore day.',
+      href: 'https://www.cattledogcoffeeroasters.net/',
+      websiteUrl: 'https://www.cattledogcoffeeroasters.net/',
+      mapQuery: 'Cattle Dog Coffee Roasters Hernando FL',
+      placePhotoQuery: 'Cattle Dog Coffee Roasters Hernando FL',
+      image: 'https://commons.wikimedia.org/wiki/Special:FilePath/FlHunterSpring.jpg?width=1000',
+      imageLabel: 'Cattle Dog Coffee Roasters Hernando',
+      layout: 'small',
+      badges: ['Brunch', 'Weekend', 'Coffee']
+    },
+    {
+      slot: 'Snacks',
+      title: 'Mimi\'s Bakehouse',
+      area: 'Crystal River',
+      timing: 'Sweet pause',
+      dek: 'Cakes, cookies, pastries, and a quick sweet pause.',
+      href: 'https://www.mimibakehouse.com/',
+      websiteUrl: 'https://www.mimibakehouse.com/',
+      mapQuery: 'Mimi\'s Bakehouse Crystal River FL',
+      placePhotoQuery: 'Mimi\'s Bakehouse Crystal River FL',
+      image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Downtownocalafl.jpg?width=1000',
+      imageLabel: 'Mimi\'s Bakehouse',
+      layout: 'square',
+      badges: ['Bakery', 'Dessert', 'Downtown']
+    },
+    {
+      slot: 'Cold treat',
+      title: 'Crystal Cream Rolls',
+      area: 'Crystal River',
+      timing: 'After lunch',
+      dek: 'Rolled ice cream for the hot after-lunch wander.',
+      href: 'https://crystalcreamrolls.com/',
+      websiteUrl: 'https://crystalcreamrolls.com/',
+      mapQuery: 'Crystal Cream Rolls Crystal River FL',
+      placePhotoQuery: 'Crystal Cream Rolls Crystal River FL',
+      image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Rainbow_spgs_florida.JPG?width=1000',
+      imageLabel: 'Crystal Cream Rolls',
+      layout: 'small',
+      badges: ['Ice cream', 'Snack', 'Heat relief']
+    },
+    {
+      slot: 'Drinks / cocktails',
+      title: 'Crumps\' Landing',
+      area: 'Homosassa',
+      timing: 'Late afternoon',
+      dek: 'Waterfront cocktails, local beer, food, and a big outdoor setting.',
+      href: 'https://crumpslanding.com/',
+      websiteUrl: 'https://crumpslanding.com/',
+      mapQuery: 'Crumps Landing Homosassa FL',
+      placePhotoQuery: 'Crumps Landing Homosassa FL',
+      image: 'https://commons.wikimedia.org/wiki/Special:FilePath/The_fish_market_in_Homosassa,_Florida.jpg?width=1000',
+      imageLabel: 'Crumps\' Landing',
+      layout: 'wide',
+      badges: ['Cocktails', 'Waterfront', 'Homosassa']
+    }
+  ];
+
+  var foodPlans = [
+    {
+      title: 'Clear-water day',
+      dek: 'Built for a Crystal River morning that starts early and stays flexible.',
+      image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Crystal_River_near_Hunter_Spring_Run_-_panoramio.jpg?width=1000',
+      imageLabel: 'Crystal River clear-water morning',
+      stops: [
+        { label: 'Breakfast', title: 'The Biscuit Barn', websiteUrl: 'https://www.biscuitbarn.net/', mapQuery: 'The Biscuit Barn Crystal River FL' },
+        { label: 'Lunch', title: 'Sadie\'s Corner Kitchen', websiteUrl: 'https://m.facebook.com/SadiesCornerKitchen/', mapQuery: 'Sadie\'s Corner Kitchen Crystal River FL' },
+        { label: 'Sweet stop', title: 'Mimi\'s Bakehouse', websiteUrl: 'https://www.mimibakehouse.com/', mapQuery: 'Mimi\'s Bakehouse Crystal River FL' },
+        { label: 'Drinks', title: 'Waterfront Social', websiteUrl: 'https://waterfrontsocialcr.com/menu/', mapQuery: 'Waterfront Social Crystal River FL' }
+      ]
+    },
+    {
+      title: 'Ozello sunset run',
+      dek: 'A food loop that saves the best light for the marsh road.',
+      image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Crystal_River_Preserve_State_Park_2.jpg?width=1000',
+      imageLabel: 'Ozello marsh sunset route',
+      stops: [
+        { label: 'Coffee', title: 'Cattle Dog Coffee Roasters', websiteUrl: 'https://www.cattledogcoffeeroasters.net/', mapQuery: 'Cattle Dog Coffee Roasters Crystal River FL' },
+        { label: 'Lunch', title: 'Backwater Fins', websiteUrl: 'https://backwater-fins.com/', mapQuery: 'Backwater Fins Ozello FL' },
+        { label: 'Dinner', title: 'Peck\'s Old Port Cove', websiteUrl: 'https://pecksoldportcove.com/', mapQuery: 'Peck\'s Old Port Cove Crystal River FL' },
+        { label: 'Nightcap', title: 'Crumps\' Landing', websiteUrl: 'https://crumpslanding.com/', mapQuery: 'Crumps Landing Homosassa FL' }
+      ]
+    },
+    {
+      title: 'Downtown nibble crawl',
+      dek: 'For a slower day around Crystal River with small stops instead of one big meal.',
+      image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Crystal_Street_in_Crystal_River,_Florida.jpg?width=1000',
+      imageLabel: 'Downtown Crystal River crawl',
+      stops: [
+        { label: 'Coffee', title: 'Cattle Dog Coffee Roasters', websiteUrl: 'https://www.cattledogcoffeeroasters.net/', mapQuery: 'Cattle Dog Coffee Roasters Crystal River FL' },
+        { label: 'Lunch', title: 'Sadie\'s Corner Kitchen', websiteUrl: 'https://m.facebook.com/SadiesCornerKitchen/', mapQuery: 'Sadie\'s Corner Kitchen Crystal River FL' },
+        { label: 'Cold treat', title: 'Crystal Cream Rolls', websiteUrl: 'https://crystalcreamrolls.com/', mapQuery: 'Crystal Cream Rolls Crystal River FL' },
+        { label: 'Dinner', title: 'Vintage on 5th', websiteUrl: 'https://www.vintageon5th.com/', mapQuery: 'Vintage on 5th Crystal River FL' }
+      ]
     }
   ];
 
@@ -153,5 +360,5 @@ window.NCP_GUIDE = (function(){
     }).join('');
   }
 
-  return { dayTrips: dayTrips, eats: eats, esc: esc, chips: chips };
+  return { dayTrips: dayTrips, eats: eats, mealStops: mealStops, foodPlans: foodPlans, esc: esc, chips: chips };
 })();

@@ -2,7 +2,7 @@
   "city": "nature-coast",
   "status": "draft",
   "publishWeek": "2026-06-06",
-  "title": "Nature Coast Pulse draft for 2026-06-06",
+  "title": "Nature Coast Insider draft for 2026-06-06",
   "subject": "Bird's Underwater, Paynes Prairie, and a smarter Nature Coast week",
   "spotlight": "bird-s-underwater",
   "dayTripCandidates": [
@@ -42,7 +42,13 @@
   ],
   "weatherSnapshot": {
     "label": "Today · Crystal River",
-    "summary": "Sunny and hot Saturday with a high near 92, light east wind, and no active NWS point alerts at sweep time. Lead with morning water plans and heat-aware afternoon options.",
+    "summary": "Sunny and hot Saturday with a high near 92, light east wind, and no active NWS point alerts at sweep time. Lead with morning water plans and heat-aware afternoon options; UV is very high late morning through afternoon.",
+    "uvIndex": {
+      "value": 10,
+      "category": "Very high",
+      "window": "11a-4p",
+      "note": "Use shade, water, sunscreen, and a long-sleeve sun shirt for open-water plans."
+    },
     "updatedAt": "2026-06-06T03:00:00-04:00",
     "source": "https://api.weather.gov/gridpoints/TBW/62,139/forecast"
   },
@@ -50,26 +56,45 @@
     {
       "status": "review",
       "title": "Summer Kickoff at Crystal River Kayak Company",
-      "url": "https://business.citruscountychamber.com/eventcalendar/Search",
+      "url": "https://business.citruscountychamber.com/eventcalendar/Details/summer-kickoff-1748006?sourceTypeId=Website",
       "startsAt": "2026-06-06T08:00:00-04:00",
       "location": "Crystal River Kayak Company & Dive Center",
-      "reason": "Strong water-day fit, direct chamber calendar source, but should stay review until venue details are checked."
+      "reason": "Strong water-day fit with an exact chamber event detail page for food trucks, kayak demos, rental specials, and sunset paddle details.",
+      "raw": {
+        "kind": "event",
+        "linkQuality": "exact",
+        "sourceUrl": "https://business.citruscountychamber.com/eventcalendar/Details/summer-kickoff-1748006?sourceTypeId=Website"
+      }
     },
     {
       "status": "review",
       "title": "Small Town Saturday Night in Downtown Inverness",
-      "url": "https://www.discovercrystalriverfl.com/events/",
+      "url": "https://www.inverness-fl.gov/Calendar.aspx?EID=7081&calType=0&day=5&month=6&year=2026",
       "startsAt": "2026-06-13T17:00:00-04:00",
-      "location": "1 Courthouse Sq, Inverness, FL 34450",
-      "reason": "Good evening/community pick from tourism calendar."
+      "endsAt": "2026-06-13T21:00:00-04:00",
+      "location": "Downtown Inverness, 207 Courthouse Square, Inverness, FL 34450",
+      "reason": "Good evening/community pick with an exact City of Inverness event page listing date, time, address, cost, contact, headliner, opener, and event rules.",
+      "raw": {
+        "kind": "event",
+        "linkQuality": "exact",
+        "sourceUrl": "https://www.inverness-fl.gov/Calendar.aspx?EID=7081&calType=0&day=5&month=6&year=2026",
+        "backupUrl": "https://inverness.gov/679/Small-Town-Saturday-Night"
+      }
     },
     {
       "status": "review",
       "title": "Homosassa Fireworks Festival",
-      "url": "https://www.discovercrystalriverfl.com/events/",
-      "startsAt": "2026-06-27",
-      "location": "MacRae's, Homosassa",
-      "reason": "Good late-June event lead; verify final schedule and parking/access before publishing."
+      "url": "https://www.homosassafireworks.com/",
+      "startsAt": "2026-06-27T18:00:00-04:00",
+      "endsAt": "2026-06-27T22:00:00-04:00",
+      "location": "5300 S. Cherokee Way, Homosassa, FL 34448",
+      "reason": "Good late-June event with official festival site as the primary URL and exact tourism detail as backup for date/time/location facts.",
+      "raw": {
+        "kind": "event",
+        "linkQuality": "exact",
+        "sourceUrl": "https://www.homosassafireworks.com/",
+        "backupUrl": "https://www.discovercrystalriverfl.com/events/homosassa-fireworks-festival/"
+      }
     },
     {
       "status": "review",

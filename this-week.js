@@ -3,6 +3,7 @@
       var progress = document.getElementById('progress');
       var sections = Array.prototype.slice.call(document.querySelectorAll('main section:not([hidden])'));
       var rail = document.getElementById('rail');
+      var sectionPicker = document.getElementById('section-picker');
 
       sections.forEach(function(s){
         var label = s.getAttribute('data-screen-label') || s.id;
@@ -12,9 +13,123 @@
         a.setAttribute('title', label);
         a.innerHTML = '<span>' + label + '</span>';
         if (rail) rail.appendChild(a);
+        if(sectionPicker){
+          var option = document.createElement('option');
+          option.value = s.id;
+          option.textContent = label;
+          sectionPicker.appendChild(option);
+        }
       });
       var railLinks = rail ? Array.prototype.slice.call(rail.children) : [];
       var weekNavLinks = Array.prototype.slice.call(document.querySelectorAll('.week-nav a[data-target]'));
+      if(sectionPicker){
+        sectionPicker.addEventListener('change', function(){
+          var target = document.getElementById(sectionPicker.value);
+          if(target) target.scrollIntoView({ block:'start', behavior:'smooth' });
+        });
+      }
+
+      var dailyHeroImages = [
+        {
+          src: 'https://commons.wikimedia.org/wiki/Special:FilePath/Three_sisters_springs_near_crystal_river_national_wildlife_refuge.jpg?width=1800',
+          label: 'Three Sisters Springs, Crystal River',
+          credit: 'via Wikimedia Commons'
+        },
+        {
+          src: 'https://commons.wikimedia.org/wiki/Special:FilePath/Crystal_River_near_Hunter_Spring_Run_-_panoramio.jpg?width=1800',
+          label: 'Crystal River near Hunter Spring Run',
+          credit: 'via Wikimedia Commons'
+        },
+        {
+          src: 'https://commons.wikimedia.org/wiki/Special:FilePath/Rainbow_spgs_florida.JPG?width=1800',
+          label: 'Rainbow Springs State Park',
+          credit: 'via Wikimedia Commons'
+        },
+        {
+          src: 'https://commons.wikimedia.org/wiki/Special:FilePath/Silver_Springs_State_Park_-_Headspring_Entrance_Sign.jpg?width=1800',
+          label: 'Silver Springs State Park',
+          credit: 'via Wikimedia Commons'
+        },
+        {
+          src: 'https://commons.wikimedia.org/wiki/Special:FilePath/Paynes_Prairie_observation_tower_view.jpg?width=1800',
+          label: 'Paynes Prairie observation tower view',
+          credit: 'via Wikimedia Commons'
+        },
+        {
+          src: 'https://commons.wikimedia.org/wiki/Special:FilePath/Cedar_Key_Aerial.jpg?width=1800',
+          label: 'Cedar Key aerial shoreline',
+          credit: 'via Wikimedia Commons'
+        },
+        {
+          src: 'https://commons.wikimedia.org/wiki/Special:FilePath/Withlacoochee_State_Trail_looking_north_at_point_where_it_makes_a_tee_intersection_with_the_Good_Neighbor_Trail_Aug_8_2020_at_location_28%C2%B035%2722.2%22N_82%C2%B013%2742.3%22W.jpg?width=1800',
+          label: 'Withlacoochee State Trail',
+          credit: 'via Wikimedia Commons'
+        },
+        {
+          src: 'https://commons.wikimedia.org/wiki/Special:FilePath/Crystal_River_Preserve_State_Park.jpg?width=1800',
+          label: 'Crystal River Preserve State Park',
+          credit: 'via Wikimedia Commons'
+        },
+        {
+          src: 'https://commons.wikimedia.org/wiki/Special:FilePath/Crystal_River_Preserve_State_Park_2.jpg?width=1800',
+          label: 'Crystal River Preserve marshland',
+          credit: 'via Wikimedia Commons'
+        },
+        {
+          src: 'https://commons.wikimedia.org/wiki/Special:FilePath/Dolphin_at_Fort_Island_Gulf_Beach.jpg?width=1800',
+          label: 'Fort Island Gulf Beach',
+          credit: 'via Wikimedia Commons'
+        },
+        {
+          src: 'https://commons.wikimedia.org/wiki/Special:FilePath/Crystal_River_in_Crystal_River05.jpg?width=1800',
+          label: 'Crystal River waterway',
+          credit: 'via Wikimedia Commons'
+        },
+        {
+          src: 'https://commons.wikimedia.org/wiki/Special:FilePath/Crystal_Street_in_Crystal_River,_Florida.jpg?width=1800',
+          label: 'Crystal River streetscape',
+          credit: 'via Wikimedia Commons'
+        },
+        {
+          src: 'https://commons.wikimedia.org/wiki/Special:FilePath/The_fish_market_in_Homosassa,_Florida.jpg?width=1800',
+          label: 'Homosassa fish market',
+          credit: 'via Wikimedia Commons'
+        }
+      ];
+
+      function dayOfYear(date){
+        var start = new Date(date.getFullYear(), 0, 0);
+        return Math.floor((date - start) / 86400000);
+      }
+      function pickDailyHero(date){
+        return dailyHeroImages[dayOfYear(date) % dailyHeroImages.length];
+      }
+      function applyHeroImage(hero){
+        if(!hero) return;
+        var img = document.querySelector('.mast .hero-ph img[data-photo]');
+        var tag = document.querySelector('.mast .hero-ph .tag');
+        var cap = document.querySelector('.mast .hero-cap');
+        var label = hero.label || hero.imageLabel || hero.imageAlt || hero.alt || 'Florida Nature Coast';
+        var credit = hero.credit || hero.imageCredit || 'daily OpenClaw update';
+        var src = hero.src || hero.image || hero.url;
+        if(!src) return;
+        if(img){
+          img.alt = label;
+          img.src = src;
+        }
+        if(tag) tag.textContent = 'PHOTO - ' + label;
+        if(cap) cap.textContent = label + ' - ' + credit;
+      }
+      function heroFromHomepageSetting(homepage){
+        if(!homepage) return null;
+        var hero = homepage.hero || homepage.masthead || homepage;
+        if(!hero || !(hero.image || hero.src || hero.url)) return null;
+        return hero;
+      }
+      function initDailyHero(){
+        applyHeroImage(pickDailyHero(new Date()));
+      }
+      initDailyHero();
 
       var dayTrips = [
         {
@@ -76,7 +191,7 @@
           ],
           links: [
             ['Ozello Park', 'https://www.discovercrystalriverfl.com/directory/ozello-park/'],
-            ['Peck\'s Old Port Cove', 'https://www.discovercrystalriverfl.com/directory/pecks-old-port-cove/'],
+            ['Peck\'s Old Port Cove', 'https://pecksoldportcove.com/'],
             ['Backwater Fins', 'https://backwater-fins.com/']
           ]
         },
@@ -110,8 +225,11 @@
           place: 'Ozello Trail · seafood',
           badges: ['Waterfront', 'Brunch', 'Seafood'],
           href: 'https://backwater-fins.com/',
+          websiteUrl: 'https://backwater-fins.com/',
+          mapQuery: 'Backwater Fins Ozello FL',
+          placePhotoQuery: 'Backwater Fins Ozello FL',
           image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Crystal_River_Preserve_State_Park.jpg?width=1000',
-          imageLabel: 'Crystal River Preserve near Ozello',
+          imageLabel: 'Backwater Fins',
           featured: true
         },
         {
@@ -120,9 +238,12 @@
           dek: 'A long-running Ozello stop for seafood, old-Florida atmosphere, and a route-friendly dinner after the marsh drive.',
           place: 'Ozello · seafood',
           badges: ['Classic', 'Dinner', 'Drive-worthy'],
-          href: 'https://www.discovercrystalriverfl.com/directory/pecks-old-port-cove/',
+          href: 'https://pecksoldportcove.com/',
+          websiteUrl: 'https://pecksoldportcove.com/',
+          mapQuery: 'Peck\'s Old Port Cove Crystal River FL',
+          placePhotoQuery: 'Peck\'s Old Port Cove Crystal River FL',
           image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Crystal_River_Preserve_State_Park_2.jpg?width=1000',
-          imageLabel: 'Ozello-area marshland',
+          imageLabel: 'Peck\'s Old Port Cove',
           featured: true
         },
         {
@@ -132,8 +253,11 @@
           place: 'Homosassa · tiki bar',
           badges: ['Unique', 'Casual', 'Shrimp'],
           href: 'https://the-freezer-homosassa.com/',
+          websiteUrl: 'https://the-freezer-homosassa.com/',
+          mapQuery: 'The Freezer Tiki Bar Homosassa FL',
+          placePhotoQuery: 'The Freezer Tiki Bar Homosassa FL',
           image: 'https://commons.wikimedia.org/wiki/Special:FilePath/The_fish_market_in_Homosassa,_Florida.jpg?width=1000',
-          imageLabel: 'Homosassa fish market',
+          imageLabel: 'The Freezer Tiki Bar',
           featured: true
         },
         {
@@ -142,9 +266,12 @@
           dek: 'A useful breakfast anchor before springs, paddles, errands, or a Crystal River loop.',
           place: 'Crystal River · breakfast',
           badges: ['Breakfast', 'Local', 'Quick stop'],
-          href: 'https://www.discovercrystalriverfl.com/directory/biscuit-barn-north-crystal-river-breakfast-diners/',
+          href: 'https://www.biscuitbarn.net/',
+          websiteUrl: 'https://www.biscuitbarn.net/',
+          mapQuery: 'The Biscuit Barn Crystal River FL',
+          placePhotoQuery: 'The Biscuit Barn Crystal River FL',
           image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Crystal_Street_in_Crystal_River,_Florida.jpg?width=1000',
-          imageLabel: 'Crystal River streetscape'
+          imageLabel: 'The Biscuit Barn'
         },
         {
           lane: 'Local lunch',
@@ -153,8 +280,11 @@
           place: 'Crystal River · lunch',
           badges: ['Local', 'Lunch', 'Loop stop'],
           href: 'https://m.facebook.com/SadiesCornerKitchen/',
+          websiteUrl: 'https://m.facebook.com/SadiesCornerKitchen/',
+          mapQuery: 'Sadie\'s Corner Kitchen Crystal River FL',
+          placePhotoQuery: 'Sadie\'s Corner Kitchen Crystal River FL',
           image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Crystal_River_in_Crystal_River05.jpg?width=1000',
-          imageLabel: 'Crystal River waterway'
+          imageLabel: 'Sadie\'s Corner Kitchen'
         }
       ];
 
@@ -166,21 +296,109 @@
       function chips(items){
         return (items || []).map(function(item){ return '<span class="chip">' + esc(item) + '</span>'; }).join('');
       }
+      function mapUrl(item){
+        return item.mapUrl || 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(item.mapQuery || (item.title + ' ' + (item.place || 'Nature Coast Florida')));
+      }
+      function websiteUrl(item){
+        return item.websiteUrl || item.href || '#';
+      }
+      function placePhotoImageUrl(item){
+        var placeId = item.googlePlaceId || item.placeId;
+        if(!placeId && !item.placePhotoQuery) return '';
+        return '/api/place-photo?' + (placeId ? 'placeId=' + encodeURIComponent(placeId) : 'query=' + encodeURIComponent(item.placePhotoQuery));
+      }
+      function placePhotoMetaUrl(item){
+        var placeId = item.googlePlaceId || item.placeId;
+        if(!placeId && !item.placePhotoQuery) return '';
+        return '/api/place-photo?format=json&' + (placeId ? 'placeId=' + encodeURIComponent(placeId) : 'query=' + encodeURIComponent(item.placePhotoQuery));
+      }
+      function imageSrc(item){
+        return placePhotoImageUrl(item) || item.image || '';
+      }
+      function placePhotoAttrs(item){
+        var attrs = ' onerror="this.onerror=null;this.classList.add(\'photo-failed\');if(this.parentNode)this.parentNode.classList.add(\'photo-missing\');"';
+        var metaUrl = placePhotoMetaUrl(item);
+        if(metaUrl) attrs += ' data-place-photo-meta="' + esc(metaUrl) + '"';
+        return attrs;
+      }
+      function placeActions(item, className){
+        return '<div class="' + className + '">' +
+          '<a href="' + esc(mapUrl(item)) + '" target="_blank" rel="noopener">MAP</a>' +
+          '<a href="' + esc(websiteUrl(item)) + '" target="_blank" rel="noopener">WEBSITE</a>' +
+        '</div>';
+      }
       function dateBadge(value){
-        if(!value) return { day: '!', month: 'Info' };
+        if(!value) return { day: '', month: 'TBD' };
         var normalized = /^\d{4}-\d{2}-\d{2}$/.test(String(value)) ? String(value) + 'T12:00:00' : value;
         var date = new Date(normalized);
-        if(Number.isNaN(date.getTime())) return { day: '!', month: 'Info' };
+        if(Number.isNaN(date.getTime())) return { day: '', month: 'TBD' };
         return {
           day: String(date.getDate()),
           month: date.toLocaleDateString('en-US', { weekday: 'short' })
         };
       }
+      function candidateLane(candidate){
+        return candidate && candidate.raw && candidate.raw.lane ? String(candidate.raw.lane) : '';
+      }
+      function isGenericCandidateUrl(value){
+        if(!value) return true;
+        var url;
+        try { url = new URL(value, window.location.href); } catch(e){ return true; }
+        var host = url.hostname.replace(/^www\./, '');
+        var path = url.pathname.replace(/\/+$/, '').toLowerCase();
+        var hasEventId = url.searchParams.has('EID') || url.searchParams.has('EventID') || url.searchParams.has('eventId') || url.searchParams.has('id');
+        if(host === 'discovercrystalriverfl.com' && path === '/events') return true;
+        if(host === 'business.citruscountychamber.com' && path === '/eventcalendar/search') return true;
+        if((host === 'inverness.gov' || host === 'inverness-fl.gov') && (path === '/calendar' || path === '/calendar.aspx') && !hasEventId) return true;
+        if(host === 'ocalamarion.com' && path === '/events/community-calendar') return true;
+        return path === '/events' || path === '/calendar';
+      }
+      function hasUsefulCandidateLink(candidate){
+        return candidate && candidate.url && !isGenericCandidateUrl(candidate.url);
+      }
+      function isCommunityEventCandidate(candidate){
+        if(!candidate || !candidate.startsAt) return false;
+        var lane = candidateLane(candidate);
+        if(/alert|rule|regulation|condition|closure|access|shortage|weather|state-park/.test(lane)) return false;
+        if(candidate.raw && candidate.raw.kind && candidate.raw.kind !== 'event') return false;
+        return true;
+      }
+      function cleanPublicGuideCopy(){
+        document.querySelectorAll('.pin').forEach(function(pin){
+          if(/source/i.test(pin.textContent || '')) pin.textContent = 'Details';
+        });
+        var footerSources = document.querySelector('footer .src');
+        if(footerSources){
+          footerSources.innerHTML =
+            'The sharp weekly guide to Crystal River, Homosassa, Ocala, Gainesville, and the wild water in between.<br>' +
+            'Built for people who want the good stuff fast.';
+        }
+      }
       function renderDailyUpdate(data){
         var snapshot = data.weatherSnapshot;
         var candidates = (data.sourceCandidates || []).filter(function(candidate){
-          return candidate && candidate.status !== 'archived';
+          return candidate && candidate.status !== 'archived' && hasUsefulCandidateLink(candidate);
         }).slice(0, 6);
+        var eventCandidates = candidates.filter(isCommunityEventCandidate);
+        function uvLabel(snapshot){
+          var uv = snapshot && snapshot.uvIndex;
+          if(uv == null) return '';
+          if(typeof uv === 'number') return String(uv);
+          if(typeof uv === 'string') return uv;
+          var value = uv.value != null ? String(uv.value) : '';
+          var category = uv.category || uv.risk || uv.level || '';
+          if(category && value) return category + ' (' + value + ')';
+          return category || value;
+        }
+        function weatherSummary(snapshot){
+          if(!snapshot) return '';
+          var summary = snapshot.summary || '';
+          var uv = uvLabel(snapshot);
+          if(uv && !/uv/i.test(summary)){
+            summary += (summary ? ' ' : '') + 'UV index is ' + uv + (snapshot.uvIndex && snapshot.uvIndex.window ? ' during ' + snapshot.uvIndex.window : '') + '.';
+          }
+          return summary;
+        }
 
         var heroBox = document.querySelector('.hero-box');
         if(heroBox && (snapshot || candidates.length)){
@@ -193,8 +411,8 @@
           }
           panel.innerHTML =
             '<div class="dup-head"><span class="blip"></span><span>Daily update loaded</span><b>' + esc(new Date().toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' })) + '</b></div>' +
-            (snapshot ? '<p><strong>' + esc(snapshot.label || 'Weather') + ':</strong> ' + esc(snapshot.summary || '') + '</p>' : '') +
-            (candidates.length ? '<div class="dup-list">' + candidates.slice(0, 3).map(function(candidate){
+            (snapshot ? '<p><strong>' + esc(snapshot.label || 'Weather') + ':</strong> ' + esc(weatherSummary(snapshot)) + '</p>' : '') +
+            (eventCandidates.length ? '<div class="dup-list">' + eventCandidates.slice(0, 3).map(function(candidate){
               return '<a href="' + esc(candidate.url || '#meetups') + '" target="_blank" rel="noopener">' + esc(candidate.title) + '</a>';
             }).join('') + '</div>' : '');
         }
@@ -208,44 +426,57 @@
             var place = todayCard.querySelector('.t-place');
             if(ritual) ritual.textContent = snapshot.label || 'Daily update';
             if(title) title.textContent = 'Weather-aware plan: go early.';
-            if(body) body.textContent = snapshot.summary || body.textContent;
-            if(place) place.innerHTML = '<b>Source</b> ' + (snapshot.source ? '<a href="' + esc(snapshot.source) + '" target="_blank" rel="noopener">NWS forecast</a>' : 'Daily sweep');
+            if(body) body.textContent = weatherSummary(snapshot) || body.textContent;
+            if(place) place.innerHTML = '<b>Forecast</b> ' + (snapshot.source ? '<a href="' + esc(snapshot.source) + '" target="_blank" rel="noopener">Today&apos;s outlook</a>' : 'Today&apos;s outlook');
+          }
+          var uv = uvLabel(snapshot);
+          if(uv){
+            var statRows = Array.prototype.slice.call(document.querySelectorAll('.today-wx .stats div'));
+            var uvRow = statRows.find(function(row){
+              var label = row.querySelector('b');
+              return label && /uv/i.test(label.textContent || '');
+            });
+            if(uvRow) uvRow.innerHTML = '<b>UV index</b>' + esc(uv);
           }
         }
 
-        if(candidates.length){
+        if(eventCandidates.length){
+          var meetups = document.querySelector('.meetups');
           var cols = document.querySelectorAll('.meetups .ev-col');
           if(cols.length){
             var primary = cols[0];
             var secondary = cols[1];
-            var firstThree = candidates.slice(0, 3);
-            var rest = candidates.slice(3, 6);
-            primary.innerHTML = '<div class="ev-head">Daily sweep · review picks</div>' + firstThree.map(function(candidate){
+            var firstThree = eventCandidates.slice(0, 3);
+            var rest = eventCandidates.slice(3, 6);
+            if(meetups) meetups.classList.toggle('is-single', !rest.length);
+            primary.innerHTML = '<div class="ev-head">Best bets this week</div>' + firstThree.map(function(candidate){
               var badge = dateBadge(candidate.startsAt);
-              var lane = candidate.raw && candidate.raw.lane ? candidate.raw.lane : 'review';
+              var lane = candidateLane(candidate) || 'event';
               return '<a class="ev" href="' + esc(candidate.url || '#') + '" target="_blank" rel="noopener">' +
                 '<div class="date"><span class="d">' + esc(badge.day) + '</span><span class="m">' + esc(badge.month) + '</span></div>' +
-                '<div class="info"><h4>' + esc(candidate.title) + '</h4><div class="place">' + esc(candidate.location || 'Nature Coast') + ' <span class="pin">↗ Source</span></div></div>' +
+                '<div class="info"><h4>' + esc(candidate.title) + '</h4><div class="place">' + esc(candidate.location || 'Nature Coast') + ' <span class="pin">Details</span></div></div>' +
                 '<span class="cat water">' + esc(lane.replace('-', ' ')) + '</span>' +
               '</a>';
             }).join('');
-            if(secondary && rest.length){
-              secondary.innerHTML = '<div class="ev-head">Alerts & later</div>' + rest.map(function(candidate){
+            if(secondary){
+              secondary.hidden = !rest.length;
+              secondary.innerHTML = rest.length ? '<div class="ev-head">More worth planning around</div>' + rest.map(function(candidate){
                 var badge = dateBadge(candidate.startsAt);
-                var lane = candidate.raw && candidate.raw.lane ? candidate.raw.lane : 'review';
+                var lane = candidateLane(candidate) || 'event';
                 return '<a class="ev" href="' + esc(candidate.url || '#') + '" target="_blank" rel="noopener">' +
                   '<div class="date"><span class="d">' + esc(badge.day) + '</span><span class="m">' + esc(badge.month) + '</span></div>' +
-                  '<div class="info"><h4>' + esc(candidate.title) + '</h4><div class="place">' + esc(candidate.summary || candidate.location || 'Needs review') + ' <span class="pin">↗ Source</span></div></div>' +
+                  '<div class="info"><h4>' + esc(candidate.title) + '</h4><div class="place">' + esc(candidate.location || 'Nature Coast') + ' <span class="pin">Details</span></div></div>' +
                   '<span class="cat land">' + esc(lane.replace('-', ' ')) + '</span>' +
                 '</a>';
-              }).join('');
+              }).join('') : '';
             }
             var evNote = document.querySelector('.ev-note');
             if(evNote){
-              evNote.textContent = 'Daily sweep loaded from local source candidates. Items marked review still need human approval before newsletter publication.';
+              evNote.textContent = 'Fresh picks, real details, and enough context to make a plan without opening twelve tabs.';
             }
           }
         }
+        cleanPublicGuideCopy();
       }
       async function loadCityPulseData(){
         try {
@@ -253,9 +484,10 @@
           if(!response.ok) throw new Error('City Pulse data unavailable');
           var data = await response.json();
           document.documentElement.dataset.contentSource = data.liveError ? 'seed-fallback' : 'city-pulse-api';
+          applyHeroImage(heroFromHomepageSetting(data.homepage));
 
           if(data.issue){
-            var issueLabel = data.issue.label || data.issue.slug || 'Pilot Issue';
+            var issueLabel = data.issue.label || data.issue.slug || 'Explorer Issue';
             var iss = document.querySelector('.bar-cta .iss');
             if(iss) iss.textContent = issueLabel;
             var datelineIssue = document.querySelector('.mast .dateline span:nth-child(2)');
@@ -266,15 +498,17 @@
             var footerSources = document.querySelector('footer .src');
             if(footerSources){
               footerSources.innerHTML =
-                'Built on source discipline: official calendars, tourism boards, parks feeds, and direct business pages. Social finds are leads, not facts.<br>' +
-                'Sources: ' + data.sources.slice(0, 6).map(function(source){
+                'The sharp weekly guide to Crystal River, Homosassa, Ocala, Gainesville, and the wild water in between.<br>' +
+                'Built for people who want the good stuff fast.' + data.sources.slice(0, 0).map(function(source){
                   return '<a href="' + esc(source.url) + '" target="_blank" rel="noopener">' + esc(source.name) + '</a>';
               }).join(' · ');
             }
           }
           renderDailyUpdate(data);
+          cleanPublicGuideCopy();
         } catch(error) {
           document.documentElement.dataset.contentSource = 'inline-fallback';
+          cleanPublicGuideCopy();
           console.warn(error);
         }
       }
@@ -314,23 +548,183 @@
         var evergreen = document.getElementById('eats-evergreen');
         if(!radar || !evergreen) return;
         function card(item){
-          return '<a class="eat-card rv' + (item.featured ? ' featured' : '') + '" href="' + esc(item.href) + '" target="_blank" rel="noopener">' +
-            '<div class="ph eat-media"><img alt="' + esc(item.imageLabel || item.title) + '" data-photo src="' + esc(item.image) + '"><span class="tag">PHOTO · ' + esc(item.imageLabel || item.title) + '</span></div>' +
+          return '<article class="eat-card rv' + (item.featured ? ' featured' : '') + '">' +
+            '<div class="ph eat-media"><img alt="' + esc(item.imageLabel || item.title) + '" data-photo src="' + esc(imageSrc(item)) + '"' + placePhotoAttrs(item) + '><span class="tag photo-credit">PHOTO · ' + esc(item.title) + '</span></div>' +
             '<div class="eat-body">' +
               '<div class="card-top"><span class="card-kicker">' + esc(item.lane) + '</span></div>' +
               '<h4>' + esc(item.title) + '</h4>' +
               '<p>' + esc(item.dek) + '</p>' +
               '<div class="rating-row"><span>' + esc(item.place) + '</span></div>' +
               '<div class="card-tags">' + chips(item.badges) + '</div>' +
+              placeActions(item, 'eat-actions') +
             '</div>' +
-          '</a>';
+          '</article>';
         }
         radar.innerHTML = eats.filter(function(item){ return item.featured; }).map(card).join('');
         evergreen.innerHTML = eats.filter(function(item){ return !item.featured; }).map(card).join('');
+        document.querySelectorAll('#eats img[data-place-photo-meta]').forEach(function(img){
+          fetch(img.getAttribute('data-place-photo-meta')).then(function(response){
+            if(!response.ok) throw new Error('Place photo unavailable');
+            return response.json();
+          }).then(function(payload){
+            var names = (payload.attributions || []).map(function(attr){ return attr.displayName; }).filter(Boolean);
+            var credit = img.parentNode ? img.parentNode.querySelector('.photo-credit') : null;
+            if(credit && names.length) credit.textContent = 'Photo: ' + names.join(', ');
+          }).catch(function(){});
+        });
       }
       renderDayTrips();
       renderEats();
 
+      var weekPlanDetails = {
+        0: {
+          lane: 'Sunday reset',
+          title: 'Riverside live music',
+          time: 'Afternoon',
+          place: 'Old Homosassa waterfront',
+          summary: 'Use this as a loose, low-effort Sunday plan: find a waterfront music stop, sit outside, and keep the rest of the day flexible.',
+          bestFor: 'Slow afternoon, casual food, easy people-watching.',
+          note: 'Confirm the specific venue or event before driving; this slot is meant to point you toward the Homosassa waterfront mood.',
+          learnLabel: 'Browse verified events',
+          learnUrl: '#meetups',
+          mapQuery: 'Old Homosassa waterfront, Homosassa, FL'
+        },
+        1: {
+          lane: 'Start early',
+          title: 'Sunrise float',
+          time: '6:45am',
+          place: 'Hunter Springs Park',
+          summary: 'Go early for cooler air, easier parking, and a calmer launch before the day gets hot and busy.',
+          bestFor: 'Swimming, paddling, clear-water photos, and an easy first stop.',
+          note: 'City park rules, parking fees, and paddle-craft launch fees can apply.',
+          learnLabel: 'Hunter Springs info',
+          learnUrl: 'https://www.crystalriverfl.org/comserv/page/hunter-springs-park',
+          mapQuery: 'Hunter Springs Park, Crystal River, FL'
+        },
+        2: {
+          lane: 'Water + lunch',
+          title: 'Paddle and lunch',
+          time: 'Late morning into lunch',
+          place: 'Kings Bay to downtown Crystal River',
+          summary: 'Make the water the anchor, then keep lunch close so the plan does not turn into a parking-and-driving project.',
+          bestFor: 'Visitors who want one clean Crystal River loop instead of five separate stops.',
+          note: 'Use a public launch or a local outfitter, then pair the paddle with a downtown lunch stop.',
+          learnLabel: 'Find kayak rentals',
+          learnUrl: 'https://crystalriverkayakcompany.com/',
+          mapQuery: 'Kings Bay Park, Crystal River, FL'
+        },
+        3: {
+          lane: 'Wildlife window',
+          title: 'Manatees, early',
+          time: 'Early morning',
+          place: 'Three Sisters Springs',
+          summary: 'This is the postcard move: go before the day crowds in, and check access rules before you assume you can walk or paddle into a specific area.',
+          bestFor: 'Clear-water viewing, wildlife awareness, first-time Crystal River visitors.',
+          note: 'Access varies by land/water route and season. Start with the official visitor info.',
+          learnLabel: 'Three Sisters info',
+          learnUrl: 'https://www.crystalriverfl.org/node/110',
+          mapQuery: 'Three Sisters Springs, Crystal River, FL'
+        },
+        4: {
+          lane: 'Sunset drive',
+          title: 'Ozello sunset drive',
+          time: 'Golden hour',
+          place: 'Peck\'s Old Port Cove',
+          summary: 'Take the Ozello Trail when the marsh light gets good, then finish with seafood instead of rushing back inland.',
+          bestFor: 'Date night, seafood, marsh views, visitors who want the old-Florida texture.',
+          note: 'Leave a little extra time for the drive; the road is part of the plan.',
+          learnLabel: 'Peck\'s website',
+          learnUrl: 'https://pecksoldportcove.com/',
+          mapQuery: 'Peck\'s Old Port Cove, Crystal River, FL'
+        },
+        5: {
+          lane: 'Evening browse',
+          title: 'Market night',
+          time: '5-9pm',
+          place: 'Downtown Inverness / Town Square',
+          summary: 'Treat this as an easy after-work wander: downtown, food nearby, and a simple way to see what Inverness has going on.',
+          bestFor: 'Browsing, dinner nearby, music or small-town event energy.',
+          note: 'Check the city calendar for the exact listing before making a special trip.',
+          learnLabel: 'Inverness calendar',
+          learnUrl: 'https://inverness.gov/Calendar/',
+          mapQuery: 'Downtown Inverness Town Square, Inverness, FL'
+        },
+        6: {
+          lane: 'Community water day',
+          title: 'Cleanup and long swim',
+          time: '8am',
+          place: 'Kings Bay Park',
+          summary: 'Start with the useful community piece, then keep the morning open for a swim, a paddle, or a shaded walk near the bay.',
+          bestFor: 'Volunteering, water access, simple family-friendly outdoor time.',
+          note: 'Kings Bay Park has posted hours, amenities, parking details, and launch-fee notes on the city page.',
+          learnLabel: 'Kings Bay Park info',
+          learnUrl: 'https://www.crystalriverfl.org/comserv/page/kings-bay-park',
+          mapQuery: 'Kings Bay Park, Crystal River, FL'
+        }
+      };
+
+      function googleDirectionsUrl(query){
+        return 'https://www.google.com/maps/dir/?api=1&destination=' + encodeURIComponent(query || 'Florida Nature Coast');
+      }
+      function ensureDayModal(){
+        var modal = document.getElementById('day-detail-modal');
+        if(modal) return modal;
+        modal = document.createElement('dialog');
+        modal.id = 'day-detail-modal';
+        modal.className = 'day-modal';
+        modal.innerHTML =
+          '<div class="day-modal-card" role="document">' +
+            '<button class="day-modal-close" type="button" aria-label="Close details">x</button>' +
+            '<div class="dm-kicker" id="day-modal-kicker"></div>' +
+            '<h3 id="day-modal-title"></h3>' +
+            '<p class="dm-meta" id="day-modal-meta"></p>' +
+            '<p class="dm-summary" id="day-modal-summary"></p>' +
+            '<dl class="dm-list">' +
+              '<div><dt>Best for</dt><dd id="day-modal-best"></dd></div>' +
+              '<div><dt>Heads up</dt><dd id="day-modal-note"></dd></div>' +
+            '</dl>' +
+            '<div class="dm-actions">' +
+              '<a class="btn" id="day-modal-learn" href="#">Learn more</a>' +
+              '<a class="btn earth" id="day-modal-map" href="#" target="_blank" rel="noopener">Get directions</a>' +
+            '</div>' +
+          '</div>';
+        document.body.appendChild(modal);
+        modal.querySelector('.day-modal-close').addEventListener('click', function(){ modal.close(); });
+        modal.addEventListener('click', function(event){
+          if(event.target === modal) modal.close();
+        });
+        modal.querySelector('#day-modal-learn').addEventListener('click', function(event){
+          var href = this.getAttribute('href') || '';
+          if(href.charAt(0) === '#'){
+            event.preventDefault();
+            modal.close();
+            var target = document.getElementById(href.slice(1));
+            if(target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+        return modal;
+      }
+      function openDayModal(cell, cellDate){
+        var detail = weekPlanDetails[Number(cell.getAttribute('data-day'))] || {};
+        var title = detail.title || (cell.querySelector('.dc-pick') ? cell.querySelector('.dc-pick').childNodes[0].textContent : 'This week');
+        var dateLabel = cellDate.toLocaleDateString(undefined, { weekday: 'long', month: 'long', day: 'numeric' });
+        var modal = ensureDayModal();
+        modal.querySelector('#day-modal-kicker').textContent = detail.lane || 'This week';
+        modal.querySelector('#day-modal-title').textContent = title;
+        modal.querySelector('#day-modal-meta').textContent = dateLabel + ' / ' + (detail.time || 'Flexible timing') + ' / ' + (detail.place || 'Nature Coast');
+        modal.querySelector('#day-modal-summary').textContent = detail.summary || 'A useful day-by-day pick from this week\'s guide.';
+        modal.querySelector('#day-modal-best').textContent = detail.bestFor || 'A simple local plan.';
+        modal.querySelector('#day-modal-note').textContent = detail.note || 'Check conditions before heading out.';
+        var learn = modal.querySelector('#day-modal-learn');
+        learn.textContent = detail.learnLabel || 'Learn more';
+        learn.href = detail.learnUrl || '#meetups';
+        learn.target = detail.learnUrl && detail.learnUrl.charAt(0) === '#' ? '' : '_blank';
+        if(learn.target) learn.rel = 'noopener'; else learn.removeAttribute('rel');
+        modal.querySelector('#day-modal-map').href = googleDirectionsUrl(detail.mapQuery || detail.place || title);
+        if(typeof modal.showModal === 'function') modal.showModal();
+        else modal.setAttribute('open', '');
+        modal.querySelector('.day-modal-close').focus();
+      }
       function initTodayModule(){
         var date = new Date();
         var names = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
@@ -340,15 +734,78 @@
         var dayDate = todayCard ? todayCard.querySelector('.day-date') : null;
         if(dayName) dayName.textContent = names[date.getDay()];
         if(dayDate) dayDate.textContent = month + ' ' + date.getDate();
-        document.querySelectorAll('.daycell').forEach(function(cell){
-          cell.classList.toggle('is-today', Number(cell.getAttribute('data-day')) === date.getDay());
+        var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+        var weekRail = document.querySelector('.weekrail');
+        var cells = Array.prototype.slice.call(document.querySelectorAll('.daycell'));
+        cells.map(function(cell){
+          var day = Number(cell.getAttribute('data-day'));
+          var offset = (day - today.getDay() + 7) % 7;
+          if(offset === 6) offset = -1;
+          return { cell: cell, offset: offset };
+        }).sort(function(a, b){
+          return a.offset - b.offset;
+        }).forEach(function(item){
+          var cellDate = new Date(today);
+          cellDate.setDate(today.getDate() + item.offset);
+          var shortDay = cellDate.toLocaleDateString(undefined, { weekday: 'short' });
+          var dayNumber = String(cellDate.getDate());
+          var dayLabel = item.cell.querySelector('.dc-day .dn');
+          var dateLabel = item.cell.querySelector('.dc-day .dd');
+          if(dayLabel) dayLabel.textContent = shortDay;
+          if(dateLabel) dateLabel.textContent = dayNumber;
+          item.cell.classList.toggle('is-yesterday', item.offset === -1);
+          item.cell.classList.toggle('is-today', item.offset === 0);
+          item.cell.classList.toggle('is-tomorrow', item.offset === 1);
+          item.cell.classList.toggle('is-future', item.offset > 0);
+          item.cell.setAttribute('data-relative-day', String(item.offset));
+          if(item.offset === 0){
+            item.cell.setAttribute('aria-current', 'date');
+          } else {
+            item.cell.removeAttribute('aria-current');
+          }
+          var detailForCell = weekPlanDetails[Number(item.cell.getAttribute('data-day'))];
+          item.cell.setAttribute('role', 'button');
+          item.cell.setAttribute('tabindex', '0');
+          item.cell.setAttribute('aria-label', 'Open details for ' + (detailForCell ? detailForCell.title : 'this day') + ' on ' + cellDate.toLocaleDateString(undefined, { weekday: 'long', month: 'long', day: 'numeric' }));
+          item.cell.addEventListener('click', function(){ openDayModal(item.cell, cellDate); });
+          item.cell.addEventListener('keydown', function(event){
+            if(event.key === 'Enter' || event.key === ' '){
+              event.preventDefault();
+              openDayModal(item.cell, cellDate);
+            }
+          });
+          if(weekRail) weekRail.appendChild(item.cell);
         });
       }
       initTodayModule();
 
+      function initWeatherWeek(){
+        var today = new Date();
+        today = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+        document.querySelectorAll('.weekfc .day').forEach(function(day, index){
+          var offset = Number(day.getAttribute('data-forecast-offset'));
+          if(Number.isNaN(offset)) offset = index;
+          var forecastDate = new Date(today);
+          forecastDate.setDate(today.getDate() + offset);
+          var label = day.querySelector('.dn');
+          var dow = label ? label.querySelector('.dow') : null;
+          var dnum = label ? label.querySelector('.dnum') : null;
+          if(label && !dow){
+            label.innerHTML = '<span class="dow"></span><span class="dnum"></span>';
+            dow = label.querySelector('.dow');
+            dnum = label.querySelector('.dnum');
+          }
+          if(dow) dow.textContent = forecastDate.toLocaleDateString(undefined, { weekday: 'short' });
+          if(dnum) dnum.textContent = String(forecastDate.getDate());
+          day.classList.toggle('is-weather-today', offset === 0);
+        });
+      }
+      initWeatherWeek();
+
       function setActiveSection(id){
         railLinks.forEach(function(l){ l.classList.toggle('active', l.getAttribute('data-target') === id); });
         weekNavLinks.forEach(function(l){ l.classList.toggle('active', l.getAttribute('data-target') === id); });
+        if(sectionPicker && id && sectionPicker.value !== id) sectionPicker.value = id;
       }
       function currentSectionId(){
         var doc = document.documentElement;
@@ -477,12 +934,79 @@
         });
       }
 
+      /* masthead photo submission flow */
+      var photoForm = document.getElementById('photoform');
+      var photoOk = document.getElementById('photo-ok');
+      var photoFile = document.getElementById('photo-file');
+      var photoFileName = document.getElementById('photo-file-name');
+      if(photoFile && photoFileName){
+        photoFile.addEventListener('change', function(){
+          var file = photoFile.files && photoFile.files[0];
+          photoFileName.textContent = file ? file.name : 'JPEG, PNG, or WebP up to 8MB';
+        });
+      }
+      function fileToDataUrl(file){
+        return new Promise(function(resolve, reject){
+          var reader = new FileReader();
+          reader.onload = function(){ resolve(reader.result); };
+          reader.onerror = function(){ reject(reader.error || new Error('Could not read image.')); };
+          reader.readAsDataURL(file);
+        });
+      }
+      if(photoForm && photoOk && photoFile){
+        photoForm.addEventListener('submit', async function(ev){
+          ev.preventDefault();
+          var file = photoFile.files && photoFile.files[0];
+          var name = document.getElementById('photo-name');
+          var email = document.getElementById('photo-email');
+          var permission = document.getElementById('photo-permission');
+          if(!name || !name.value.trim()){ if(name) name.focus(); return; }
+          if(!email || !email.value.trim()){ if(email) email.focus(); return; }
+          if(!file){ photoFile.focus(); return; }
+          if(file.size > 8 * 1024 * 1024){
+            if(photoFileName) photoFileName.textContent = 'That file is over 8MB.';
+            return;
+          }
+          if(!permission || !permission.checked){ if(permission) permission.focus(); return; }
+          var button = photoForm.querySelector('button[type="submit"]');
+          var original = button ? button.textContent : '';
+          if(button){ button.disabled = true; button.textContent = 'Submitting...'; }
+          try {
+            var dataUrl = await fileToDataUrl(file);
+            var response = await fetch('/api/submit-photo', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                city: 'nature-coast',
+                photographerName: name.value.trim(),
+                email: email.value.trim(),
+                location: (document.getElementById('photo-location') || {}).value || '',
+                credit: (document.getElementById('photo-credit') || {}).value || '',
+                caption: (document.getElementById('photo-caption') || {}).value || '',
+                contentType: file.type,
+                dataBase64: dataUrl,
+                permission: true,
+                discountOptIn: Boolean((document.getElementById('photo-discount') || {}).checked)
+              })
+            });
+            var result = await response.json().catch(function(){ return {}; });
+            if(!response.ok) throw new Error(result.error || 'Photo submission failed.');
+            photoForm.classList.add('hide');
+            photoOk.classList.add('show');
+          } catch(error) {
+            if(photoFileName) photoFileName.textContent = error.message || 'Photo submission failed.';
+          } finally {
+            if(button){ button.disabled = false; button.textContent = original; }
+          }
+        });
+      }
+
       /* join flow */
       var form = document.getElementById('joinform');
       var confirmed = document.getElementById('confirmed');
       var detail = document.getElementById('confirm-detail');
       var emailEl = document.getElementById('email');
-      var KEY = 'ncp_pilot_email';
+      var KEY = 'ncp_explorer_email';
       function showConfirmed(email){
         form.classList.add('hide'); confirmed.classList.add('show');
         detail.textContent = 'Issue 002 is headed to ' + email + ' this Friday.';

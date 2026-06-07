@@ -1,6 +1,6 @@
 # OpenClaw Publish API
 
-This API lets a remote OpenClaw process publish structured Nature Coast Pulse data into the Vercel-hosted app.
+This API lets a remote OpenClaw process publish structured Nature Coast Insider data into the Vercel-hosted app.
 
 OpenClaw does not need to run on the same machine as Vercel. It only needs HTTPS access to the deployed site and the shared publish secret.
 
@@ -63,6 +63,8 @@ Published data is read back through:
 GET /api/city-pulse?city=nature-coast
 ```
 
+The Eats page reads `settings.guidePages.eats` from that public payload after rendering its bundled fallback data. Use this setting when OpenClaw needs to update Eats cards by API without editing `guide-data.js`.
+
 ## Minimal Example
 
 ```bash
@@ -121,6 +123,19 @@ For settings writes, `storage.settings` reports where each setting was saved. Ex
 
 Both storage paths are read by `/api/city-pulse`, so OpenClaw can still update site-facing settings such as image URLs and weather config.
 
+## Advertiser Copy Rules
+
+OpenClaw must not use `founder`, `founding`, `founding sponsor`, or `founder rate` in advertiser, sponsor, or partner copy.
+
+Use community-oriented language instead:
+
+- `community partner`
+- `community partnership`
+- `community partner slot`
+- `local guide partner`
+
+Advertisers should be positioned as part of the community-building team that helps keep the guide useful, source-backed, and connected to real local businesses. Keep paid placement labeling clear and honest.
+
 ## Full Payload Shape
 
 ```json
@@ -130,7 +145,7 @@ Both storage paths are read by `/api/city-pulse`, so OpenClaw can still update s
   "publish": {
     "city": {
       "slug": "nature-coast",
-      "name": "Nature Coast Pulse",
+      "name": "Nature Coast Insider",
       "region": "Florida Nature Coast",
       "timezone": "America/New_York",
       "lanes": ["Crystal River", "Homosassa", "Ocala", "Gainesville"]
@@ -145,7 +160,34 @@ Both storage paths are read by `/api/city-pulse`, so OpenClaw can still update s
       "weatherSnapshot": {
         "label": "Today · Crystal River",
         "summary": "Hot, PM storms likely",
+        "uvIndex": {
+          "value": 10,
+          "category": "Very high",
+          "window": "11a-4p",
+          "note": "Use shade, water, sunscreen, and a long-sleeve sun shirt for open-water plans."
+        },
         "updatedAt": "2026-06-06T12:00:00-04:00"
+      },
+      "guidePages": {
+        "eats": {
+          "mealStops": [
+            {
+              "slot": "Dinner",
+              "title": "Peck's Old Port Cove",
+              "area": "Ozello",
+              "dek": "Old-school seafood after the Ozello drive.",
+              "websiteUrl": "https://pecksoldportcove.com/",
+              "mapQuery": "Peck's Old Port Cove Crystal River FL",
+              "googlePlaceId": "EXACT_GOOGLE_PLACE_ID_HERE",
+              "placePhotoQuery": "Peck's Old Port Cove Crystal River FL",
+              "imageLabel": "Peck's Old Port Cove",
+              "photoStatus": "PASS exact place photo",
+              "photoEvidence": "Returned Google place identity and rendered card were checked."
+            }
+          ],
+          "eats": [],
+          "foodPlans": []
+        }
       }
     },
     "issue": {
@@ -166,8 +208,142 @@ Both storage paths are read by `/api/city-pulse`, so OpenClaw can still update s
     "dayTrips": [],
     "images": [],
     "sources": [],
-    "sourceCandidates": []
+    "sourceCandidates": [
+      {
+        "title": "Small Town Saturday Night in Downtown Inverness",
+        "status": "review",
+        "url": "https://www.inverness-fl.gov/Calendar.aspx?EID=7081&calType=0&day=5&month=6&year=2026",
+        "startsAt": "2026-06-13T17:00:00-04:00",
+        "endsAt": "2026-06-13T21:00:00-04:00",
+        "location": "Downtown Inverness, 207 Courthouse Square, Inverness, FL 34450",
+        "summary": "Exact, source-backed event summary.",
+        "raw": {
+          "kind": "event",
+          "source": "City of Inverness calendar",
+          "sourceUrl": "https://www.inverness-fl.gov/Calendar.aspx?EID=7081&calType=0&day=5&month=6&year=2026",
+          "backupUrl": "https://inverness.gov/679/Small-Town-Saturday-Night",
+          "linkQuality": "exact",
+          "checkedAt": "2026-06-06T16:00:00Z"
+        }
+      }
+    ]
   }
+}
+```
+
+## Source Candidate Link Quality
+
+Review/published source candidates must use exact detail URLs. The publish API rejects review/published candidates whose `url` is only a generic event index, calendar root, or search results page.
+
+Classify every candidate before publishing:
+
+- `event`: community calendar item, festival, class, market, music, meetup, or other thing a person can attend.
+- `alert`: advisory or warning.
+- `rule`: regulation, season, permit, or official rule.
+- `access-note`: closure, shuttle/parking/route/access change, park operations note.
+- `weather`: weather or water condition.
+- `place` / `business`: guide/place/business discovery item.
+
+Only `event` candidates belong in Community Events. Alerts, rules, access notes, weather, and season/regulation items should be published to conditions/planning-note surfaces instead.
+
+Bad clickable URLs for review/published candidates include:
+
+- `https://www.discovercrystalriverfl.com/events/`
+- `https://business.citruscountychamber.com/eventcalendar/Search`
+- generic `/calendar`, `/Calendar.aspx`, or `/events` pages without event identifiers
+
+OpenClaw should search by event title, venue, city, and date until it finds the direct detail page. Prefer official city, venue, chamber detail, tourism detail, or event-owned sites. If the official site is useful but another exact detail page has clearer facts, use the official site as `url` and store the other page in `raw.backupUrl`.
+
+Review-ready candidates should include:
+
+- `url`: exact event/detail page
+- `startsAt` and `endsAt` when available
+- `location`: venue and address when available
+- `summary`: practical facts from the detail page
+- `raw.source`, `raw.sourceUrl`, `raw.linkQuality: "exact"`, and `raw.checkedAt`
+
+If exact research fails, keep the candidate as `draft`, set `raw.linkQuality` to `needs-detail`, and do not treat it as daily-panel content.
+
+## Place And Business Link Quality
+
+For places and businesses, the public URL should be the canonical user destination, not simply the source where OpenClaw discovered the listing.
+
+Use:
+
+- `web` for the business-owned website, official attraction page, menu/order page, reservation/booking page, ticket page, or official social profile when no website exists.
+- `sourceUrl` for tourism, chamber, directory, map, city, or other evidence pages that verify facts.
+- `map` for the map/directions URL.
+- `websiteUrl` for Eats-page cards when the public action should say Website.
+- `mapUrl` or `mapQuery` for Eats-page MAP buttons. Use `mapUrl` when a stable Google Maps URL is known; otherwise provide a precise `mapQuery` like `Peck's Old Port Cove Crystal River FL`.
+- `googlePlaceId` or `placeId` for exact Eats-page Google place photos. This is preferred because it avoids bad free-text Places matches.
+- `placePhotoQuery` for Eats-page place photo discovery only when the exact Place ID is not yet known. The public page sends this to `/api/place-photo`, which uses the server-side Google Maps API key and falls back to `image` if Google is unavailable.
+
+Do not use a tourism/chamber/directory page as `web` when that page links to a live, useful official business site.
+
+Do not put Google Maps API keys or raw Places photo calls in public HTML. Place photos must go through `/api/place-photo` or through a daily OpenClaw publish step that stores a safe public image URL.
+
+Place photo success is not proven by DOM `src` values, HTTP 200s, attribution counts, or the string `/api/place-photo` appearing on cards. OpenClaw must verify identity:
+
+- Prefer exact `googlePlaceId` / `placeId`.
+- In JSON mode, confirm the returned `place.name`, `place.address`, or `place.googleMapsUri` is the intended business/place.
+- Browser-render the Eats page and visually reject generic regional scenery, repeated fallback images, tourism filler, unrelated streets/water/trees, or another business.
+- Record per-place evidence as `PASS exact place photo`, `PASS reviewed fallback`, or `BLOCKED needs human image`.
+- If the exact Place ID still returns a poor first photo, publish a reviewed image from a business-owned site/social/source when allowed, or leave the item marked for human image review. Do not claim the photo work is fixed.
+
+Example:
+
+```json
+{
+  "id": "peck-s-old-port-cove",
+  "status": "published",
+  "sortOrder": 10,
+  "name": "Peck's Old Port Cove",
+  "area": "Ozello",
+  "category": "food",
+  "tags": ["Seafood", "Waterfront", "Old-school"],
+  "rating": "4.5 / 4,267",
+  "blurb": "Go for the drive, seafood, and old-school waterfront feel.",
+  "map": "https://maps.google.com/?cid=7457366538817134625",
+  "web": "https://pecksoldportcove.com/",
+  "websiteUrl": "https://pecksoldportcove.com/",
+  "mapQuery": "Peck's Old Port Cove Crystal River FL",
+  "googlePlaceId": "EXACT_GOOGLE_PLACE_ID_HERE",
+  "placePhotoQuery": "Peck's Old Port Cove Crystal River FL",
+  "photoStatus": "PASS exact place photo",
+  "photoVerifiedAt": "2026-06-06T16:00:00Z",
+  "sourceUrl": "https://www.discovercrystalriverfl.com/directory/pecks-old-port-cove/"
+}
+```
+
+For the server-side Google photo path, configure one of:
+
+- `GOOGLE_MAPS_API_KEY`
+- `GOOGLE_PLACES_API_KEY`
+
+The endpoint accepts either an exact `placeId` / `googlePlaceId` or a fallback `placePhotoQuery`. Exact Place IDs are preferred.
+
+```text
+GET /api/place-photo?format=json&placeId=<google-place-id>
+GET /api/place-photo?format=json&query=Peck%27s%20Old%20Port%20Cove%20Crystal%20River%20FL
+```
+
+The endpoint can either redirect to the Google-hosted photo URI or return JSON with `photoUri`, `attributions`, and the returned `place` identity fields.
+
+The Eats page uses the JSON mode so it can display required Google photo attributions when they exist. If the key is missing, the Places API fails, or no photo is found, the endpoint returns the card's fallback `image`.
+
+Example JSON response:
+
+```json
+{
+  "photoUri": "https://lh3.googleusercontent.com/places/...",
+  "fallback": false,
+  "place": {
+    "id": "ChIJ...",
+    "name": "Peck's Old Port Cove",
+    "address": "139 N Ozello Trail, Crystal River, FL 34429, USA",
+    "googleMapsUri": "https://maps.google.com/?cid=..."
+  },
+  "attributions": []
 }
 ```
 
@@ -177,6 +353,8 @@ OpenClaw can publish images in two ways:
 
 - Assign an existing public remote URL.
 - Upload generated image bytes as base64 to Supabase Storage.
+
+Every image can optionally include a `target`. If no target is provided, the API resolves or stores the image and returns the public URL without changing page content.
 
 Set this optional env var in Vercel:
 
@@ -244,6 +422,81 @@ If the bucket does not exist, the API attempts to create a public bucket with th
         }
       }
     ]
+  }
+}
+```
+
+### Assign The This Week Hero
+
+Use this for the daily 3am OpenClaw update. The page reads `settings.homepage.image` from `/api/city-pulse` and uses the local daily image pool only when no published homepage image exists.
+
+Remote image URLs should be direct, stable, public image URLs. If the image is generated by OpenClaw, send `dataBase64` instead of `url`; the API uploads it to Supabase Storage and then writes the stored public URL into `settings.homepage.image`.
+
+```json
+{
+  "city": "nature-coast",
+  "publish": {
+    "images": [
+      {
+        "id": "daily-this-week-hero",
+        "url": "https://example.com/daily-this-week-hero.jpg",
+        "target": {
+          "type": "setting",
+          "key": "homepage",
+          "value": {
+            "imageLabel": "Crystal River morning",
+            "imageCredit": "OpenClaw daily image sweep",
+            "updatedAt": "2026-06-06T09:00:00-04:00"
+          }
+        }
+      }
+    ]
+  }
+}
+```
+
+Generated-image version:
+
+```json
+{
+  "city": "nature-coast",
+  "publish": {
+    "images": [
+      {
+        "id": "daily-this-week-hero",
+        "filename": "daily-this-week-hero.png",
+        "contentType": "image/png",
+        "dataBase64": "<base64 image bytes>",
+        "target": {
+          "type": "setting",
+          "key": "homepage",
+          "value": {
+            "imageLabel": "Generated Florida Nature Coast sunrise",
+            "imageCredit": "Generated by OpenClaw daily image workflow",
+            "updatedAt": "2026-06-06T03:00:00-04:00"
+          }
+        }
+      }
+    ]
+  }
+}
+```
+
+After publishing, OpenClaw should verify:
+
+```text
+GET /api/city-pulse?city=nature-coast
+```
+
+Expected readback shape:
+
+```json
+{
+  "homepage": {
+    "image": "https://...",
+    "imageLabel": "Crystal River morning",
+    "imageCredit": "OpenClaw daily image sweep",
+    "updatedAt": "2026-06-06T03:00:00-04:00"
   }
 }
 ```

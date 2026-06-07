@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Eats | Nature Coast Pulse</title>
+  <title>Eats | Nature Coast Insider</title>
   <link rel="icon" type="image/png" href="assets/nature-coast-insider-webicon.png">
   <link rel="apple-touch-icon" href="assets/nature-coast-insider-webicon.png">
   <link rel="stylesheet" href="guide-pages.css">
@@ -24,9 +24,9 @@
 
   <main>
     <section class="hero">
-      <img alt="Homosassa fish market" src="https://commons.wikimedia.org/wiki/Special:FilePath/The_fish_market_in_Homosassa,_Florida.jpg?width=1800">
+      <img alt="The Freezer Tiki Bar in Homosassa" src="/api/place-photo?query=The%20Freezer%20Tiki%20Bar%20Homosassa%20FL&amp;fallback=https%3A%2F%2Fcommons.wikimedia.org%2Fwiki%2FSpecial%3AFilePath%2FThe_fish_market_in_Homosassa%2C_Florida.jpg%3Fwidth%3D1800">
       <div class="wrap">
-        <div class="kicker">Nature Coast Pulse - Eats</div>
+        <div class="kicker">Nature Coast Insider - Eats</div>
         <h1>Food stops with a reason to go.</h1>
         <p>A practical food guide for the Nature Coast: route-friendly seafood, breakfast anchors, local lunch stops, and places that make a day trip easier to plan.</p>
         <div class="hero-actions">
@@ -50,6 +50,25 @@
       </div>
     </section>
 
+    <section class="section food-day" id="food-day">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <div class="kicker">Build a food day</div>
+            <h2>Breakfast to cocktails, without overthinking the map.</h2>
+            <p>Start with one anchor, then stack nearby stops around water, downtown, Ozello, or a slow Homosassa afternoon.</p>
+          </div>
+          <a href="#evergreen" class="btn">Browse more eats</a>
+        </div>
+        <div id="meal-board" class="meal-board"></div>
+        <div class="food-loop-head">
+          <div class="kicker">Ready-made loops</div>
+          <h2>Three ways to eat around the coast.</h2>
+        </div>
+        <div id="food-loops" class="food-loops"></div>
+      </div>
+    </section>
+
     <section class="section" id="evergreen">
       <div class="wrap">
         <div class="section-head">
@@ -69,30 +88,132 @@
   </main>
 
   <footer>
-    <div class="wrap">Nature Coast Pulse - Crystal River, Homosassa, Ocala, Gainesville.</div>
+    <div class="wrap">Nature Coast Insider - Crystal River, Homosassa, Ocala, Gainesville.</div>
   </footer>
 
-  <script src="guide-data.js"></script>
+  <script src="guide-data.js?v=food-clean-1"></script>
   <script>
     (function(){
       var guide = window.NCP_GUIDE;
       var radar = document.getElementById('eats-radar');
       var evergreen = document.getElementById('eats-evergreen');
+      var mealBoard = document.getElementById('meal-board');
+      var foodLoops = document.getElementById('food-loops');
       if(!guide || !radar || !evergreen) return;
+      function mapUrl(item){
+        return item.mapUrl || 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(item.mapQuery || (item.title + ' ' + (item.area || item.place || 'Nature Coast Florida')));
+      }
+      function websiteUrl(item){
+        return item.websiteUrl || item.href || '#';
+      }
+      function imageSrc(item){
+        return placePhotoImageUrl(item) || item.image || '';
+      }
+      function placePhotoImageUrl(item){
+        var placeId = item.googlePlaceId || item.placeId;
+        if(!placeId && !item.placePhotoQuery) return '';
+        return '/api/place-photo?' + (placeId ? 'placeId=' + encodeURIComponent(placeId) : 'query=' + encodeURIComponent(item.placePhotoQuery));
+      }
+      function placePhotoMetaUrl(item){
+        var placeId = item.googlePlaceId || item.placeId;
+        if(!placeId && !item.placePhotoQuery) return '';
+        return '/api/place-photo?format=json&' + (placeId ? 'placeId=' + encodeURIComponent(placeId) : 'query=' + encodeURIComponent(item.placePhotoQuery));
+      }
+      function imageAttrs(item){
+        var attrs = ' onerror="this.onerror=null;this.classList.add(\'photo-failed\');if(this.parentNode)this.parentNode.classList.add(\'photo-missing\');"';
+        var metaUrl = placePhotoMetaUrl(item);
+        if(metaUrl) attrs += ' data-place-photo-meta="' + guide.esc(metaUrl) + '"';
+        return attrs;
+      }
+      function actions(item, className){
+        return '<div class="' + className + '">' +
+          '<a href="' + guide.esc(mapUrl(item)) + '" target="_blank" rel="noopener">MAP</a>' +
+          '<a href="' + guide.esc(websiteUrl(item)) + '" target="_blank" rel="noopener">WEBSITE</a>' +
+        '</div>';
+      }
       function card(item){
-        return '<a class="eat-card' + (item.featured ? ' featured' : '') + '" href="' + guide.esc(item.href) + '" target="_blank" rel="noopener">' +
-          '<div class="ph"><img alt="' + guide.esc(item.imageLabel || item.title) + '" src="' + guide.esc(item.image) + '"></div>' +
+        return '<article class="eat-card' + (item.featured ? ' featured' : '') + '">' +
+          '<div class="ph"><img alt="' + guide.esc(item.imageLabel || item.title) + '" src="' + guide.esc(imageSrc(item)) + '"' + imageAttrs(item) + '><span class="photo-credit"></span></div>' +
           '<div class="eat-body">' +
             '<div class="card-top"><span class="card-kicker">' + guide.esc(item.lane) + '</span></div>' +
             '<h3>' + guide.esc(item.title) + '</h3>' +
             '<p>' + guide.esc(item.dek) + '</p>' +
             '<div class="rating-row"><span>' + guide.esc(item.place) + '</span></div>' +
             '<div class="card-tags">' + guide.chips(item.badges) + '</div>' +
+            actions(item, 'eat-actions') +
           '</div>' +
-        '</a>';
+        '</article>';
       }
-      radar.innerHTML = guide.eats.filter(function(item){ return item.featured; }).map(card).join('');
-      evergreen.innerHTML = guide.eats.filter(function(item){ return !item.featured; }).map(card).join('');
+      function mealCard(item, index){
+        var weekend = [0, 6].indexOf(new Date().getDay()) !== -1;
+        var slot = item.slot === 'Weekend brunch' && weekend ? 'Brunch today' : item.slot;
+        var layout = item.layout || (index === 0 ? 'lead' : index === 4 ? 'tall' : '');
+        return '<article class="meal-card' + (layout ? ' meal-' + guide.esc(layout) : '') + '">' +
+          '<div class="meal-media"><img alt="' + guide.esc(item.imageLabel || item.title) + '" src="' + guide.esc(imageSrc(item)) + '"' + imageAttrs(item) + '><span class="photo-credit"></span></div>' +
+          '<div class="meal-scrim"></div>' +
+          '<div class="meal-copy">' +
+            '<div class="meal-slot">' + guide.esc(slot) + '</div>' +
+            '<h3>' + guide.esc(item.title) + '</h3>' +
+            '<p>' + guide.esc(item.dek) + '</p>' +
+            actions(item, 'meal-actions') +
+          '</div>' +
+        '</article>';
+      }
+      function foodLoop(plan){
+        return '<article class="food-loop">' +
+          '<div class="food-loop-media"><img alt="' + guide.esc(plan.imageLabel || plan.title) + '" src="' + guide.esc(plan.image) + '"></div>' +
+          '<div class="food-loop-copy">' +
+            '<h3>' + guide.esc(plan.title) + '</h3>' +
+            '<p>' + guide.esc(plan.dek) + '</p>' +
+            '<ol>' + (plan.stops || []).map(function(stop){
+              var item = Array.isArray(stop) ? { label: stop[0], title: stop[1], websiteUrl: stop[2], href: stop[2] } : stop;
+              return '<li>' +
+                '<span>' + guide.esc(item.label) + '</span>' +
+                '<div class="loop-place">' +
+                  '<strong>' + guide.esc(item.title) + '</strong>' +
+                  actions(item, 'loop-actions') +
+                '</div>' +
+              '</li>';
+            }).join('') + '</ol>' +
+          '</div>' +
+        '</article>';
+      }
+      function hydratePhotoCredits(){
+        document.querySelectorAll('img[data-place-photo-meta]').forEach(function(img){
+          fetch(img.getAttribute('data-place-photo-meta')).then(function(response){
+            if(!response.ok) throw new Error('Place photo unavailable');
+            return response.json();
+          }).then(function(payload){
+            var names = (payload.attributions || []).map(function(attr){ return attr.displayName; }).filter(Boolean);
+            var credit = img.parentNode ? img.parentNode.querySelector('.photo-credit') : null;
+            if(credit && names.length) credit.textContent = 'Photo: ' + names.join(', ');
+          }).catch(function(){});
+        });
+      }
+      function renderEatsPage(model){
+        radar.innerHTML = (model.eats || []).filter(function(item){ return item.featured; }).map(card).join('');
+        evergreen.innerHTML = (model.eats || []).filter(function(item){ return !item.featured; }).map(card).join('');
+        if(mealBoard) mealBoard.innerHTML = (model.mealStops || []).map(mealCard).join('');
+        if(foodLoops) foodLoops.innerHTML = (model.foodPlans || []).map(foodLoop).join('');
+        hydratePhotoCredits();
+      }
+      function liveEatsModel(data){
+        var eatsPage = data && data.guidePages && data.guidePages.eats;
+        if(!eatsPage) return null;
+        return Object.assign({}, guide, {
+          eats: Array.isArray(eatsPage.eats) ? eatsPage.eats : guide.eats,
+          mealStops: Array.isArray(eatsPage.mealStops) ? eatsPage.mealStops : guide.mealStops,
+          foodPlans: Array.isArray(eatsPage.foodPlans) ? eatsPage.foodPlans : guide.foodPlans
+        });
+      }
+      renderEatsPage(guide);
+      fetch('/api/city-pulse?city=nature-coast').then(function(response){
+        if(!response.ok) throw new Error('City Pulse data unavailable');
+        return response.json();
+      }).then(function(data){
+        var model = liveEatsModel(data);
+        if(model) renderEatsPage(model);
+      }).catch(function(){});
     })();
   </script>
 </body>

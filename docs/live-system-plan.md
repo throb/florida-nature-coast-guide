@@ -1,6 +1,6 @@
-# Nature Coast Pulse Live System Plan
+# Nature Coast Insider Live System Plan
 
-This is the detailed Codex handoff for turning Nature Coast Pulse from a static MVP into a living City Pulse-style local guide.
+This is the detailed Codex handoff for turning Nature Coast Insider from a static MVP into a living City Pulse-style local guide.
 
 ## Current State
 
@@ -93,7 +93,7 @@ Keep the current page working while the backend matures.
 
 Current behavior:
 
-- `index.html` renders the branded Nature Coast Pulse page.
+- `index.html` renders the branded Nature Coast Insider page.
 - `loadCityPulseData()` fetches `/api/city-pulse?city=nature-coast`.
 - If the API fails, the page still renders from inline fallback content.
 - Signup form posts to `/api/subscribe`.
@@ -148,7 +148,7 @@ Expected result:
 - 26 places
 - 3 day trips
 - 18 sources
-- published pilot issue
+- published explorer issue
 
 ### EmailOctopus
 
@@ -171,7 +171,7 @@ EmailOctopus supports list/contact API work, but campaign sending is dashboard/p
 
 Next EmailOctopus tasks:
 
-1. Create/select the Nature Coast Pulse list.
+1. Create/select the Nature Coast Insider list.
 2. Add `EMAILOCTOPUS_API_KEY` and `EMAILOCTOPUS_LIST_ID` in Vercel.
 3. Test signup on production with a real inbox.
 4. Confirm double opt-in behavior.
@@ -428,7 +428,7 @@ Browser smoke:
 
 ```bash
 python3 -m http.server 4173
-google-chrome --headless --disable-gpu --no-sandbox --virtual-time-budget=8000 --dump-dom http://127.0.0.1:4173/ | rg "Get the weekly Nature Coast Pulse|26 of 26 places shown|Crystal River / Kings Bay"
+google-chrome --headless --disable-gpu --no-sandbox --virtual-time-budget=8000 --dump-dom http://127.0.0.1:4173/ | rg "Get the weekly Nature Coast Insider|26 of 26 places shown|Crystal River / Kings Bay"
 ```
 
 Stop the server after the test:

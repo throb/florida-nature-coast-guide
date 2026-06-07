@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "generatedFrom": "index.html pilot content",
+  "generatedFrom": "index.html explorer content",
   "city": {
     "slug": "nature-coast",
-    "name": "Nature Coast Pulse",
+    "name": "Nature Coast Insider",
     "region": "Florida Nature Coast",
     "lanes": [
       "Crystal River",
@@ -14,10 +14,10 @@
     "timezone": "America/New_York"
   },
   "issue": {
-    "slug": "pilot-001",
+    "slug": "explorer-001",
     "status": "published",
-    "label": "Weekly issue / pilot 001",
-    "kicker": "Pilot issue 001",
+    "label": "Weekly issue / explorer 001",
+    "kicker": "Explorer issue 001",
     "title": "This week in the Nature Coast",
     "subject": "Clear water, greasy breakfasts, and one smarter way to test the move",
     "summary": "The newsletter is the push. The site is the destination. This issue surface turns the offline template idea into a live, Vercel-readable product: weekly picks, weather, guide cards, sponsor inventory, and source discipline in one place.",
@@ -80,7 +80,13 @@
   ],
   "weatherSnapshot": {
     "label": "Today · Crystal River",
-    "summary": "Sunny and hot Saturday with a high near 92, light east wind, and no active NWS point alerts at sweep time. Morning water plans look cleaner than late-day heat.",
+    "summary": "Sunny and hot Saturday with a high near 92, light east wind, and no active NWS point alerts at sweep time. Morning water plans look cleaner than late-day heat, with very high UV late morning through afternoon.",
+    "uvIndex": {
+      "value": 10,
+      "category": "Very high",
+      "window": "11a-4p",
+      "note": "Use shade, water, sunscreen, and a long-sleeve sun shirt for open-water plans."
+    },
     "updatedAt": "2026-06-06T03:00:00-04:00",
     "source": "https://api.weather.gov/gridpoints/TBW/62,139/forecast",
     "alerts": []
@@ -247,13 +253,16 @@
     {
       "status": "review",
       "title": "Summer Kickoff at Crystal River Kayak Company",
-      "url": "https://business.citruscountychamber.com/eventcalendar/Search",
+      "url": "https://business.citruscountychamber.com/eventcalendar/Details/summer-kickoff-1748006?sourceTypeId=Website",
       "startsAt": "2026-06-06T08:00:00-04:00",
       "endsAt": "2026-06-06T17:30:00-04:00",
       "location": "Crystal River Kayak Company & Dive Center",
       "summary": "Chamber calendar lists food truck, ice cream truck, kayak demos, rental specials, and a limited-spots sunset paddle.",
       "raw": {
+        "kind": "event",
         "source": "Citrus County Chamber community calendar",
+        "sourceUrl": "https://business.citruscountychamber.com/eventcalendar/Details/summer-kickoff-1748006?sourceTypeId=Website",
+        "linkQuality": "exact",
         "lane": "chamber-calendar",
         "checkedAt": "2026-06-06T06:09:00Z"
       }
@@ -261,28 +270,37 @@
     {
       "status": "review",
       "title": "Small Town Saturday Night in Downtown Inverness",
-      "url": "https://www.discovercrystalriverfl.com/events/",
+      "url": "https://www.inverness-fl.gov/Calendar.aspx?EID=7081&calType=0&day=5&month=6&year=2026",
       "startsAt": "2026-06-13T17:00:00-04:00",
       "endsAt": "2026-06-13T21:00:00-04:00",
-      "location": "1 Courthouse Sq, Inverness, FL 34450",
-      "summary": "Discover Crystal River lists a free June 13 music event on the square with Absolute Def Leppard headlining.",
+      "location": "Downtown Inverness, 207 Courthouse Square, Inverness, FL 34450",
+      "summary": "City of Inverness lists a free June 13 Small Town Saturday Night event downtown from 5-9 PM with Absolute Def Leppard headlining, Radlin Rootz opening, seating and cooler rules, and event contact details.",
       "raw": {
-        "source": "Discover Crystal River events",
-        "lane": "tourism-calendar",
-        "checkedAt": "2026-06-06T06:09:00Z"
+        "kind": "event",
+        "source": "City of Inverness calendar",
+        "sourceUrl": "https://www.inverness-fl.gov/Calendar.aspx?EID=7081&calType=0&day=5&month=6&year=2026",
+        "backupUrl": "https://inverness.gov/679/Small-Town-Saturday-Night",
+        "linkQuality": "exact",
+        "lane": "city-calendar",
+        "checkedAt": "2026-06-06T16:00:00Z"
       }
     },
     {
       "status": "review",
       "title": "Homosassa Fireworks Festival",
-      "url": "https://www.discovercrystalriverfl.com/events/",
-      "startsAt": "2026-06-27",
+      "url": "https://www.homosassafireworks.com/",
+      "startsAt": "2026-06-27T18:00:00-04:00",
+      "endsAt": "2026-06-27T22:00:00-04:00",
       "location": "5300 S. Cherokee Way, Homosassa, FL 34448",
-      "summary": "Discover Crystal River lists MacRae's annual Homosassa Fireworks Festival for June 27.",
+      "summary": "Old Homosassa Fireworks Festival has an official festival site; Discover Crystal River also lists MacRae's annual Homosassa Fireworks Festival for June 27 from 6-10 PM with food, lights, and festival contact information.",
       "raw": {
-        "source": "Discover Crystal River events",
-        "lane": "tourism-calendar",
-        "checkedAt": "2026-06-06T06:09:00Z"
+        "kind": "event",
+        "source": "Old Homosassa Fireworks Festival",
+        "sourceUrl": "https://www.homosassafireworks.com/",
+        "backupUrl": "https://www.discovercrystalriverfl.com/events/homosassa-fireworks-festival/",
+        "linkQuality": "exact",
+        "lane": "official-event",
+        "checkedAt": "2026-06-06T16:00:00Z"
       }
     },
     {
@@ -292,6 +310,7 @@
       "location": "Ellie Schiller Homosassa Springs Wildlife State Park",
       "summary": "Florida State Parks says shuttle boat service is currently unavailable due to low water levels; tram and park access should be checked before recommending the visit.",
       "raw": {
+        "kind": "access-note",
         "source": "Florida State Parks",
         "lane": "state-park",
         "checkedAt": "2026-06-06T06:09:00Z"
@@ -306,6 +325,7 @@
       "location": "Levy, Citrus, and Hernando county state waters",
       "summary": "FWC lists the 2026 Levy/Citrus/Hernando bay scallop season as July 1 through Sept. 24, including Cedar Key, Crystal River, and Homosassa.",
       "raw": {
+        "kind": "rule",
         "source": "FWC bay scallop regulations",
         "lane": "rules",
         "checkedAt": "2026-06-06T06:09:00Z"
@@ -318,6 +338,7 @@
       "location": "Ocala / Marion County",
       "summary": "City of Ocala page notes most of Marion County is under a Phase III Extreme Water Shortage Advisory with one-day-per-week irrigation limits.",
       "raw": {
+        "kind": "alert",
         "source": "City of Ocala",
         "lane": "city-alert",
         "checkedAt": "2026-06-06T06:09:00Z"
@@ -495,6 +516,8 @@
       "rating": "4.5 / 4,267",
       "blurb": "Go for the drive, seafood, and old-school waterfront feel.",
       "map": "https://maps.google.com/?cid=7457366538817134625",
+      "web": "https://pecksoldportcove.com/",
+      "sourceUrl": "https://www.discovercrystalriverfl.com/directory/pecks-old-port-cove/",
       "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Crystal_River_NWR_2.jpg/330px-Crystal_River_NWR_2.jpg"
     },
     {

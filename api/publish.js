@@ -366,18 +366,43 @@ function normalizeSource(source, cityId) {
   };
 }
 
+function isGenericCandidateUrl(value) {
+  if (!value) return true;
+  let url;
+  try {
+    url = new URL(value);
+  } catch {
+    return true;
+  }
+  const host = url.hostname.replace(/^www\./, "");
+  const path = url.pathname.replace(/\/+$/, "").toLowerCase();
+  const hasEventId = url.searchParams.has("EID") || url.searchParams.has("EventID") || url.searchParams.has("eventId") || url.searchParams.has("id");
+  if (host === "discovercrystalriverfl.com" && path === "/events") return true;
+  if (host === "business.citruscountychamber.com" && path === "/eventcalendar/search") return true;
+  if (host === "inverness.gov" && (path === "/calendar" || path === "/calendar.aspx") && !hasEventId) return true;
+  if (host === "inverness-fl.gov" && (path === "/calendar" || path === "/calendar.aspx") && !hasEventId) return true;
+  if (host === "ocalamarion.com" && path === "/events/community-calendar") return true;
+  if (path === "/events" || path === "/calendar") return true;
+  return false;
+}
+
 function normalizeCandidate(candidate, cityId) {
   if (!candidate.title) throw new Error("Each source candidate needs title.");
+  const status = normalizeStatus(candidate.status, "draft");
+  const raw = candidate.raw || candidate;
+  if (status !== "draft" && isGenericCandidateUrl(candidate.url) && raw.linkQuality !== "exact" && !raw.exactUrl) {
+    throw new Error(`Candidate ${candidate.title} needs an exact event/detail URL before ${status} status.`);
+  }
   return {
     city_id: cityId,
-    status: normalizeStatus(candidate.status, "draft"),
+    status,
     title: candidate.title,
     url: candidate.url || null,
     starts_at: candidate.startsAt || candidate.starts_at || null,
     ends_at: candidate.endsAt || candidate.ends_at || null,
     location: candidate.location || null,
     summary: candidate.summary || null,
-    raw: candidate.raw || candidate
+    raw
   };
 }
 

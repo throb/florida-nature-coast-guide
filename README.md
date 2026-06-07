@@ -1,4 +1,4 @@
-# Nature Coast Pulse
+# Nature Coast Insider
 
 Interactive local guide and weekly briefing MVP for Florida's Nature Coast.
 
@@ -27,7 +27,7 @@ Vercel imports this repository directly. Changes pushed to `main` redeploy autom
 
 The site now has a City Pulse data layer:
 
-- `data/nature-coast.seed.json` is the local fallback and pilot content seed.
+- `data/nature-coast.seed.json` is the local fallback and explorer content seed.
 - `api/city-pulse.js` serves published Supabase rows when env vars are present, and falls back to seed data if Supabase is not configured yet.
 - `api/cron/weekly-draft.js` is the Monday scheduled draft generator declared in `vercel.json`.
 - `supabase/schema.sql` defines the draft-first content model for cities, places, day trips, weekly issues, sources, and source candidates.
@@ -52,4 +52,4 @@ Apply the Supabase schema, sync the Nature Coast seed, set the Supabase and Emai
 
 ## Template Direction
 
-The current page uses the offline "Nature Coast Pulse — This Week" template as brand direction: blue/cream pulse mark, weekly issue framing, quick-card issue highlights, and a site-first newsletter archive model.
+The current page uses the offline "Nature Coast Insider - This Week" template as brand direction: blue/cream mark, weekly issue framing, quick-card issue highlights, and a site-first newsletter archive model.

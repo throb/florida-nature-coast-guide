@@ -2,7 +2,7 @@
 <html lang="en" data-theme="light"><head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Nature Coast Pulse — This Week</title>
+<title>Nature Coast Insider - This Week</title>
 <link rel="icon" type="image/png" href="assets/nature-coast-insider-webicon.png">
 <link rel="apple-touch-icon" href="assets/nature-coast-insider-webicon.png">
 <link rel="stylesheet" href="this-week.css">
@@ -22,7 +22,7 @@
       <a href="eats.html">Eats</a>
     </nav>
     <div class="bar-cta">
-      <span class="iss">Pilot Issue 001</span>
+      <span class="iss">Explorer Issue 001</span>
       <a href="#join" class="btn">Join the list</a>
     </div>
     <nav class="week-nav" aria-label="This week sections">
@@ -40,6 +40,10 @@
       <a href="#tip" data-target="tip">Send a Tip</a>
       <a href="#join" data-target="join">Join</a>
     </nav>
+    <label class="mobile-section-picker" for="section-picker">
+      <span>Jump to</span>
+      <select id="section-picker" aria-label="Jump to section"></select>
+    </label>
   </header>
 
   <nav class="rail" id="rail" aria-label="Issue sections"></nav>
@@ -54,7 +58,7 @@
             <span class="tag">PHOTO · Three Sisters Springs — clear-water aerial</span>
           </div>
           <div class="hero-box">
-            <div class="kicker">Nature Coast Pulse · This Week</div>
+            <div class="kicker">Nature Coast Insider - This Week</div>
             <div class="dateline">
               <span class="pill live"><span class="blip"></span>Live this week</span>
               <span>Issue 002 · June 1-7, 2026</span>
@@ -89,7 +93,7 @@
             </div>
             <div class="ritual">Daily dose</div>
             <h3>Sunrise float at Hunter Springs.</h3>
-            <p>Go early, keep it slow, and let the clear water do the heavy lifting before the heat and storms wake up.</p>
+            <p>Go early, keep it slow, and let the clear water do the heavy lifting before the heat, storms, and high UV wake up.</p>
             <div class="tline">
               <span class="tmeta t-place"><b>Place</b> Hunter Springs</span>
               <span class="tmeta"><b>$</b> <span class="t-cost">Free park stop / rental optional</span></span>
@@ -101,13 +105,13 @@
               <span class="t">Your week, day by day</span>
               <span class="scallop">Scallops Jul 1</span>
             </div>
-            <div class="daycell" data-day="0"><div class="dc-day"><span class="dn">Sun</span><span class="dd">7</span></div><div class="dc-pick">Riverside live music<small>Homosassa, afternoon</small></div><span class="wx part"></span><span class="nowtag">Now</span></div>
-            <div class="daycell" data-day="1"><div class="dc-day"><span class="dn">Mon</span><span class="dd">1</span></div><div class="dc-pick">Sunrise float<small>Hunter Springs, 6:45am</small></div><span class="wx sun"></span><span class="nowtag">Now</span></div>
-            <div class="daycell" data-day="2"><div class="dc-day"><span class="dn">Tue</span><span class="dd">2</span></div><div class="dc-pick">Paddle and lunch<small>Kings Bay to downtown</small></div><span class="wx sun"></span><span class="nowtag">Now</span></div>
-            <div class="daycell" data-day="3"><div class="dc-day"><span class="dn">Wed</span><span class="dd">3</span></div><div class="dc-pick">Manatees, early<small>Three Sisters Springs</small></div><span class="wx part"></span><span class="nowtag">Now</span></div>
-            <div class="daycell" data-day="4"><div class="dc-day"><span class="dn">Thu</span><span class="dd">4</span></div><div class="dc-pick">Ozello sunset drive<small>Peck's Old Port Cove</small></div><span class="wx part"></span><span class="nowtag">Now</span></div>
-            <div class="daycell" data-day="5"><div class="dc-day"><span class="dn">Fri</span><span class="dd">5</span></div><div class="dc-pick">Market night<small>Town Square, 5-9pm</small></div><span class="wx sun"></span><span class="nowtag">Now</span></div>
-            <div class="daycell" data-day="6"><div class="dc-day"><span class="dn">Sat</span><span class="dd">6</span></div><div class="dc-pick">Cleanup and long swim<small>Kings Bay Park, 8am</small></div><span class="wx storm"></span><span class="nowtag">Now</span></div>
+            <div class="daycell" data-day="0"><div class="dc-day"><span class="dn">Sun</span><span class="dd">7</span></div><div class="dc-pick">Riverside live music<small>Homosassa, afternoon</small></div><span class="wx part"></span></div>
+            <div class="daycell" data-day="1"><div class="dc-day"><span class="dn">Mon</span><span class="dd">1</span></div><div class="dc-pick">Sunrise float<small>Hunter Springs, 6:45am</small></div><span class="wx sun"></span></div>
+            <div class="daycell" data-day="2"><div class="dc-day"><span class="dn">Tue</span><span class="dd">2</span></div><div class="dc-pick">Paddle and lunch<small>Kings Bay to downtown</small></div><span class="wx sun"></span></div>
+            <div class="daycell" data-day="3"><div class="dc-day"><span class="dn">Wed</span><span class="dd">3</span></div><div class="dc-pick">Manatees, early<small>Three Sisters Springs</small></div><span class="wx part"></span></div>
+            <div class="daycell" data-day="4"><div class="dc-day"><span class="dn">Thu</span><span class="dd">4</span></div><div class="dc-pick">Ozello sunset drive<small>Peck's Old Port Cove</small></div><span class="wx part"></span></div>
+            <div class="daycell" data-day="5"><div class="dc-day"><span class="dn">Fri</span><span class="dd">5</span></div><div class="dc-pick">Market night<small>Town Square, 5-9pm</small></div><span class="wx sun"></span></div>
+            <div class="daycell" data-day="6"><div class="dc-day"><span class="dn">Sat</span><span class="dd">6</span></div><div class="dc-pick">Cleanup and long swim<small>Kings Bay Park, 8am</small></div><span class="wx storm"></span></div>
           </aside>
         </div>
       </div>
@@ -187,7 +191,7 @@
               <div class="bizlinks">
                 <span class="bl-label">Eat &amp; drink</span>
                 <div class="bl-row">
-                  <a class="biz" href="https://www.discovercrystalriverfl.com/directory/pecks-old-port-cove/" target="_blank" rel="noopener">Peck's Old Port Cove <span class="ar">↗</span></a>
+                  <a class="biz" href="https://pecksoldportcove.com/" target="_blank" rel="noopener">Peck's Old Port Cove <span class="ar">↗</span></a>
                   <a class="biz" href="https://the-freezer-homosassa.com/" target="_blank" rel="noopener">The Freezer Tiki Bar <span class="ar">↗</span></a>
                   <a class="biz" href="https://www.discovercrystalriverfl.com/directory/ozello-park/" target="_blank" rel="noopener">Ozello Park <span class="ar">↗</span></a>
                   <a class="biz sponsor" href="#advertise">Your restaurant here <span class="tagad">Sponsor</span></a>
@@ -228,7 +232,7 @@
               <p>Community calendars are where the good stuff shows up: outdoor markets, guided paddles, classes, festivals, library programs, and volunteer days.</p>
               <div class="where"><span class="chip">Markets</span><span class="chip">Paddles</span><span class="chip">Classes</span><span class="chip">Volunteer shifts</span></div>
               <div class="bizlinks">
-                <span class="bl-label">Event sources</span>
+                <span class="bl-label">Find more going on</span>
                 <div class="bl-row">
                   <a class="biz" href="https://www.discovercrystalriverfl.com/events/" target="_blank" rel="noopener">Discover Crystal River events <span class="ar">↗</span></a>
                   <a class="biz" href="https://business.citruscountychamber.com/eventcalendar" target="_blank" rel="noopener">Citrus Chamber calendar <span class="ar">↗</span></a>
@@ -237,7 +241,7 @@
               </div>
             </div>
           </div>
-          <p class="ev-note" style="margin-top:30px;">Every pick links straight to the local outfitters, kitchens, and guides that make it happen — and these listings are how founding sponsors get in front of people already heading out the door.</p>
+          <p class="ev-note" style="margin-top:30px;">Every pick links straight to the local outfitters, kitchens, and guides that make it happen — and these listings are how community partners get in front of people already heading out the door.</p>
         </div>
       </div>
     </section>
@@ -323,7 +327,7 @@
         <div class="bizlinks" style="margin-top:20px;">
           <span class="bl-label">Stops on this loop</span>
           <div class="bl-row">
-            <a class="biz" href="https://www.discovercrystalriverfl.com/directory/biscuit-barn-north-crystal-river-breakfast-diners/" target="_blank" rel="noopener">The Biscuit Barn <span class="ar">↗</span></a>
+            <a class="biz" href="https://www.biscuitbarn.net/" target="_blank" rel="noopener">The Biscuit Barn <span class="ar">↗</span></a>
             <a class="biz" href="https://m.facebook.com/SadiesCornerKitchen/" target="_blank" rel="noopener">Sadie's <span class="ar">↗</span></a>
             <a class="biz" href="https://www.discovercrystalriverfl.com/directory/hunter-springs-park-boardwalks/" target="_blank" rel="noopener">Hunter Springs <span class="ar">↗</span></a>
             <a class="biz" href="https://www.discovercrystalriverfl.com/directory/fort-island-gulf-beach/" target="_blank" rel="noopener">Fort Island Beach <span class="ar">↗</span></a>
@@ -405,20 +409,26 @@
         <div class="wild-grid">
           <div class="wild rv">
             <div class="w-top"><span class="orb manatee"></span><h4>Manatees</h4></div>
-            <span class="status go"><span class="s-dot"></span>Summer scatter</span>
-            <p>The big winter herds have spread out for warm-season feeding. You'll still spot a few grazing in the rivers. Give them space, no touching, and idle speed in the bay.</p>
+            <div class="w-body">
+              <span class="status go"><span class="s-dot"></span>Summer scatter</span>
+              <p>The big winter herds have spread out for warm-season feeding. You'll still spot a few grazing in the rivers. Give them space, no touching, and idle speed in the bay.</p>
+            </div>
             <div class="meter"><div class="lab"><span>Sighting odds now</span><span>Fair</span></div><div class="track"><i class="acc" style="width:45%"></i></div></div>
           </div>
           <div class="wild rv">
             <div class="w-top"><span class="orb scallop"></span><h4>Scallops</h4></div>
-            <span class="status soon"><span class="s-dot"></span>Opens Jul 1</span>
-            <p>Citrus County's season opens July 1 and runs through late September. Snorkel the grass flats off Homosassa and Crystal River once the window opens.</p>
+            <div class="w-body">
+              <span class="status soon"><span class="s-dot"></span>Opens Jul 1</span>
+              <p>Citrus County's season opens July 1 and runs through late September. Snorkel the grass flats off Homosassa and Crystal River once the window opens.</p>
+            </div>
             <div class="meter"><div class="lab"><span>Countdown to open</span><span>About 4 weeks</span></div><div class="track"><i class="ert" style="width:80%"></i></div></div>
           </div>
           <div class="wild rv">
             <div class="w-top"><span class="orb birds"></span><h4>Shorebirds</h4></div>
-            <span class="status go"><span class="s-dot"></span>Active now</span>
-            <p>Ospreys, herons, spoonbills, and wading flocks work the marsh edges at dawn. First light on Ozello or Fort Island is the quiet show.</p>
+            <div class="w-body">
+              <span class="status go"><span class="s-dot"></span>Active now</span>
+              <p>Ospreys, herons, spoonbills, and wading flocks work the marsh edges at dawn. First light on Ozello or Fort Island is the quiet show.</p>
+            </div>
             <div class="meter"><div class="lab"><span>Best at</span><span>First light</span></div><div class="track"><i class="acc" style="width:88%"></i></div></div>
           </div>
         </div>
@@ -460,7 +470,7 @@
         <div class="archive-head rv" style="margin-top:0;">
           <div>
             <h3>Today’s three</h3>
-            <p>Top slots are meant to refresh often. Publish only restaurants with verified source links, and move proven picks into the evergreen guide below.</p>
+            <p>Top slots refresh with the week: new finds, waterfront classics, breakfast anchors, and places that fit the way people actually move around the coast.</p>
           </div>
           <a href="#advertise" class="btn ghost">Sponsor Eats →</a>
         </div>
@@ -486,7 +496,7 @@
           <span class="no">06</span>
           <div>
             <h2>Community Events</h2>
-            <p class="sub">Actual community calendar picks pulled from official local sources — water days, markets, classes, and local gatherings worth planning around.</p>
+            <p class="sub">The week&apos;s best local things to do: water days, markets, classes, festivals, and gatherings worth planning around.</p>
           </div>
         </div>
         <div class="meetups">
@@ -494,17 +504,17 @@
             <div class="ev-head">This week</div>
             <a class="ev" href="https://business.citruscountychamber.com/eventcalendar/Details/summer-kickoff-1748006?sourceTypeId=Website" target="_blank" rel="noopener">
               <div class="date"><span class="d">6</span><span class="m">Sat</span></div>
-              <div class="info"><h4>Summer Kickoff at Crystal River Kayak Co.</h4><div class="place">Crystal River Kayak Company · 8:00am–5:30pm <span class="pin">↗ Source</span></div></div>
+              <div class="info"><h4>Summer Kickoff at Crystal River Kayak Co.</h4><div class="place">Crystal River Kayak Company · 8:00am–5:30pm <span class="pin">Details</span></div></div>
               <span class="cat water">Water</span>
             </a>
             <a class="ev" href="https://ocaladowntownmarket.com/" target="_blank" rel="noopener">
               <div class="date"><span class="d">6</span><span class="m">Sat</span></div>
-              <div class="info"><h4>Ocala Downtown Market</h4><div class="place">SE 3rd St / SE 3rd Ave · 9:00am–2:00pm <span class="pin">↗ Source</span></div></div>
+              <div class="info"><h4>Ocala Downtown Market</h4><div class="place">SE 3rd St / SE 3rd Ave · 9:00am–2:00pm <span class="pin">Details</span></div></div>
               <span class="cat land">Market</span>
             </a>
             <a class="ev" href="https://www.smoothflavadancegnv.com/" target="_blank" rel="noopener">
               <div class="date"><span class="d">9</span><span class="m">Tue</span></div>
-              <div class="info"><h4>Smooth Flava Dance Party</h4><div class="place">Smooth Flava Dance GNV · 5:45–6:45pm <span class="pin">↗ Source</span></div></div>
+              <div class="info"><h4>Smooth Flava Dance Party</h4><div class="place">Smooth Flava Dance GNV · 5:45–6:45pm <span class="pin">Details</span></div></div>
               <span class="cat land">Class</span>
             </a>
           </div>
@@ -512,27 +522,27 @@
             <div class="ev-head">Later this month</div>
             <a class="ev" href="https://business.citruscountychamber.com/eventcalendar/Search?DateFilter=5&cid=6381&from=06%2F13%2F2026&mode=0&to=06%2F14%2F2026" target="_blank" rel="noopener">
               <div class="date"><span class="d">13</span><span class="m">Sat</span></div>
-              <div class="info"><h4>3rd Annual Family Pride Fest</h4><div class="place">Citrus County Chamber calendar · 3:00–7:00pm <span class="pin">↗ Source</span></div></div>
+              <div class="info"><h4>3rd Annual Family Pride Fest</h4><div class="place">Citrus County · 3:00–7:00pm <span class="pin">Details</span></div></div>
               <span class="cat land">Community</span>
             </a>
             <a class="ev" href="https://www.coinshows-usa.com/Citrus-Coin-Club-Show-Crystal-River" target="_blank" rel="noopener">
               <div class="date"><span class="d">19</span><span class="m">Fri</span></div>
-              <div class="info"><h4>Citrus County Coin Club Show</h4><div class="place">Florida National Guard Armory · Jun 19–20 <span class="pin">↗ Source</span></div></div>
+              <div class="info"><h4>Citrus County Coin Club Show</h4><div class="place">Florida National Guard Armory · Jun 19–20 <span class="pin">Details</span></div></div>
               <span class="cat land">Local</span>
             </a>
             <a class="ev" href="https://business.citruscountychamber.com/memberdirectory/Details/mertailor-s-mermaid-aquarium-encounter-2392848" target="_blank" rel="noopener">
               <div class="date"><span class="d">25</span><span class="m">Thu</span></div>
-              <div class="info"><h4>Mertailor Mermaid Aquarium Showcase</h4><div class="place">Citrus County Chamber calendar · June 25 <span class="pin">↗ Source</span></div></div>
+              <div class="info"><h4>Mertailor Mermaid Aquarium Showcase</h4><div class="place">Mertailor&apos;s Mermaid Aquarium Encounter · June 25 <span class="pin">Details</span></div></div>
               <span class="cat water">Water</span>
             </a>
             <a class="ev" href="https://www.eventbrite.com/e/yogathon-2026-tickets-1988653434957" target="_blank" rel="noopener">
               <div class="date"><span class="d">27</span><span class="m">Sat</span></div>
-              <div class="info"><h4>YogaThon 2026 — Downtown Crystal River</h4><div class="place">Downtown Crystal River · June 27 <span class="pin">↗ Source</span></div></div>
+              <div class="info"><h4>YogaThon 2026 — Downtown Crystal River</h4><div class="place">Downtown Crystal River · June 27 <span class="pin">Details</span></div></div>
               <span class="cat land">Wellness</span>
             </a>
           </div>
         </div>
-        <p class="ev-note">Event picks checked June 4, 2026 from Citrus County Chamber, Ocala Main Street, City of Gainesville, and Citrus Coin Club listings. Social posts are leads; calendar/source pages are the publishable layer.</p>
+        <p class="ev-note">Fresh picks, real details, and enough context to make a plan without opening twelve tabs.</p>
       </div>
     </section>
 
@@ -637,11 +647,11 @@
           </div>
 
           <div class="panel weekfc rv">
-            <div class="day"><div class="dn">Thu</div><div class="wx storm"></div><div class="wd">Storms PM</div><div class="wt"><b>90°</b> <s>73°</s></div></div>
-            <div class="day"><div class="dn">Fri</div><div class="wx part"></div><div class="wd">Scattered</div><div class="wt"><b>91°</b> <s>74°</s></div></div>
-            <div class="day"><div class="dn">Sat</div><div class="wx sun"></div><div class="wd">Partly sunny</div><div class="wt"><b>90°</b> <s>75°</s></div></div>
-            <div class="day"><div class="dn">Sun</div><div class="wx storm"></div><div class="wd">Storms PM</div><div class="wt"><b>89°</b> <s>74°</s></div></div>
-            <div class="day"><div class="dn">Mon</div><div class="wx sun"></div><div class="wd">Hot, humid</div><div class="wt"><b>91°</b> <s>75°</s></div></div>
+            <div class="day" data-forecast-offset="0"><div class="dn"><span class="dow">Sat</span><span class="dnum">6</span></div><div class="wx sun"></div><div class="wd">Partly sunny</div><div class="wt"><b>90°</b> <s>75°</s></div></div>
+            <div class="day" data-forecast-offset="1"><div class="dn"><span class="dow">Sun</span><span class="dnum">7</span></div><div class="wx storm"></div><div class="wd">Storms PM</div><div class="wt"><b>89°</b> <s>74°</s></div></div>
+            <div class="day" data-forecast-offset="2"><div class="dn"><span class="dow">Mon</span><span class="dnum">8</span></div><div class="wx sun"></div><div class="wd">Hot, humid</div><div class="wt"><b>91°</b> <s>75°</s></div></div>
+            <div class="day" data-forecast-offset="3"><div class="dn"><span class="dow">Tue</span><span class="dnum">9</span></div><div class="wx part"></div><div class="wd">Scattered</div><div class="wt"><b>91°</b> <s>74°</s></div></div>
+            <div class="day" data-forecast-offset="4"><div class="dn"><span class="dow">Wed</span><span class="dnum">10</span></div><div class="wx storm"></div><div class="wd">Storms PM</div><div class="wt"><b>90°</b> <s>73°</s></div></div>
           </div>
 
           <div class="heads rv">
@@ -651,7 +661,7 @@
             <div class="hd"><span class="mk note"></span><p><b>Sea breeze builds after noon</b> on the Gulf flats — flats fishing and clear-water photos are best at first light.</p></div>
           </div>
 
-          <p class="cond-note">Pilot snapshot — wiring to live NWS forecast + USGS / spring water-temp feeds next.</p>
+          <p class="cond-note">Check the sky before you launch, plan water time early, and leave room for a weather pivot after lunch.</p>
         </div>
       </div>
     </section>
@@ -700,6 +710,45 @@
             </div>
           </div>
         </div>
+        <div class="photo-submit rv">
+          <div>
+            <div class="kicker">Masthead photos</div>
+            <h3>Put your shot at the top.</h3>
+            <p class="tlead">Send a Nature Coast photo for the weekly masthead. We review every submission before it can be featured, credit the photographer, and may attach a small local perk when a shot runs.</p>
+          </div>
+          <form class="photoform" id="photoform" novalidate="">
+            <div class="frow">
+              <input id="photo-name" type="text" placeholder="Photographer name" aria-label="Photographer name" required="">
+              <input id="photo-email" type="email" placeholder="Email for credit/perk follow-up" aria-label="Email" required="">
+            </div>
+            <div class="frow">
+              <input id="photo-location" type="text" placeholder="Where was it shot?" aria-label="Photo location">
+              <input id="photo-credit" type="text" placeholder="Credit line (optional)" aria-label="Credit line">
+            </div>
+            <textarea id="photo-caption" placeholder="Caption, timing, or anything we should know..." aria-label="Photo caption"></textarea>
+            <label class="filepick" for="photo-file">
+              <span class="filepick-main">Choose photo</span>
+              <span class="filepick-name" id="photo-file-name">JPEG, PNG, or WebP up to 8MB</span>
+            </label>
+            <input id="photo-file" class="fileinput" type="file" accept="image/jpeg,image/png,image/webp" required="">
+            <label class="checkline">
+              <input id="photo-permission" type="checkbox" required="">
+              <span>I own this photo and allow Nature Coast Insider to feature it with credit.</span>
+            </label>
+            <label class="checkline">
+              <input id="photo-discount" type="checkbox">
+              <span>Tell me if featured-photo perks or discounts become available.</span>
+            </label>
+            <div class="frow2">
+              <span class="fine">Review-first. No public posting until approved.</span>
+              <button type="submit" class="btn earth">Submit photo</button>
+            </div>
+          </form>
+          <div class="tip-ok photo-ok" id="photo-ok">
+            <div class="ck">✓</div>
+            <p><b>Photo received.</b> It is in the review queue and will not go public until approved.</p>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -710,12 +759,12 @@
           <span class="no">09</span>
           <div>
             <h2>Advertise</h2>
-            <p class="sub">Early-stage local sponsorship — useful placement for businesses that genuinely fit the guide. No fake audience numbers, no media-kit nonsense.</p>
+            <p class="sub">Targeted local sponsorship — useful placement for businesses that genuinely fit the guide. No fake audience numbers, no media-kit nonsense.</p>
           </div>
         </div>
         <div class="adv">
           <div class="adv-main rv">
-            <p class="adv-pitch">Every place we send people is a link to a real local business. A founding sponsorship puts you in those moments — in front of visitors and locals already deciding where to paddle, eat, and book this week.</p>
+            <p class="adv-pitch">Every place we send people is a link to a real local business. A community partnership puts you in those moments — in front of visitors and locals already deciding where to paddle, eat, and book this week.</p>
             <div class="adv-inv">
               <div class="row"><span class="n">01</span><div><h4>Weekly newsletter blurb</h4><p>One native, clearly-labeled mention in the Friday issue — written to fit, not shouted.</p></div></div>
               <div class="row"><span class="n">02</span><div><h4>Site category placement</h4><p>A listing on the guide page that matches what you do — water, food, day trips, or meetups.</p></div></div>
@@ -729,16 +778,16 @@
             </div>
           </div>
           <aside class="adv-card rv">
-            <span class="bl-label">Founding sponsor slot</span>
-            <h3>Get in early, at a founder rate.</h3>
-            <p>Pilot pricing stays manual and founder-direct while we grow the list — a founding rate, not mature-audience pricing. One sponsor per category to start.</p>
+            <span class="bl-label">Community partner slot</span>
+            <h3>Help build the local guide people actually use.</h3>
+            <p>Early pricing stays manual and community-direct while we grow the list — practical early support, not mature-audience pricing. One sponsor per category to start.</p>
             <ul class="adv-list">
               <li>One weekly newsletter blurb</li>
               <li>One category-page placement</li>
               <li>One social-ready local pick</li>
               <li>Clear “sponsor” labeling, always</li>
             </ul>
-            <a class="btn earth" href="mailto:sponsors@naturecoastpulse.com?subject=Founding%20sponsor%20inquiry">Become a founding sponsor →</a>
+            <a class="btn earth" href="mailto:sponsors@naturecoastpulse.com?subject=Community%20partner%20inquiry">Become a community partner →</a>
             <p class="adv-fine">We won't sell placements that make the guide worse. If you don't fit, we'll say so.</p>
           </aside>
         </div>
@@ -756,16 +805,16 @@
           </div>
           <form class="joinform" id="joinform" novalidate="">
             <input type="email" id="email" placeholder="you@email.com" aria-label="Email address" required="">
-            <button type="submit" class="btn">Join the pilot list</button>
+            <button type="submit" class="btn">Join the explorer list</button>
           </form>
           <div class="confirmed" id="confirmed">
             <div class="check2">✓</div>
             <div>
-              <h3>You're on the pilot list.</h3>
+              <h3>You're on the explorer list.</h3>
               <p id="confirm-detail">We'll send Issue 002 this Friday.</p>
             </div>
           </div>
-          <p class="fine">Pilot list — saved directly to the Nature Coast Pulse signup table. No spam, unsubscribe anytime.</p>
+          <p class="fine">Explorer list - saved directly to the Nature Coast Insider signup table. No spam, unsubscribe anytime.</p>
         </div>
       </div>
     </section>
@@ -774,13 +823,13 @@
       <div class="wrap">
         <div class="grid">
           <div class="src">
-            Built on source discipline: official calendars, tourism boards, parks feeds, and direct business pages. Social finds are leads, not facts.<br>
-            Sources: <a href="https://business.citruscountychamber.com/eventcalendar" target="_blank" rel="noopener">Citrus Chamber calendar</a> · <a href="https://ocaladowntownmarket.com/" target="_blank" rel="noopener">Ocala Downtown Market</a> · <a href="https://www.smoothflavadancegnv.com/" target="_blank" rel="noopener">Smooth Flava Dance GNV</a> · <a href="https://myfwc.com/boating/regulations/" target="_blank" rel="noopener">FWC rules</a>
+            The sharp weekly guide to Crystal River, Homosassa, Ocala, Gainesville, and the wild water in between.<br>
+            Built for people who want the good stuff fast.
           </div>
           <div class="meta">
-            Nature Coast Pulse<br>
+            Nature Coast Insider<br>
             Nature Coast weekly guide<br>
-            Last checked: June 4, 2026<br>
+            Updated weekly<br>
             Photos: Three Sisters &amp; Silver Springs via Wikimedia Commons
           </div>
         </div>

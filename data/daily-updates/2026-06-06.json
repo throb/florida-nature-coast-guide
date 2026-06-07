@@ -10,7 +10,7 @@
     "dayTrips": 3,
     "sources": 18,
     "sourceCandidates": 6,
-    "issue": "pilot-001",
+    "issue": "explorer-001",
     "weatherUpdatedAt": "2026-06-06T02:09:00-04:00"
   },
   "sourcesChecked": [
@@ -171,7 +171,13 @@
   ],
   "settingsWeatherSnapshot": {
     "label": "Today · Crystal River",
-    "summary": "Sunny and hot Saturday with a high near 92, light east wind, and no active NWS point alerts at sweep time. Morning water plans look cleaner than late-day heat.",
+    "summary": "Sunny and hot Saturday with a high near 92, light east wind, and no active NWS point alerts at sweep time. Morning water plans look cleaner than late-day heat, with very high UV late morning through afternoon.",
+    "uvIndex": {
+      "value": 10,
+      "category": "Very high",
+      "window": "11a-4p",
+      "note": "Use shade, water, sunscreen, and a long-sleeve sun shirt for open-water plans."
+    },
     "updatedAt": "2026-06-06T03:00:00-04:00",
     "source": "https://api.weather.gov/gridpoints/TBW/62,139/forecast",
     "alerts": []
@@ -180,13 +186,16 @@
     {
       "status": "review",
       "title": "Summer Kickoff at Crystal River Kayak Company",
-      "url": "https://business.citruscountychamber.com/eventcalendar/Search",
+      "url": "https://business.citruscountychamber.com/eventcalendar/Details/summer-kickoff-1748006?sourceTypeId=Website",
       "startsAt": "2026-06-06T08:00:00-04:00",
       "endsAt": "2026-06-06T17:30:00-04:00",
       "location": "Crystal River Kayak Company & Dive Center",
       "summary": "Chamber calendar lists food truck, ice cream truck, kayak demos, rental specials, and a limited-spots sunset paddle.",
       "raw": {
+        "kind": "event",
         "source": "Citrus County Chamber community calendar",
+        "sourceUrl": "https://business.citruscountychamber.com/eventcalendar/Details/summer-kickoff-1748006?sourceTypeId=Website",
+        "linkQuality": "exact",
         "lane": "chamber-calendar",
         "checkedAt": "2026-06-06T06:09:00Z"
       }
@@ -194,28 +203,37 @@
     {
       "status": "review",
       "title": "Small Town Saturday Night in Downtown Inverness",
-      "url": "https://www.discovercrystalriverfl.com/events/",
+      "url": "https://www.inverness-fl.gov/Calendar.aspx?EID=7081&calType=0&day=5&month=6&year=2026",
       "startsAt": "2026-06-13T17:00:00-04:00",
       "endsAt": "2026-06-13T21:00:00-04:00",
-      "location": "1 Courthouse Sq, Inverness, FL 34450",
-      "summary": "Discover Crystal River lists a free June 13 music event on the square with Absolute Def Leppard headlining.",
+      "location": "Downtown Inverness, 207 Courthouse Square, Inverness, FL 34450",
+      "summary": "City of Inverness lists a free June 13 Small Town Saturday Night event downtown from 5-9 PM with Absolute Def Leppard headlining, Radlin Rootz opening, seating and cooler rules, and event contact details.",
       "raw": {
-        "source": "Discover Crystal River events",
-        "lane": "tourism-calendar",
-        "checkedAt": "2026-06-06T06:09:00Z"
+        "kind": "event",
+        "source": "City of Inverness calendar",
+        "sourceUrl": "https://www.inverness-fl.gov/Calendar.aspx?EID=7081&calType=0&day=5&month=6&year=2026",
+        "backupUrl": "https://inverness.gov/679/Small-Town-Saturday-Night",
+        "linkQuality": "exact",
+        "lane": "city-calendar",
+        "checkedAt": "2026-06-06T16:00:00Z"
       }
     },
     {
       "status": "review",
       "title": "Homosassa Fireworks Festival",
-      "url": "https://www.discovercrystalriverfl.com/events/",
-      "startsAt": "2026-06-27",
+      "url": "https://www.homosassafireworks.com/",
+      "startsAt": "2026-06-27T18:00:00-04:00",
+      "endsAt": "2026-06-27T22:00:00-04:00",
       "location": "5300 S. Cherokee Way, Homosassa, FL 34448",
-      "summary": "Discover Crystal River lists MacRae's annual Homosassa Fireworks Festival for June 27.",
+      "summary": "Old Homosassa Fireworks Festival has an official festival site; Discover Crystal River also lists MacRae's annual Homosassa Fireworks Festival for June 27 from 6-10 PM with food, lights, and festival contact information.",
       "raw": {
-        "source": "Discover Crystal River events",
-        "lane": "tourism-calendar",
-        "checkedAt": "2026-06-06T06:09:00Z"
+        "kind": "event",
+        "source": "Old Homosassa Fireworks Festival",
+        "sourceUrl": "https://www.homosassafireworks.com/",
+        "backupUrl": "https://www.discovercrystalriverfl.com/events/homosassa-fireworks-festival/",
+        "linkQuality": "exact",
+        "lane": "official-event",
+        "checkedAt": "2026-06-06T16:00:00Z"
       }
     },
     {
@@ -225,6 +243,7 @@
       "location": "Ellie Schiller Homosassa Springs Wildlife State Park",
       "summary": "Florida State Parks says shuttle boat service is currently unavailable due to low water levels; tram and park access should be checked before recommending the visit.",
       "raw": {
+        "kind": "access-note",
         "source": "Florida State Parks",
         "lane": "state-park",
         "checkedAt": "2026-06-06T06:09:00Z"
@@ -239,6 +258,7 @@
       "location": "Levy, Citrus, and Hernando county state waters",
       "summary": "FWC lists the 2026 Levy/Citrus/Hernando bay scallop season as July 1 through Sept. 24, including Cedar Key, Crystal River, and Homosassa.",
       "raw": {
+        "kind": "rule",
         "source": "FWC bay scallop regulations",
         "lane": "rules",
         "checkedAt": "2026-06-06T06:09:00Z"
@@ -251,13 +271,25 @@
       "location": "Ocala / Marion County",
       "summary": "City of Ocala page notes most of Marion County is under a Phase III Extreme Water Shortage Advisory with one-day-per-week irrigation limits.",
       "raw": {
+        "kind": "alert",
         "source": "City of Ocala",
         "lane": "city-alert",
         "checkedAt": "2026-06-06T06:09:00Z"
       }
     }
   ],
-  "imageActions": [],
+  "imageActions": [
+    {
+      "action": "publish-masthead",
+      "target": "settings.homepage.image",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Florida_manatees_%284587175202%29.jpg/1920px-Florida_manatees_%284587175202%29.jpg",
+      "imageLabel": "Florida manatees",
+      "imageCredit": "Wikimedia Commons / USFWS/Southeast",
+      "updatedAt": "2026-06-06T03:00:00-04:00",
+      "sourceQuery": "Chassahowitzka River Florida",
+      "reason": "Daily 3am masthead rotation now searches Wikimedia Commons for date-rotated regional imagery and publishes the selected image through api/publish.js so /api/city-pulse can drive the homepage masthead."
+    }
+  ],
   "localDataChanges": [
     {
       "file": "data/nature-coast.seed.json",
@@ -274,7 +306,19 @@
     {
       "file": "data/daily-updates/2026-06-06.json",
       "changes": [
-        "Updated local-first daily sweep artifact with source results, publish blocker, and verification notes."
+        "Updated local-first daily sweep artifact with source results, masthead image publish, publish blocker, and verification notes."
+      ]
+    },
+    {
+      "file": "scripts/publish-daily-masthead.mjs",
+      "changes": [
+        "Added daily 3am masthead publish helper that loads project .env, searches Wikimedia Commons by date-rotated regional themes, falls back to a larger curated pool, calls /api/publish, and verifies /api/city-pulse readback."
+      ]
+    },
+    {
+      "file": "package.json",
+      "changes": [
+        "Added npm run publish:masthead for the daily masthead publish step."
       ]
     }
   ],
@@ -285,14 +329,35 @@
       "settings": {
         "weatherSnapshot": {
           "label": "Today · Crystal River",
-          "summary": "Sunny and hot Saturday with a high near 92, light east wind, and no active NWS point alerts at sweep time. Morning water plans look cleaner than late-day heat.",
+          "summary": "Sunny and hot Saturday with a high near 92, light east wind, and no active NWS point alerts at sweep time. Morning water plans look cleaner than late-day heat, with very high UV late morning through afternoon.",
+          "uvIndex": {
+            "value": 10,
+            "category": "Very high",
+            "window": "11a-4p",
+            "note": "Use shade, water, sunscreen, and a long-sleeve sun shirt for open-water plans."
+          },
           "updatedAt": "2026-06-06T03:00:00-04:00",
           "source": "https://api.weather.gov/gridpoints/TBW/62,139/forecast",
           "alerts": []
         }
       },
       "sourceCandidates": [],
-      "images": []
+      "images": [
+        {
+          "id": "daily-this-week-hero-2026-06-06",
+          "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Florida_manatees_%284587175202%29.jpg/1920px-Florida_manatees_%284587175202%29.jpg",
+          "target": {
+            "type": "setting",
+            "key": "homepage",
+            "value": {
+              "imageLabel": "Florida manatees",
+              "imageCredit": "Wikimedia Commons / USFWS/Southeast",
+              "updatedAt": "2026-06-06T03:00:00-04:00",
+              "sourceQuery": "Chassahowitzka River Florida"
+            }
+          }
+        }
+      ]
     }
   },
   "publishResponse": {
@@ -322,11 +387,54 @@
     "published": true,
     "reason": "Published the weatherSnapshot setting through api/publish.js using local .env credentials; Supabase stored it in the source_candidates fallback path."
   },
+  "mastheadPublishResponse": {
+    "dryRunAttempted": true,
+    "publishAttempted": true,
+    "localEndpoint": "direct local handler api/publish.js",
+    "httpStatusCode": 200,
+    "body": {
+      "ok": true,
+      "city": "nature-coast",
+      "counts": {
+        "places": 0,
+        "dayTrips": 0,
+        "sources": 0,
+        "sourceCandidates": 0,
+        "images": 1,
+        "settings": 0,
+        "issue": 0
+      },
+      "storage": {
+        "settings": {},
+        "images": [
+          {
+            "id": "daily-this-week-hero-2026-06-06",
+            "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Florida_manatees_%284587175202%29.jpg/1920px-Florida_manatees_%284587175202%29.jpg",
+            "storage": "remote_url",
+            "path": null,
+            "target": "setting:homepage"
+          }
+        ]
+      }
+    },
+    "published": true,
+    "reason": "Published today's masthead image through api/publish.js using local .env credentials; /api/city-pulse verified homepage image, label, credit, and updatedAt."
+  },
   "verification": {
     "afterFetch": {
       "endpoint": "http://127.0.0.1:3000/api/city-pulse?city=nature-coast",
       "weatherUpdatedAt": "2026-06-06T03:00:00-04:00",
-      "weatherSummary": "Sunny and hot Saturday with a high near 92, light east wind, and no active NWS point alerts at sweep time. Morning water plans look cleaner than late-day heat.",
+      "weatherSummary": "Sunny and hot Saturday with a high near 92, light east wind, and no active NWS point alerts at sweep time. Morning water plans look cleaner than late-day heat, with very high UV late morning through afternoon.",
+      "uvIndex": {
+        "value": 10,
+        "category": "Very high",
+        "window": "11a-4p"
+      },
+      "homepageImage": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Florida_manatees_%284587175202%29.jpg/1920px-Florida_manatees_%284587175202%29.jpg",
+      "homepageImageLabel": "Florida manatees",
+      "homepageImageCredit": "Wikimedia Commons / USFWS/Southeast",
+      "homepageUpdatedAt": "2026-06-06T03:00:00-04:00",
+      "homepageSourceQuery": "Chassahowitzka River Florida",
       "places": 26,
       "dayTrips": 3,
       "sources": 18,
@@ -363,6 +471,16 @@
         "name": "api/city-pulse.js post-publish readback",
         "status": "passed",
         "detail": "Returned weatherUpdatedAt 2026-06-06T03:00:00-04:00, the expected summary, 6 source candidates, and no liveError."
+      },
+      {
+        "name": "npm run publish:masthead -- --dry-run --direct",
+        "status": "passed",
+        "detail": "Validated daily masthead payload with images: 1 and target setting:homepage."
+      },
+      {
+        "name": "npm run publish:masthead -- --direct",
+        "status": "passed",
+        "detail": "Published Florida manatees masthead from the Chassahowitzka River Florida Commons search and verified /api/city-pulse homepage readback matched image, label, credit, and updatedAt."
       }
     ]
   },

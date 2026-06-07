@@ -32,14 +32,16 @@ async function loadPublishedFromSupabase(citySlug) {
     { data: issue, error: issueError },
     { data: sources, error: sourcesError },
     { data: settings, error: settingsError },
-    { data: settingsFallback, error: settingsFallbackError }
+    { data: settingsFallback, error: settingsFallbackError },
+    { data: sourceCandidates, error: sourceCandidatesError }
   ] = await Promise.all([
     supabase.from("places").select("*").eq("city_id", city.id).eq("status", "published").order("sort_order"),
     supabase.from("day_trips").select("*").eq("city_id", city.id).eq("status", "published").order("sort_order"),
     supabase.from("weekly_issues").select("*").eq("city_id", city.id).eq("status", "published").order("publish_date", { ascending: false }).limit(1).maybeSingle(),
     supabase.from("sources").select("*").eq("city_id", city.id).eq("active", true).order("name"),
     supabase.from("city_settings").select("key,value").eq("city_id", city.id),
-    supabase.from("source_candidates").select("title,raw,created_at").eq("city_id", city.id).order("created_at", { ascending: false })
+    supabase.from("source_candidates").select("title,raw,created_at").eq("city_id", city.id).order("created_at", { ascending: false }),
+    supabase.from("source_candidates").select("status,title,url,starts_at,ends_at,location,summary,raw,created_at").eq("city_id", city.id).not("title", "like", "__setting:%").order("created_at", { ascending: false }).limit(12)
   ]);
 
   if (placesError) throw placesError;
@@ -48,6 +50,7 @@ async function loadPublishedFromSupabase(citySlug) {
   if (sourcesError) throw sourcesError;
   if (settingsError && settingsError.code !== "PGRST205" && settingsError.code !== "42P01") throw settingsError;
   if (settingsFallbackError) throw settingsFallbackError;
+  if (sourceCandidatesError) throw sourceCandidatesError;
 
   const seed = await loadSeed();
   const settingsByKey = settingsError ? {} : Object.fromEntries((settings || []).map(setting => [setting.key, setting.value]));
@@ -60,10 +63,13 @@ async function loadPublishedFromSupabase(citySlug) {
   return {
     ...seed,
     weatherLocations: settingsByKey.weatherLocations || seed.weatherLocations,
+    weatherSnapshot: settingsByKey.weatherSnapshot || seed.weatherSnapshot,
     categoryLabels: settingsByKey.categoryLabels || seed.categoryLabels,
     categoryImages: settingsByKey.categoryImages || seed.categoryImages,
     updateScope: settingsByKey.updateScope || seed.updateScope,
     operatingCadence: settingsByKey.operatingCadence || seed.operatingCadence,
+    homepage: settingsByKey.homepage || seed.homepage || null,
+    guidePages: settingsByKey.guidePages || seed.guidePages || null,
     city: {
       slug: city.slug,
       name: city.name,
@@ -110,6 +116,17 @@ async function loadPublishedFromSupabase(citySlug) {
       url: source.url,
       lane: source.lane,
       note: source.note
+    })),
+    sourceCandidates: (sourceCandidates?.length ? sourceCandidates : seed.sourceCandidates || []).map(candidate => ({
+      status: candidate.status,
+      title: candidate.title,
+      url: candidate.url,
+      startsAt: candidate.starts_at || candidate.startsAt || null,
+      endsAt: candidate.ends_at || candidate.endsAt || null,
+      location: candidate.location,
+      summary: candidate.summary,
+      raw: candidate.raw || {},
+      createdAt: candidate.created_at || candidate.createdAt || null
     }))
   };
 }

@@ -7,6 +7,7 @@
     "dev": "npx vercel dev",
     "draft:weekly": "node scripts/weekly-draft.mjs",
     "check:data": "node scripts/check-data.mjs",
+    "publish:masthead": "node scripts/publish-daily-masthead.mjs",
     "sync:supabase": "node scripts/sync-supabase.mjs"
   },
   "dependencies": {
